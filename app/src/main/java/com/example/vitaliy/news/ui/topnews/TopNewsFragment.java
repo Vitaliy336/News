@@ -31,13 +31,18 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+        initListener();
+        initPresenter();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.top_news_fragment, container, false);
-        initView();
-        initListener();
-        initPresenter();
         return rootView;
     }
 
@@ -47,8 +52,8 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initView() {
-        testTV = (TextView)rootView.findViewById(R.id.HotTv);
-        topNewsRv = (RecyclerView)rootView.findViewById(R.id.topNewsRV);
+        testTV = rootView.findViewById(R.id.HotTv);
+        topNewsRv = rootView.findViewById(R.id.topNewsRV);
     }
 
     private void initListener() {
