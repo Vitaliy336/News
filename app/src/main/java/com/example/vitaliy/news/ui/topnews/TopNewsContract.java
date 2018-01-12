@@ -12,6 +12,7 @@ import java.util.List;
 public interface TopNewsContract {
     interface ITopNewsView extends BaseView {
         void displayNews(List<String> news);
+        void displayToastMessage();
     }
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {

@@ -10,8 +10,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     private TopNewsContract.ITopNewsView view;
 
-
-
     @Override
     public void attachView(TopNewsContract.ITopNewsView view) {
         this.view = view;
@@ -24,5 +22,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void onTextClick() {
+        view.displayToastMessage();
     }
 }

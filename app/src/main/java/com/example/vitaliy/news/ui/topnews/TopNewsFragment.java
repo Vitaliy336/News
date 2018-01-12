@@ -21,9 +21,10 @@ import java.util.List;
 public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
 
     private TextView testTV;
-    private TopNewsContract.ITopNewsPresenter presenter;
+    TopNewsContract.ITopNewsPresenter presenter;
     private View rootView;
     private RecyclerView topNewsRv;
+    private TopNewsAdapter newsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,13 +36,19 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.top_news_fragment, container, false);
         initView();
+        initListener();
+        initPresenter();
         return rootView;
+    }
+
+    private void initPresenter() {
+        presenter = new TopNewsPresenter();
+        presenter.attachView(this);
     }
 
     private void initView() {
         testTV = (TextView)rootView.findViewById(R.id.HotTv);
         topNewsRv = (RecyclerView)rootView.findViewById(R.id.topNewsRV);
-        initListener();
     }
 
     private void initListener() {
@@ -49,8 +56,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         testTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                presenter.onTextClick();
             }
         });
+        newsAdapter = new TopNewsAdapter();
+        topNewsRv.setAdapter(newsAdapter);
     }
 
 
@@ -58,4 +68,10 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     public void displayNews(List<String> news) {
 
     }
+
+    @Override
+    public void displayToastMessage() {
+        Toast.makeText(getActivity(), "@@@@", Toast.LENGTH_SHORT).show();
+    }
+
 }
