@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    Presentor presentor;
 
 
     @Override
