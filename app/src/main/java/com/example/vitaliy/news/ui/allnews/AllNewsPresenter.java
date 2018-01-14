@@ -1,5 +1,7 @@
 package com.example.vitaliy.news.ui.allnews;
 
+import java.util.List;
+
 /**
  * Created by v_shevchyk on 12.01.18.
  */
@@ -21,4 +23,11 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     public void onTextClickListener() {
         view.ShowToastMessage();
     }
+
+    @Override
+    public void prepareCategories(List<String> categories) {
+        view.displayCategories(categories);
+    }
+
+
 }

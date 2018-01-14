@@ -42,7 +42,7 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsAdapter.NewsHold
 
         public NewsHolder(View itemView) {
             super(itemView);
-            button = (Button)itemView.findViewById(R.id.button);
+            //button = (Button)itemView.findViewById(R.id.button);
         }
         void bind(String str){
 
