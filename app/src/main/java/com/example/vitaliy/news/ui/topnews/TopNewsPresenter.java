@@ -2,6 +2,7 @@ package com.example.vitaliy.news.ui.topnews;
 
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,13 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     }
 
     @Override
-    public void prepareCategories(List<String> categories) {
+    public void prepareCategories() {
+        List<String> categories = new ArrayList<>();
+        categories.add("Sport");
+        categories.add("Politic");
+        categories.add("Woirld");
+        categories.add("BBC");
+        categories.add("Others");
         view.displayCategories(categories);
     }
 }

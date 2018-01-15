@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.ui.allnews;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,13 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     }
 
     @Override
-    public void prepareCategories(List<String> categories) {
+    public void prepareCategories() {
+        List<String> categories = new ArrayList<>();
+        categories.add("Sport");
+        categories.add("Politic");
+        categories.add("Woirld");
+        categories.add("BBC");
+        categories.add("Others");
         view.displayCategories(categories);
     }
 }

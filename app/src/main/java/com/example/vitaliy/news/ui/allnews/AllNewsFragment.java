@@ -47,7 +47,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private void initPresenter() {
         presenter = new AllNewsPresenter();
         presenter.attachView(this);
-        presenter.prepareCategories(categoriesList);
+        presenter.prepareCategories();
     }
 
     private void intiListener() {
@@ -61,10 +61,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     private void initView() {
         tv = (TextView)rootView.findViewById(R.id.AllNewsTv);
-        categoriesList.add("Sport");
-        categoriesList.add("Politic");
-        categoriesList.add("World");
-        categoriesList.add("Others");
+
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 

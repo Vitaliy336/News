@@ -53,7 +53,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private void initPresenter() {
         presenter = new TopNewsPresenter();
         presenter.attachView(this);
-        presenter.prepareCategories(categoriesList);
+        presenter.prepareCategories();
     }
 
     private void initView() {

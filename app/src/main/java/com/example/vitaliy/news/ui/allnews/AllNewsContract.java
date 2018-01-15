@@ -17,6 +17,6 @@ public interface AllNewsContract {
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView>{
         void onTextClickListener();
-        void prepareCategories(List<String> categories);
+        void prepareCategories();
     }
 }

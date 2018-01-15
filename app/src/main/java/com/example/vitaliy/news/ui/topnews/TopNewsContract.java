@@ -17,6 +17,6 @@ public interface TopNewsContract {
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {
         void onTextClick();
-        void prepareCategories(List<String> categories);
+        void prepareCategories();
     }
 }
