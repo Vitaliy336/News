@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
+import com.example.vitaliy.news.ui.Model.newsModel.NewsModel;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
+import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private TextView testTV;
     TopNewsContract.ITopNewsPresenter presenter;
     private View rootView;
-    private RecyclerView categoriesRV;
+    private RecyclerView categoriesRV, newsRV ;
     private CategoriesAdapter categoriesAdapter;
+    private NewsAdapter newsAdapter;
     private List<String> categoriesList = new ArrayList<>();
 
     @Override
@@ -54,20 +57,25 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         presenter = new TopNewsPresenter();
         presenter.attachView(this);
         presenter.prepareCategories();
+        presenter.prepareNews();
     }
 
     private void initView() {
-        testTV = rootView.findViewById(R.id.HotTv);
         categoriesAdapter = new CategoriesAdapter();
-        categoriesList.add("Sport");
-        categoriesList.add("World");
-        categoriesList.add("Politic");
-        categoriesList.add("Others");
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        newsAdapter = new NewsAdapter();
+
+        LinearLayoutManager layoutManagerForCategories = new LinearLayoutManager(getActivity());
+        layoutManagerForCategories.setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManagerForNews = new LinearLayoutManager(getActivity());
+        layoutManagerForNews.setOrientation(LinearLayoutManager.VERTICAL);
+
+        newsRV = rootView.findViewById(R.id.newsRV);
+        newsRV.setLayoutManager(layoutManagerForNews);
+        newsRV.setAdapter(newsAdapter);
+
 
         categoriesRV = rootView.findViewById(R.id.categoriesRV);
-        categoriesRV.setLayoutManager(layoutManager);
+        categoriesRV.setLayoutManager(layoutManagerForCategories);
         categoriesRV.setAdapter(categoriesAdapter);
     }
 
@@ -75,19 +83,17 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-
-        testTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onTextClick();
-            }
-        });
     }
 
 
     @Override
     public void displayCategories(List<String> categories) {
         categoriesAdapter.setData(categories);
+    }
+
+    @Override
+    public void displayNews(List<NewsModel> news) {
+        newsAdapter.setData(news);
     }
 
     @Override
