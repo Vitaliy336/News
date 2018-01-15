@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.ui.topnews;
 
 import com.example.vitaliy.news.ui.Model.NewsData;
+import com.example.vitaliy.news.ui.Model.newsModel.NewsModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,9 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void prepareNews() {
-        view.displayNews(new NewsData().NewsData());
+        ArrayList<NewsModel> news = new ArrayList<>();
+        NewsData nd = new NewsData();
+        nd.NewsDataFromApi();
+        view.displayNews(news);
     }
 }

@@ -60,8 +60,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         }
 
         void bind(NewsModel news){
-            title.setText(news.getTitle());
-            description.setText(news.getDescription());
+            //title.setText(news.getTitle());
+            //description.setText(news.getDescription());
         }
     }
 }

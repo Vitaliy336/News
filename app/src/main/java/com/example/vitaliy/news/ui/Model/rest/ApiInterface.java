@@ -1,11 +1,8 @@
 package com.example.vitaliy.news.ui.Model.rest;
 
 import com.example.vitaliy.news.ui.Model.newsModel.NewsModel;
-import com.example.vitaliy.news.ui.Model.newsModel.NewsSource;
 
 import java.util.List;
-
-import javax.xml.transform.Source;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
