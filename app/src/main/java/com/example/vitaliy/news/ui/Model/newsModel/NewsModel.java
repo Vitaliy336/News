@@ -2,12 +2,14 @@ package com.example.vitaliy.news.ui.Model.newsModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 
 /**
  * Created by v_shevchyk on 15.01.18.
  */
 
-public class NewsModel {
+public class NewsModel implements Serializable{
     @SerializedName("source")
     @Expose
     private NewsSource source;
@@ -30,10 +32,10 @@ public class NewsModel {
     @Expose
     private String publishedAt;
 
-    public NewsModel(String news1, String s) {
-        title = news1;
-        description = s;
-    }
+//    public NewsModel(String news1, String s) {
+//        title = news1;
+//        description = s;
+//    }
 
 
     public NewsSource getSource() {

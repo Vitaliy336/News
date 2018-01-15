@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
+import com.example.vitaliy.news.ui.Model.rest.ApiInterface;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 
 import java.util.ArrayList;
