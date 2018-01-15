@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
+import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +25,10 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private View rootView;
     private AllNewsContract.IAllNewsPresenter presenter;
     private TextView tv;
-    private CategoriesAdapter categoriesAdapter;
+    private CategoriesAdapter categoriesAdapter = new CategoriesAdapter();
     private RecyclerView categories;
     private LinearLayoutManager layoutManager;
-    private List<String> categ = new ArrayList<>();
-
+    private List<String> categoriesList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +47,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private void initPresenter() {
         presenter = new AllNewsPresenter();
         presenter.attachView(this);
+        presenter.prepareCategories(categoriesList);
     }
 
     private void intiListener() {
@@ -58,20 +57,21 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
                 presenter.onTextClickListener();
             }
         });
-//       presenter.prepareCategories();
     }
 
     private void initView() {
         tv = (TextView)rootView.findViewById(R.id.AllNewsTv);
+        categoriesList.add("Sport");
+        categoriesList.add("Politic");
+        categoriesList.add("World");
+        categoriesList.add("Others");
+        layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        categoriesAdapter = new CategoriesAdapter();
-
-        RecyclerView userList = (RecyclerView) rootView.findViewById(R.id.categories);
-        userList.setLayoutManager(layoutManager);
-        userList.setAdapter(categoriesAdapter);
+        categories = (RecyclerView) rootView.findViewById(R.id.categories);
+        categories.setLayoutManager(layoutManager);
+        categories.setAdapter(categoriesAdapter);
     }
 
     @Nullable

@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui.allnews;
+package com.example.vitaliy.news.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;

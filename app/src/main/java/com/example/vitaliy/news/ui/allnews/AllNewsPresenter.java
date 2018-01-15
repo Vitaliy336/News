@@ -28,6 +28,4 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     public void prepareCategories(List<String> categories) {
         view.displayCategories(categories);
     }
-
-
 }
