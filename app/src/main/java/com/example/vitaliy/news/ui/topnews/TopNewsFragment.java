@@ -28,7 +28,6 @@ import java.util.List;
 
 public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
 
-    private TextView testTV;
     TopNewsContract.ITopNewsPresenter presenter;
     private View rootView;
     private RecyclerView categoriesRV, newsRV ;

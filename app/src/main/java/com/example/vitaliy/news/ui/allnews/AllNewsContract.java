@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.ui.allnews;
 
+import com.example.vitaliy.news.data.model.Article;
 import com.example.vitaliy.news.ui.base.BasePresenter;
 import com.example.vitaliy.news.ui.base.BaseView;
 
@@ -12,13 +13,13 @@ import java.util.List;
 public interface AllNewsContract {
     interface IAllNewsView extends BaseView {
         void displayCategories(List<String> categories);
-
+        void displayNews(List<Article> news);
         void ShowToastMessage();
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
         void onTextClickListener();
-
+        void prepareNews();
         void prepareCategories();
     }
 }

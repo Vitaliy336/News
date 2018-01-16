@@ -1,5 +1,10 @@
 package com.example.vitaliy.news.ui.allnews;
 
+import android.util.Log;
+
+import com.example.vitaliy.news.data.model.Article;
+import com.example.vitaliy.news.data.source.NewsDataSource;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +14,11 @@ import java.util.List;
 
 public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     private AllNewsContract.IAllNewsView view;
+    NewsDataSource newsDataSource;
+
+    public AllNewsPresenter(NewsDataSource newsDataSource) {
+        this.newsDataSource = newsDataSource;
+    }
 
     @Override
     public void attachView(AllNewsContract.IAllNewsView view) {
@@ -23,6 +33,21 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     @Override
     public void onTextClickListener() {
         view.ShowToastMessage();
+    }
+
+    @Override
+    public void prepareNews() {
+        newsDataSource.AllDataFromApi(new NewsDataSource.getListCallback() {
+            @Override
+            public void onListReceived(List<Article> list) {
+                view.displayNews(list);
+            }
+
+            @Override
+            public void onFailure() {
+                Log.e("Failure", "fail");
+            }
+        });
     }
 
     @Override

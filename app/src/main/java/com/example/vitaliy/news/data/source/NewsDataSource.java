@@ -17,4 +17,5 @@ public interface NewsDataSource {
     }
 
     void topDataFromApi(getListCallback callback);
+    void AllDataFromApi(getListCallback callback);
 }

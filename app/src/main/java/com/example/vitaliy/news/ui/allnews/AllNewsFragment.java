@@ -12,7 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
+import com.example.vitaliy.news.data.model.Article;
+import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
+import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +26,13 @@ import java.util.List;
  */
 
 public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNewsView {
+
     private View rootView;
     private AllNewsContract.IAllNewsPresenter presenter;
-    private TextView tv;
+    private NewsAdapter newsAdapter;
     private CategoriesAdapter categoriesAdapter = new CategoriesAdapter();
-    private RecyclerView categories;
-    private LinearLayoutManager layoutManager;
+    private RecyclerView categories, news;
+    private LinearLayoutManager layoutManager, lm;
     private List<String> categoriesList = new ArrayList<>();
 
     @Override
@@ -45,27 +50,26 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     }
 
     private void initPresenter() {
-        presenter = new AllNewsPresenter();
+        RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
+        presenter = new AllNewsPresenter(dataSource);
         presenter.attachView(this);
         presenter.prepareCategories();
+        presenter.prepareNews();
     }
 
     private void intiListener() {
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onTextClickListener();
-            }
-        });
     }
 
     private void initView() {
-        tv = (TextView)rootView.findViewById(R.id.AllNewsTv);
-
+        newsAdapter = new NewsAdapter();
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        lm = new LinearLayoutManager(getActivity());
+        lm.setOrientation(LinearLayoutManager.VERTICAL);
 
-
+        news = (RecyclerView)rootView.findViewById(R.id.AllnewsRV);
+        news.setLayoutManager(lm);
+        news.setAdapter(newsAdapter);
         categories = (RecyclerView) rootView.findViewById(R.id.categories);
         categories.setLayoutManager(layoutManager);
         categories.setAdapter(categoriesAdapter);
@@ -81,6 +85,11 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     @Override
     public void displayCategories(List<String> categories) {
         categoriesAdapter.setData(categories);
+    }
+
+    @Override
+    public void displayNews(List<Article> news) {
+        newsAdapter.setData(news);
     }
 
     @Override
