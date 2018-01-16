@@ -97,8 +97,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     @Override
     public void displayNews(List<Article> news) {
-        newsAdapter.setData(news);
+        newsAdapter.setData(news, getActivity());
     }
+
 
     @Override
     public void displayToastMessage() {

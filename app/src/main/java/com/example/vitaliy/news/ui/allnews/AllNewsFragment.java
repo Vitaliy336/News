@@ -89,7 +89,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     @Override
     public void displayNews(List<Article> news) {
-        newsAdapter.setData(news);
+        newsAdapter.setData(news, getActivity());
     }
 
     @Override

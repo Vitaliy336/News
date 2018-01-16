@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.ui.adapters;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         notifyDataSetChanged();
         Log.d("qweee", "size =" + getItemCount());
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView categoryName;

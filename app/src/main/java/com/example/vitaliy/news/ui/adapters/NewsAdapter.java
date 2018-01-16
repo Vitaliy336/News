@@ -1,5 +1,7 @@
 package com.example.vitaliy.news.ui.adapters;
 
+import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.Article;
 
@@ -20,7 +23,7 @@ import java.util.List;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
-
+    private Context mContext;
     List<Article> newsList = new ArrayList<>();
 
     @Override
@@ -39,10 +42,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         return newsList.size();
     }
 
-    public void setData(List<Article> news) {
+    public void setData(List<Article> news, FragmentActivity activity) {
         newsList.clear();
         newsList.addAll(news);
         notifyDataSetChanged();
+        mContext = activity;
         Log.e("newsAdapter", "news size = "+news.size());
     }
 
@@ -62,6 +66,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         void bind(Article news) {
             title.setText(news.getTitle());
             description.setText(news.getDescription());
+            Glide.with(mContext)
+                    .load(news.getUrlToImage())
+                    .override(300, 150)
+                    .centerCrop()
+                    .into(newsPicture);
         }
     }
 }
