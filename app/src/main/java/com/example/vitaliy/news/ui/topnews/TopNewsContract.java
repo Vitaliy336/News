@@ -13,7 +13,6 @@ import java.util.List;
 public interface TopNewsContract {
     interface ITopNewsView extends BaseView {
         void displayCategories(List<String> categories);
-
         void displayNews(List<Article> article);
         void displayToastMessage();
     }

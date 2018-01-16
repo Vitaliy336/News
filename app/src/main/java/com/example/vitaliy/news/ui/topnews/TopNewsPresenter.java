@@ -59,7 +59,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
             @Override
             public void onFailure() {
-                Log.e("Error", "Failed");
             }
         });
     }
