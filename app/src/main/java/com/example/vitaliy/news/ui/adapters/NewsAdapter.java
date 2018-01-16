@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.ui.Model.newsModel.NewsModel;
+import com.example.vitaliy.news.data.model.Article;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
-    List<NewsModel> newsList = new ArrayList<>();
+    List<Article> newsList = new ArrayList<>();
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +39,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         return newsList.size();
     }
 
-    public void setData(List<NewsModel> news){
+    public void setData(List<Article> news) {
         newsList.clear();
         newsList.addAll(news);
         notifyDataSetChanged();
@@ -59,9 +59,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             newsPicture = (ImageView)itemView.findViewById(R.id.newsImgView);
         }
 
-        void bind(NewsModel news){
-            //title.setText(news.getTitle());
-            //description.setText(news.getDescription());
+        void bind(Article news) {
+            title.setText(news.getTitle());
+            description.setText(news.getDescription());
         }
     }
 }

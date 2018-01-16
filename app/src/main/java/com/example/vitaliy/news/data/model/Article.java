@@ -1,22 +1,21 @@
-package com.example.vitaliy.news.ui.Model.newsModel;
+package com.example.vitaliy.news.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-
 /**
- * Created by v_shevchyk on 15.01.18.
+ * Created by v_shevchyk on 16.01.18.
  */
 
-public class NewsModel implements Serializable{
+
+public class Article {
+
     @SerializedName("source")
     @Expose
-    private NewsSource source;
+    private Source source;
     @SerializedName("author")
     @Expose
-    private Object author;
+    private String author;
     @SerializedName("title")
     @Expose
     private String title;
@@ -28,30 +27,24 @@ public class NewsModel implements Serializable{
     private String url;
     @SerializedName("urlToImage")
     @Expose
-    private Object urlToImage;
+    private String urlToImage;
     @SerializedName("publishedAt")
     @Expose
     private String publishedAt;
 
-//    public NewsModel(String news1, String s) {
-//        title = news1;
-//        description = s;
-//    }
-
-
-    public NewsSource getSource() {
+    public Source getSource() {
         return source;
     }
 
-    public void setSource(NewsSource source) {
+    public void setSource(Source source) {
         this.source = source;
     }
 
-    public Object getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Object author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -79,11 +72,11 @@ public class NewsModel implements Serializable{
         this.url = url;
     }
 
-    public Object getUrlToImage() {
+    public String getUrlToImage() {
         return urlToImage;
     }
 
-    public void setUrlToImage(Object urlToImage) {
+    public void setUrlToImage(String urlToImage) {
         this.urlToImage = urlToImage;
     }
 
@@ -94,4 +87,5 @@ public class NewsModel implements Serializable{
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
+
 }

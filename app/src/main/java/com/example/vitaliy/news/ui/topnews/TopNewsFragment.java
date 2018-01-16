@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.ui.Model.newsModel.NewsModel;
+import com.example.vitaliy.news.data.model.Article;
+import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
@@ -54,10 +56,12 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initPresenter() {
-        presenter = new TopNewsPresenter();
+        NewsDataSource dataSource = new RemoteNewsDataSource();
+        presenter = new TopNewsPresenter(dataSource);
         presenter.attachView(this);
         presenter.prepareCategories();
         presenter.prepareNews();
+
     }
 
     private void initView() {
@@ -82,7 +86,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private void initListener() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
     }
 
 
@@ -91,8 +94,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         categoriesAdapter.setData(categories);
     }
 
+
     @Override
-    public void displayNews(List<NewsModel> news) {
+    public void displayNews(List<Article> news) {
         newsAdapter.setData(news);
     }
 

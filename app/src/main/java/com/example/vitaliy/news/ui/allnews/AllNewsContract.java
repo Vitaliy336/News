@@ -12,11 +12,13 @@ import java.util.List;
 public interface AllNewsContract {
     interface IAllNewsView extends BaseView {
         void displayCategories(List<String> categories);
+
         void ShowToastMessage();
     }
 
-    interface IAllNewsPresenter extends BasePresenter<IAllNewsView>{
+    interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
         void onTextClickListener();
+
         void prepareCategories();
     }
 }

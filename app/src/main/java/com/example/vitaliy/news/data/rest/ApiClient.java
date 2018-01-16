@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui.Model.rest;
+package com.example.vitaliy.news.data.rest;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

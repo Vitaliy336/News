@@ -1,23 +1,28 @@
-package com.example.vitaliy.news.ui.Model.newsModel;
+package com.example.vitaliy.news.data.model;
+
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 /**
- * Created by v_shevchyk on 15.01.18.
+ * Created by v_shevchyk on 16.01.18.
  */
 
-public class NewsSource {
+
+public class Source {
+
     @SerializedName("id")
     @Expose
-    private Object id;
+    private String id;
     @SerializedName("name")
     @Expose
     private String name;
 
-    public Object getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -28,4 +33,5 @@ public class NewsSource {
     public void setName(String name) {
         this.name = name;
     }
+
 }

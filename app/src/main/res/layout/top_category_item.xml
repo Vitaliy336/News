@@ -7,6 +7,7 @@
         android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginRight="5dp"
         android:background="@drawable/round_borders"
         android:padding="16dp"
