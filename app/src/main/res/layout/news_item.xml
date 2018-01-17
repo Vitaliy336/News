@@ -17,8 +17,8 @@
 
             <ImageView
                 android:id="@+id/newsImgView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="16dp"
@@ -26,11 +26,13 @@
 
             <TextView
                 android:id="@+id/newsTitleTV"
+                android:textColor="@color/colorBlack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@id/newsImgView"
-                android:layout_margin="10dp"
+                android:layout_below="@id/newsImgView"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:text="ssss"
                 android:textSize="20sp" />
 
@@ -39,8 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/newsTitleTV"
-                android:layout_toRightOf="@id/newsImgView"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:text="ssss1"
                 android:textSize="15sp" />
 
