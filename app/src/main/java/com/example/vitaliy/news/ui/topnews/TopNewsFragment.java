@@ -1,5 +1,7 @@
 package com.example.vitaliy.news.ui.topnews;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -64,7 +66,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private void initView() {
         categoriesAdapter = new CategoriesAdapter();
         newsAdapter = new NewsAdapter();
-
         LinearLayoutManager layoutManagerForCategories = new LinearLayoutManager(getActivity());
         layoutManagerForCategories.setOrientation(LinearLayoutManager.HORIZONTAL);
         LinearLayoutManager layoutManagerForNews = new LinearLayoutManager(getActivity());
@@ -75,14 +76,20 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         newsRV.setAdapter(newsAdapter);
 
 
+
         categoriesRV = rootView.findViewById(R.id.categoriesRV);
         categoriesRV.setLayoutManager(layoutManagerForCategories);
         categoriesRV.setAdapter(categoriesAdapter);
     }
 
+
     private void initListener() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void OnClick(Article article) {
+                Toast.makeText(getActivity(), article.getTitle(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

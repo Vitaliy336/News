@@ -41,7 +41,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
     @Override
     public void AllDataFromApi(final getListCallback callback) {
         if(callback != null){
-            apiInterface.getAllNews("bitcoin", API_KEY).enqueue(new Callback<NewsModel>() {
+            apiInterface.getAllNews("news", API_KEY).enqueue(new Callback<NewsModel>() {
                 @Override
                 public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                     callback.onListReceived(response.body().getArticles());

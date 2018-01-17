@@ -17,6 +17,9 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     private RemoteNewsDataSource dataSource;
 
+    public TopNewsPresenter(){
+    }
+
     public TopNewsPresenter(RemoteNewsDataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -41,11 +44,13 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     @Override
     public void prepareCategories() {
         List<String> categories = new ArrayList<>();
-        categories.add("Sport");
-        categories.add("Politic");
-        categories.add("Woirld");
-        categories.add("BBC");
-        categories.add("Others");
+        categories.add("Sports");
+        categories.add("Technology");
+        categories.add("Business");
+        categories.add("Entertainment");
+        categories.add("General");
+        categories.add("Health");
+        categories.add("Science");
         view.displayCategories(categories);
     }
 

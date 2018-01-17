@@ -8,10 +8,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="@drawable/round_borders"
-        android:padding="16dp"
+        android:padding="10dp"
         android:textColor="@color/colorWhite"
         android:textSize="18sp" />
 </LinearLayout>

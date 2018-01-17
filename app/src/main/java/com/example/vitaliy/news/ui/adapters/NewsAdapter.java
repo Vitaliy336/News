@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,17 +26,22 @@ import java.util.List;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
+
+    private OnItemClickListener mListener;
     private Context mContext;
     List<Article> newsList = new ArrayList<>();
+    View view;
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.click(newsList.get(position),mListener);
         holder.bind(newsList.get(position));
     }
 
@@ -44,20 +50,29 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return newsList.size();
     }
 
+    public interface OnItemClickListener{
+        void OnClick(Article article);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = null;
+        mListener = listener;
+    }
+
     public void setData(List<Article> news, FragmentActivity activity) {
         newsList.clear();
         newsList.addAll(news);
         notifyDataSetChanged();
         mContext = activity;
+
         Log.e("newsAdapter", "news size = "+news.size());
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
         TextView title, description;
         ImageView newsPicture;
-        TopNewsPresenter presenter;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -80,9 +95,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     .into(newsPicture);
         }
 
-        @Override
-        public void onClick(View view) {
-
+        public void click(final Article article, final OnItemClickListener onItemClickListener){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.OnClick(article);
+                }
+            });
         }
     }
 }

@@ -8,12 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.Article;
-import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
@@ -58,16 +56,23 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     }
 
     private void intiListener() {
+        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void OnClick(Article article) {
+                Toast.makeText(getActivity(), article.getTitle(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void initView() {
         newsAdapter = new NewsAdapter();
+
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        news = (RecyclerView)rootView.findViewById(R.id.AllnewsRV);
+        news = (RecyclerView) rootView.findViewById(R.id.AllnewsRV);
         news.setLayoutManager(lm);
         news.setAdapter(newsAdapter);
         categories = (RecyclerView) rootView.findViewById(R.id.categories);
