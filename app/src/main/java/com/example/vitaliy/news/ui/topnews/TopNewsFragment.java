@@ -1,12 +1,13 @@
 package com.example.vitaliy.news.ui.topnews;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.vitaliy.news.data.model.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
+import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private RecyclerView categoriesRV, newsRV ;
     private CategoriesAdapter categoriesAdapter;
     private NewsAdapter newsAdapter;
-    private List<String> categoriesList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,9 +86,12 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     private void initListener() {
         newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void OnClick(Article article) {
                 Toast.makeText(getActivity(), article.getTitle(), Toast.LENGTH_LONG).show();
+                presenter.goToFullNews(article.getUrl());
+
             }
         });
     }
@@ -108,6 +112,13 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     @Override
     public void displayToastMessage() {
         Toast.makeText(getActivity(), "@@@@", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void ShowFullNews(String url) {
+        Intent intent = new Intent(getActivity(), FullNewsActivity.class);
+        intent.putExtra("Url", url);
+        startActivity(intent);
     }
 
 }

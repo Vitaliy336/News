@@ -16,7 +16,6 @@ import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +30,6 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private CategoriesAdapter categoriesAdapter = new CategoriesAdapter();
     private RecyclerView categories, news;
     private LinearLayoutManager layoutManager, lm;
-    private List<String> categoriesList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

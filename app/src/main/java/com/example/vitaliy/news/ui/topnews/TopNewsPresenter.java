@@ -1,7 +1,5 @@
 package com.example.vitaliy.news.ui.topnews;
 
-import android.util.Log;
-
 import com.example.vitaliy.news.data.model.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
@@ -16,15 +14,13 @@ import java.util.List;
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     private RemoteNewsDataSource dataSource;
+    private TopNewsContract.ITopNewsView view;
 
-    public TopNewsPresenter(){
-    }
 
     public TopNewsPresenter(RemoteNewsDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    private TopNewsContract.ITopNewsView view;
 
     @Override
     public void attachView(TopNewsContract.ITopNewsView view) {
@@ -66,5 +62,11 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
             public void onFailure() {
             }
         });
+    }
+
+
+    @Override
+    public void goToFullNews(String url) {
+        view.ShowFullNews(url);
     }
 }

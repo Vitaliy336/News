@@ -77,4 +77,5 @@ public class MainActivity extends AppCompatActivity {
             return Titles.get(position);
         }
     }
+
 }
