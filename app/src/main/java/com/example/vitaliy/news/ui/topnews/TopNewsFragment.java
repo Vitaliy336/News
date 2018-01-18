@@ -20,7 +20,6 @@ import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,7 +88,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             @SuppressLint("ResourceType")
             @Override
             public void OnClick(Article article) {
-                Toast.makeText(getActivity(), article.getTitle(), Toast.LENGTH_LONG).show();
                 Log.e("Ss", article.getUrl());
                 presenter.goToFullNews(article.getUrl());
 

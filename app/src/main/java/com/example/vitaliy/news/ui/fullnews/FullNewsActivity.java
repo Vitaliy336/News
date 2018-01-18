@@ -1,15 +1,19 @@
 package com.example.vitaliy.news.ui.fullnews;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.example.vitaliy.news.R;
 
 public class FullNewsActivity extends AppCompatActivity implements FullNewsContract.IFullNewsView {
     private FullNewsContract.IFullNewsPresenter presenter;
+    private ProgressBar newsPB;
     private WebView fullNews;
 
     @Override
@@ -45,10 +49,33 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
 
     private void initView() {
         fullNews = (WebView)findViewById(R.id.fullNewsWV);
+        newsPB = (ProgressBar)findViewById(R.id.newsPB);
     }
 
     @Override
     public void showContent(String url) {
+        fullNews.setWebViewClient(new WebViewClient());
         fullNews.loadUrl(url);
     }
+
+    public class WebViewClient extends android.webkit.WebViewClient{
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            fullNews.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            newsPB.setVisibility(view.GONE);
+        }
+    }
+
 }
