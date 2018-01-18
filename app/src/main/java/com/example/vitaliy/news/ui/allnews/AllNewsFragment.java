@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.ui.allnews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.example.vitaliy.news.data.model.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
+import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
 import java.util.List;
 
@@ -54,12 +56,18 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     }
 
     private void intiListener() {
-        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+        newsAdapter.setOnItemClickListener(new NewsAdapter.onNewsClickListener() {
             @Override
             public void OnClick(Article article) {
-                Toast.makeText(getActivity(), article.getTitle(), Toast.LENGTH_LONG).show();
+                presenter.goTofullNews(article.getUrl());
             }
         });
+//        categoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
+//            @Override
+//            public void onCatClick(String str) {
+//                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+//            }
+//        }); not shure that here need categories
     }
 
     private void initView() {
@@ -70,10 +78,10 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        news = (RecyclerView) rootView.findViewById(R.id.AllnewsRV);
+        news = rootView.findViewById(R.id.AllnewsRV);
         news.setLayoutManager(lm);
         news.setAdapter(newsAdapter);
-        categories = (RecyclerView) rootView.findViewById(R.id.categories);
+        categories = rootView.findViewById(R.id.categories);
         categories.setLayoutManager(layoutManager);
         categories.setAdapter(categoriesAdapter);
     }
@@ -98,6 +106,13 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     @Override
     public void ShowToastMessage() {
         Toast.makeText(getActivity(), "Did i understand it?", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showFullNews(String url) {
+        Intent intent = new Intent(getActivity(), FullNewsActivity.class);
+        intent.putExtra("Url", url);
+        startActivity(intent);
     }
 
 

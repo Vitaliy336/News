@@ -15,11 +15,13 @@ public interface AllNewsContract {
         void displayCategories(List<String> categories);
         void displayNews(List<Article> news);
         void ShowToastMessage();
+        void showFullNews(String url);
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
         void onTextClickListener();
         void prepareNews();
         void prepareCategories();
+        void goTofullNews(String url);
     }
 }

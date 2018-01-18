@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.vitaliy.news.ui.allnews.AllNewsFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
-import com.example.vitaliy.news.ui.topnews.TopNewsPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    TopNewsPresenter presentor;
 
 
     @SuppressLint("RestrictedApi")
@@ -30,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
 

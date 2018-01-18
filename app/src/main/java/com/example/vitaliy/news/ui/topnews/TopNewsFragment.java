@@ -84,13 +84,18 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
 
     private void initListener() {
-        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+        newsAdapter.setOnItemClickListener(new NewsAdapter.onNewsClickListener() {
             @SuppressLint("ResourceType")
             @Override
             public void OnClick(Article article) {
                 Log.e("Ss", article.getUrl());
                 presenter.goToFullNews(article.getUrl());
-
+            }
+        });
+        categoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
+            @Override
+            public void onCatClick(String str) {
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });
     }

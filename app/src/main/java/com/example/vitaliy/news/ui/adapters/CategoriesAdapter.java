@@ -1,6 +1,5 @@
 package com.example.vitaliy.news.ui.adapters;
 
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,22 +18,33 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
+    private onCategoryItemClick onCategoryItemClick;
     List<String> data = new ArrayList<>();
+    View view;
+
+    public interface onCategoryItemClick{
+        void onCatClick(String str);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.top_category_item, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.top_category_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.onClick(data.get(position), onCategoryItemClick);
         holder.bind(data.get(position));
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void setCategoryItemClick(onCategoryItemClick categoryItemClick){
+        onCategoryItemClick = categoryItemClick;
     }
 
     public void setData(List<String> categories) {
@@ -50,11 +60,20 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            categoryName = (TextView) itemView.findViewById(R.id.categoryName);
+            categoryName =  itemView.findViewById(R.id.categoryName);
         }
 
         void bind(String str) {
             categoryName.setText(str);
+        }
+
+        public void onClick(final String str, final onCategoryItemClick onCategoryItemClick){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onCategoryItemClick.onCatClick(str);
+                }
+            });
         }
     }
 }

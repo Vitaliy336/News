@@ -60,4 +60,9 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
         categories.add("Others");
         view.displayCategories(categories);
     }
+
+    @Override
+    public void goTofullNews(String url) {
+        view.showFullNews(url);
+    }
 }

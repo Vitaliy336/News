@@ -48,8 +48,9 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
     }
 
     private void initView() {
-        fullNews = (WebView)findViewById(R.id.fullNewsWV);
-        newsPB = (ProgressBar)findViewById(R.id.newsPB);
+        fullNews = findViewById(R.id.fullNewsWV);
+        fullNews.getSettings().setJavaScriptEnabled(true);
+        newsPB = findViewById(R.id.newsPB);
     }
 
     @Override

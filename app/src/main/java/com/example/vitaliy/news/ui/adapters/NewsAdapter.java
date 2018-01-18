@@ -9,14 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.Article;
-import com.example.vitaliy.news.ui.topnews.TopNewsPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +25,15 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private OnItemClickListener mListener;
+    private onNewsClickListener mListener;
     private Context mContext;
     List<Article> newsList = new ArrayList<>();
     View view;
+
+
+    public interface onNewsClickListener {
+        void OnClick(Article article);
+    }
 
 
     @Override
@@ -50,12 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return newsList.size();
     }
 
-    public interface OnItemClickListener{
-        void OnClick(Article article);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        mListener = null;
+    public void setOnItemClickListener(onNewsClickListener listener){
         mListener = listener;
     }
 
@@ -76,10 +74,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cardViewItem);
-            title = (TextView)itemView.findViewById(R.id.newsTitleTV);
-            description = (TextView)itemView.findViewById(R.id.newsDescriptionTV);
-            newsPicture = (ImageView)itemView.findViewById(R.id.newsImgView);
+            cv = itemView.findViewById(R.id.cardViewItem);
+            title = itemView.findViewById(R.id.newsTitleTV);
+            description = itemView.findViewById(R.id.newsDescriptionTV);
+            newsPicture = itemView.findViewById(R.id.newsImgView);
         }
 
         void bind(Article news) {
@@ -95,11 +93,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     .into(newsPicture);
         }
 
-        public void click(final Article article, final OnItemClickListener onItemClickListener){
+        public void click(final Article article, final onNewsClickListener onNewsClickListener){
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.OnClick(article);
+                    onNewsClickListener.OnClick(article);
                 }
             });
         }
