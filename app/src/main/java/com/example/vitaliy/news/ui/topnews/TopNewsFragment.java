@@ -90,6 +90,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             @Override
             public void OnClick(Article article) {
                 Toast.makeText(getActivity(), article.getTitle(), Toast.LENGTH_LONG).show();
+                Log.e("Ss", article.getUrl());
                 presenter.goToFullNews(article.getUrl());
 
             }

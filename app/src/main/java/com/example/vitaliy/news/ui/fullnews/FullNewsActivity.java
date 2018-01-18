@@ -19,8 +19,8 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         presenter.detachView();
         Log.e("onStop", "View detached");
     }
