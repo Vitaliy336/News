@@ -64,6 +64,21 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         });
     }
 
+    @Override
+    public void prepareNewsWithFilter(String category) {
+        dataSource.hotNewsWithFilter(new NewsDataSource.getListCallback() {
+            @Override
+            public void onListReceived(List<Article> list) {
+                view.showNewsWithFilter(list);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }, category);
+    }
+
 
     @Override
     public void goToFullNews(String url) {

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.vitaliy.news.data.model.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,10 @@ import java.util.List;
 
 public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     private AllNewsContract.IAllNewsView view;
+    private RemoteNewsDataSource dataSource;
     NewsDataSource newsDataSource;
+
+
 
     public AllNewsPresenter(NewsDataSource newsDataSource) {
         this.newsDataSource = newsDataSource;
@@ -32,7 +36,7 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
 
     @Override
     public void onTextClickListener() {
-        view.ShowToastMessage();
+        view.showToastMessage();
     }
 
     @Override
@@ -64,5 +68,10 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     @Override
     public void goTofullNews(String url) {
         view.showFullNews(url);
+    }
+
+    @Override
+    public void searchNews(String query) {
+
     }
 }

@@ -96,6 +96,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             @Override
             public void onCatClick(String str) {
                 Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+                presenter.prepareNewsWithFilter(str);
             }
         });
     }
@@ -123,6 +124,12 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         Intent intent = new Intent(getActivity(), FullNewsActivity.class);
         intent.putExtra("Url", url);
         startActivity(intent);
+    }
+
+    @Override
+    public void showNewsWithFilter(List<Article> articles) {
+        newsAdapter.setData(articles, getActivity());
+
     }
 
 }

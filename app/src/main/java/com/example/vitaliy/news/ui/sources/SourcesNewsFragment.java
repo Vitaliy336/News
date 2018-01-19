@@ -75,7 +75,6 @@ public class SourcesNewsFragment extends Fragment implements SourccesNewsContrac
         categories.setLayoutManager(layoutManagerC);
         categories.setAdapter(categoriesAdapter);
 
-        tv = rootView.findViewById(R.id.textView);
     }
 
     @Override

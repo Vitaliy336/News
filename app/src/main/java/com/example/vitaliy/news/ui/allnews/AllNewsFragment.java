@@ -29,8 +29,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private View rootView;
     private AllNewsContract.IAllNewsPresenter presenter;
     private NewsAdapter newsAdapter;
-    private CategoriesAdapter categoriesAdapter = new CategoriesAdapter();
-    private RecyclerView categories, news;
+    private RecyclerView news;
     private LinearLayoutManager layoutManager, lm;
 
     @Override
@@ -81,9 +80,6 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         news = rootView.findViewById(R.id.newsA);
         news.setLayoutManager(lm);
         news.setAdapter(newsAdapter);
-        categories = rootView.findViewById(R.id.categoriesA);
-        categories.setLayoutManager(layoutManager);
-        categories.setAdapter(categoriesAdapter);
     }
 
     @Nullable
@@ -95,7 +91,6 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     @Override
     public void displayCategories(List<String> categories) {
-        categoriesAdapter.setData(categories);
     }
 
     @Override
@@ -104,7 +99,12 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     }
 
     @Override
-    public void ShowToastMessage() {
+    public void displayNewsbySearch(List<Article> news) {
+
+    }
+
+    @Override
+    public void showToastMessage() {
         Toast.makeText(getActivity(), "Did i understand it?", Toast.LENGTH_SHORT).show();
     }
 

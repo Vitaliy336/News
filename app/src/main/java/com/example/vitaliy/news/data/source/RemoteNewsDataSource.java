@@ -1,5 +1,7 @@
 package com.example.vitaliy.news.data.source;
 
+import android.util.Log;
+
 import com.example.vitaliy.news.data.model.NewsModel;
 import com.example.vitaliy.news.data.rest.ApiClient;
 import com.example.vitaliy.news.data.rest.ApiInterface;
@@ -32,6 +34,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
                 @Override
                 public void onFailure(Call<NewsModel> call, Throwable t) {
                     callback.onFailure();
+                    Log.e("Error", t.toString());
                 }
             });
         }
@@ -41,7 +44,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
     @Override
     public void AllDataFromApi(final getListCallback callback) {
         if(callback != null){
-            apiInterface.getAllNews("news", API_KEY).enqueue(new Callback<NewsModel>() {
+            apiInterface.getAllNews("us", API_KEY).enqueue(new Callback<NewsModel>() {
                 @Override
                 public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                     callback.onListReceived(response.body().getArticles());
@@ -50,6 +53,41 @@ public class RemoteNewsDataSource implements NewsDataSource {
                 @Override
                 public void onFailure(Call<NewsModel> call, Throwable t) {
                     callback.onFailure();
+                    Log.e("Error", t.toString());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void hotNewsWithFilter(final getListCallback callback, String category) {
+        if(callback != null){
+            apiInterface.getTopNewsFiltered("us", category, API_KEY).enqueue(new Callback<NewsModel>() {
+                @Override
+                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                    callback.onListReceived(response.body().getArticles());
+                }
+
+                @Override
+                public void onFailure(Call<NewsModel> call, Throwable t) {
+                    Log.e("Error", t.toString());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void AllNewsWithSearchQuery(final getListCallback callback, String query) {
+        if(callback != null){
+            apiInterface.getAllNews(query, API_KEY).enqueue(new Callback<NewsModel>() {
+                @Override
+                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                    callback.onListReceived(response.body().getArticles());
+                }
+
+                @Override
+                public void onFailure(Call<NewsModel> call, Throwable t) {
+                    Log.e("Error", t.toString());
                 }
             });
         }

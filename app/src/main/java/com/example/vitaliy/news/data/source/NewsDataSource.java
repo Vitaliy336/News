@@ -18,4 +18,9 @@ public interface NewsDataSource {
 
     void topDataFromApi(getListCallback callback);
     void AllDataFromApi(getListCallback callback);
+
+    void hotNewsWithFilter(getListCallback callback, String category);
+    void AllNewsWithSearchQuery(getListCallback callback, String query);
+
+
 }

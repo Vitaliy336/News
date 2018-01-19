@@ -7,13 +7,14 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/categoriesA"
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/recycler_iews_margin"
         android:layout_marginStart="@dimen/recycler_iews_margin"
         android:layout_marginTop="@dimen/recycler_iews_margin"
+        android:background="@android:color/holo_blue_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoriesA"
+        app:layout_constraintTop_toBottomOf="@+id/searchA"
         app:layout_constraintVertical_weight="3">
 
     </android.support.v7.widget.RecyclerView>

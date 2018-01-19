@@ -14,7 +14,8 @@ public interface AllNewsContract {
     interface IAllNewsView extends BaseView {
         void displayCategories(List<String> categories);
         void displayNews(List<Article> news);
-        void ShowToastMessage();
+        void displayNewsbySearch(List<Article> news);
+        void showToastMessage();
         void showFullNews(String url);
     }
 
@@ -23,5 +24,6 @@ public interface AllNewsContract {
         void prepareNews();
         void prepareCategories();
         void goTofullNews(String url);
+        void searchNews(String query);
     }
 }

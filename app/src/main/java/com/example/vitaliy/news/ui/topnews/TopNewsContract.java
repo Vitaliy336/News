@@ -16,6 +16,7 @@ public interface TopNewsContract {
         void displayNews(List<Article> article);
         void displayToastMessage();
         void ShowFullNews(String url);
+        void showNewsWithFilter(List<Article> article);
 
     }
 
@@ -23,6 +24,7 @@ public interface TopNewsContract {
         void onTextClick();
         void prepareCategories();
         void prepareNews();
+        void prepareNewsWithFilter(String category);
         void goToFullNews(String url);
 
     }
