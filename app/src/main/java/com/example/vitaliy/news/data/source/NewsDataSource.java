@@ -1,6 +1,8 @@
 package com.example.vitaliy.news.data.source;
 
-import com.example.vitaliy.news.data.model.Article;
+import android.widget.ListView;
+
+import com.example.vitaliy.news.data.newsModel.Article;
 
 import java.util.List;
 
@@ -11,13 +13,14 @@ import java.util.List;
 public interface NewsDataSource {
 
     interface getListCallback {
-        void onListReceived(List<Article> list);
+        void onListReceived(List<?> article);
 
         void onFailure();
     }
 
     void topDataFromApi(getListCallback callback);
     void AllDataFromApi(getListCallback callback);
+    void SourcesDataFromApi(getListCallback callback);
 
     void hotNewsWithFilter(getListCallback callback, String category);
     void AllNewsWithSearchQuery(getListCallback callback, String query);

@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.vitaliy.news.ui.allnews.AllNewsFragment;
-import com.example.vitaliy.news.ui.sources.SourcesNewsFragment;
+import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragmet(new TopNewsFragment(), "Top News");
         adapter.addFragmet(new AllNewsFragment(), "All News");
-        adapter.addFragmet(new SourcesNewsFragment(), "Source News");
+        adapter.addFragmet(new SourcesFragment(), "NewsSource News");
         viewPager.setAdapter(adapter);
     }
 

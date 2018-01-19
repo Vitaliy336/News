@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.model.Article;
+import com.example.vitaliy.news.data.newsModel.Article;
 
 import java.util.ArrayList;
 import java.util.List;

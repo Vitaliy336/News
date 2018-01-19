@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.model;
+package com.example.vitaliy.news.data.newsModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -10,9 +10,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Article {
 
-    @SerializedName("source")
+    @SerializedName("newsSource")
     @Expose
-    private Source source;
+    private NewsSource newsSource;
     @SerializedName("author")
     @Expose
     private String author;
@@ -32,12 +32,12 @@ public class Article {
     @Expose
     private String publishedAt;
 
-    public Source getSource() {
-        return source;
+    public NewsSource getNewsSource() {
+        return newsSource;
     }
 
-    public void setSource(Source source) {
-        this.source = source;
+    public void setNewsSource(NewsSource newsSource) {
+        this.newsSource = newsSource;
     }
 
     public String getAuthor() {

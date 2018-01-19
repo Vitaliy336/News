@@ -2,7 +2,7 @@ package com.example.vitaliy.news.ui.allnews;
 
 import android.util.Log;
 
-import com.example.vitaliy.news.data.model.Article;
+import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
@@ -40,8 +40,8 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     public void prepareNews() {
         newsDataSource.AllDataFromApi(new NewsDataSource.getListCallback() {
             @Override
-            public void onListReceived(List<Article> list) {
-                view.displayNews(list);
+            public void onListReceived(List<?> list) {
+                view.displayNews((List<Article>) list);
             }
 
             @Override
@@ -71,8 +71,8 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     public void searchNews(String query) {
         newsDataSource.AllNewsWithSearchQuery(new NewsDataSource.getListCallback() {
             @Override
-            public void onListReceived(List<Article> list) {
-                view.displayNewsbySearch(list);
+            public void onListReceived(List<?> article) {
+                view.displayNewsbySearch((List<Article>) article);
             }
 
             @Override

@@ -14,8 +14,6 @@
         android:layout_marginEnd="@dimen/recycler_iews_margin"
         android:layout_marginStart="@dimen/recycler_iews_margin"
         android:layout_marginTop="@dimen/recycler_iews_margin"
-        android:background="@android:color/holo_blue_light"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

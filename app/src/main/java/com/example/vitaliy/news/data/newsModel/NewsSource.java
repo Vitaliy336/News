@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.model;
+package com.example.vitaliy.news.data.newsModel;
 
 
 import com.google.gson.annotations.Expose;
@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 
-public class Source {
+public class NewsSource {
 
     @SerializedName("id")
     @Expose

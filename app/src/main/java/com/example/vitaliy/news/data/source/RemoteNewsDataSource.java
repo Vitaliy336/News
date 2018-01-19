@@ -2,9 +2,11 @@ package com.example.vitaliy.news.data.source;
 
 import android.util.Log;
 
-import com.example.vitaliy.news.data.model.NewsModel;
+import com.example.vitaliy.news.data.newsModel.NewsModel;
 import com.example.vitaliy.news.data.rest.ApiClient;
 import com.example.vitaliy.news.data.rest.ApiInterface;
+import com.example.vitaliy.news.data.sourceModel.Source;
+import com.example.vitaliy.news.data.sourceModel.SourceModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,6 +60,24 @@ public class RemoteNewsDataSource implements NewsDataSource {
             });
         }
     }
+
+    @Override
+    public void SourcesDataFromApi(final getListCallback callback) {
+        if(callback!=null){
+            apiInterface.getSources(API_KEY).enqueue(new Callback<SourceModel>() {
+                @Override
+                public void onResponse(Call<SourceModel> call, Response<SourceModel> response) {
+                    callback.onListReceived(response.body().getSources());
+                }
+
+                @Override
+                public void onFailure(Call<SourceModel> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
 
     @Override
     public void hotNewsWithFilter(final getListCallback callback, String category) {

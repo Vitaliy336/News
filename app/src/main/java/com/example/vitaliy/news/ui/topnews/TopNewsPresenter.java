@@ -1,6 +1,6 @@
 package com.example.vitaliy.news.ui.topnews;
 
-import com.example.vitaliy.news.data.model.Article;
+import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
@@ -54,8 +54,8 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     public void prepareNews() {
         dataSource.topDataFromApi(new NewsDataSource.getListCallback() {
             @Override
-            public void onListReceived(List<Article> list) {
-                view.displayNews(list);
+            public void onListReceived(List<?> list) {
+                view.displayNews((List<Article>) list);
             }
 
             @Override
@@ -68,8 +68,8 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     public void prepareNewsWithFilter(String category) {
         dataSource.hotNewsWithFilter(new NewsDataSource.getListCallback() {
             @Override
-            public void onListReceived(List<Article> list) {
-                view.showNewsWithFilter(list);
+            public void onListReceived(List<?> list) {
+                view.showNewsWithFilter((List<Article>) list);
             }
 
             @Override

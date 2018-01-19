@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.model;
+package com.example.vitaliy.news.data.newsModel;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
