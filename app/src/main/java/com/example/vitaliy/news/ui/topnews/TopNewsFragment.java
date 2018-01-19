@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -72,6 +73,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         layoutManagerForNews.setOrientation(LinearLayoutManager.VERTICAL);
 
         newsRV = rootView.findViewById(R.id.newsT);
+        newsRV.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         newsRV.setLayoutManager(layoutManagerForNews);
         newsRV.setAdapter(newsAdapter);
 
