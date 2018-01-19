@@ -71,13 +71,13 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         LinearLayoutManager layoutManagerForNews = new LinearLayoutManager(getActivity());
         layoutManagerForNews.setOrientation(LinearLayoutManager.VERTICAL);
 
-        newsRV = rootView.findViewById(R.id.newsRV);
+        newsRV = rootView.findViewById(R.id.newsT);
         newsRV.setLayoutManager(layoutManagerForNews);
         newsRV.setAdapter(newsAdapter);
 
 
 
-        categoriesRV = rootView.findViewById(R.id.categoriesRV);
+        categoriesRV = rootView.findViewById(R.id.categoriesT);
         categoriesRV.setLayoutManager(layoutManagerForCategories);
         categoriesRV.setAdapter(categoriesAdapter);
     }

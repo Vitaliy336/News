@@ -47,7 +47,7 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
             public void onFailure() {
                 Log.e("Failure", "fail");
             }
-        });
+        } );
     }
 
     @Override

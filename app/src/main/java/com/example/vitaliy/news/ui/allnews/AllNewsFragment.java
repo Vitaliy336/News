@@ -78,10 +78,10 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        news = rootView.findViewById(R.id.AllnewsRV);
+        news = rootView.findViewById(R.id.newsA);
         news.setLayoutManager(lm);
         news.setAdapter(newsAdapter);
-        categories = rootView.findViewById(R.id.categories);
+        categories = rootView.findViewById(R.id.categoriesA);
         categories.setLayoutManager(layoutManager);
         categories.setAdapter(categoriesAdapter);
     }
