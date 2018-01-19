@@ -15,12 +15,9 @@ import java.util.List;
 
 public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     private AllNewsContract.IAllNewsView view;
-    private RemoteNewsDataSource dataSource;
-    NewsDataSource newsDataSource;
+    private RemoteNewsDataSource newsDataSource;
 
-
-
-    public AllNewsPresenter(NewsDataSource newsDataSource) {
+    public AllNewsPresenter(RemoteNewsDataSource newsDataSource) {
         this.newsDataSource = newsDataSource;
     }
 
@@ -72,6 +69,16 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
 
     @Override
     public void searchNews(String query) {
+        newsDataSource.AllNewsWithSearchQuery(new NewsDataSource.getListCallback() {
+            @Override
+            public void onListReceived(List<Article> list) {
+                view.displayNewsbySearch(list);
+            }
 
+            @Override
+            public void onFailure() {
+
+            }
+        }, query);
     }
 }

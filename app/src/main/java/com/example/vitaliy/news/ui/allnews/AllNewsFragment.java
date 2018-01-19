@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +32,8 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private AllNewsContract.IAllNewsPresenter presenter;
     private NewsAdapter newsAdapter;
     private RecyclerView news;
-    private LinearLayoutManager layoutManager, lm;
+    private LinearLayoutManager lm;
+    private SearchView searchNews;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,19 +64,26 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
                 presenter.goTofullNews(article.getUrl());
             }
         });
-//        categoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
-//            @Override
-//            public void onCatClick(String str) {
-//                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
-//            }
-//        }); not shure that here need categories
+       searchNews.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+           @Override
+           public boolean onQueryTextSubmit(String query) {
+               Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
+               presenter.searchNews(query);
+               searchNews.clearFocus();
+               return false;
+           }
+
+           @Override
+           public boolean onQueryTextChange(String newText) {
+               return false;
+           }
+       });
     }
 
     private void initView() {
         newsAdapter = new NewsAdapter();
+        searchNews = rootView.findViewById(R.id.searchA);
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -100,7 +110,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     @Override
     public void displayNewsbySearch(List<Article> news) {
-
+        newsAdapter.setData(news, getActivity());
     }
 
     @Override
