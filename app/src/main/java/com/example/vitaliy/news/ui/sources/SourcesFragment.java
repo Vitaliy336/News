@@ -43,7 +43,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try{
-            mSourceDataListener = (OnSourceDataListener)activity
+            mSourceDataListener = (OnSourceDataListener)activity;
         }
         catch (Exception e){
 
