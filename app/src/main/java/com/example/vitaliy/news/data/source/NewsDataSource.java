@@ -24,6 +24,7 @@ public interface NewsDataSource {
 
     void hotNewsWithFilter(getListCallback callback, String category);
     void AllNewsWithSearchQuery(getListCallback callback, String query);
+    void AllSourcesDataWithFilter(getListCallback callback, String category);
 
 
 }

@@ -25,4 +25,7 @@ public interface ApiInterface {
     @GET("/v2/sources")
     Call<SourceModel> getSources(@Query("apiKey") String apiKey);
 
+    @GET("/v2/sources")
+    Call<SourceModel> getSourcesWithCategory(@Query("category") String category, @Query("apiKey") String apiKey);
+
 }

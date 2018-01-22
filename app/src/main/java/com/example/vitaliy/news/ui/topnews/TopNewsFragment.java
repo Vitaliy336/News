@@ -90,7 +90,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             @SuppressLint("ResourceType")
             @Override
             public void OnClick(Article article) {
-                Log.e("Ss", article.getUrl());
                 presenter.goToFullNews(article.getUrl());
             }
         });
@@ -133,5 +132,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         newsAdapter.setData(articles, getActivity());
 
     }
+
 
 }

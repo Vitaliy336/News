@@ -112,4 +112,21 @@ public class RemoteNewsDataSource implements NewsDataSource {
             });
         }
     }
+
+    @Override
+    public void AllSourcesDataWithFilter(final getListCallback callback, String category) {
+        if(callback != null){
+            apiInterface.getSourcesWithCategory(category, API_KEY).enqueue(new Callback<SourceModel>() {
+                @Override
+                public void onResponse(Call<SourceModel> call, Response<SourceModel> response) {
+                    callback.onListReceived(response.body().getSources());
+                }
+
+                @Override
+                public void onFailure(Call<SourceModel> call, Throwable t) {
+
+                }
+            });
+        }
+    }
 }

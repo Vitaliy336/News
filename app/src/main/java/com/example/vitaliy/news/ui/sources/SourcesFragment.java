@@ -1,19 +1,24 @@
 package com.example.vitaliy.news.ui.sources;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
+import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
-import com.example.vitaliy.news.ui.adapters.NewsAdapter;
+import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
 
 import java.util.List;
 
@@ -23,11 +28,27 @@ import java.util.List;
 
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView{
     private View rootView;
+    private OnSourceDataListener mSourceDataListener;
     private SourcesPresenter presenter;
     private RemoteNewsDataSource dataSource;
-    private RecyclerView newsS, categoriesS;
-    private NewsAdapter sNewsAdapter;
+    private RecyclerView sourcesRV, categoriesS;
+    private SourcesAdapter sourcesAdapter;
     private CategoriesAdapter sCategoriesAdapter;
+
+    public interface OnSourceDataListener{
+        public void onSourceDataReceived(String data);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try{
+            mSourceDataListener = (OnSourceDataListener)activity
+        }
+        catch (Exception e){
+
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,41 +76,60 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         presenter = new SourcesPresenter(dataSource);
         presenter.attachView(this);
         presenter.prepareCategories();
-        presenter.prepareNews();
+        presenter.prepareSources();
+
 
     }
 
     private void initListener() {
+        sCategoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
+            @Override
+            public void onCatClick(String str) {
+                presenter.prepareSourcesWithCategory(str);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sourcesAdapter.setSourceItemClickListener(new SourcesAdapter.onSourceClickListener() {
+            @Override
+            public void onClick(Source source) {
+                Toast.makeText(getActivity(), source.getName(), Toast.LENGTH_SHORT).show();
+
+                mSourceDataListener.onSourceDataReceived(source.getName());//cc
+//                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
+//                viewPager.setCurrentItem(0);
+
+//                TopNewsFragment topNewsFragment = new TopNewsFragment();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.topNews, topNewsFragment).commit();
+            }
+        });
     }
 
     private void initView() {
-        sNewsAdapter = new NewsAdapter();
         sCategoriesAdapter = new CategoriesAdapter();
+        sourcesAdapter = new SourcesAdapter();
 
         LinearLayoutManager categoryLM = new LinearLayoutManager(getActivity());
-        LinearLayoutManager newsLM = new LinearLayoutManager(getActivity());
+        LinearLayoutManager sourcesLM = new LinearLayoutManager(getActivity());
 
         categoryLM.setOrientation(LinearLayoutManager.HORIZONTAL);
-        newsLM.setOrientation(LinearLayoutManager.VERTICAL);
+        sourcesLM.setOrientation(LinearLayoutManager.VERTICAL);
 
-        newsS = rootView.findViewById(R.id.newsS);
+        sourcesRV = rootView.findViewById(R.id.sourcesRV);
         categoriesS = rootView.findViewById(R.id.categoriesS);
+        sourcesRV.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
-        newsS.setLayoutManager(newsLM);
-        newsS.setAdapter(sNewsAdapter);
+        sourcesRV.setLayoutManager(sourcesLM);
+        sourcesRV.setAdapter(sourcesAdapter);
 
         categoriesS.setLayoutManager(categoryLM);
         categoriesS.setAdapter(sCategoriesAdapter);
     }
 
+
     @Override
     public void displayCategories(List<String> categories) {
         sCategoriesAdapter.setData(categories);
-    }
-
-    @Override
-    public void displayNews(List<Article> article) {
-      // sNewsAdapter.setData(article, getActivity());
     }
 
     @Override
@@ -98,12 +138,13 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     }
 
     @Override
-    public void ShowFullNews(String url) {
-
+    public void showSources(List<Source> list) {
+        sourcesAdapter.setInfo(list, getActivity());
+        Log.e("SSS", list.size() + "");
     }
 
     @Override
-    public void showNewsWithFilter(List<Article> article) {
-
+    public void showSourcesWithCategory(List<Source> list) {
+        sourcesAdapter.setInfo(list, getActivity());
     }
 }

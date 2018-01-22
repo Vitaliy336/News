@@ -1,8 +1,8 @@
 package com.example.vitaliy.news.ui.sources;
 
-import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
+import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.ArrayList;
@@ -50,18 +50,33 @@ public class SourcesPresenter implements ISourcesPresenter{
     }
 
     @Override
-    public void prepareNews() {
+    public void prepareSources() {
+        dataSource.SourcesDataFromApi(new NewsDataSource.getListCallback() {
+            @Override
+            public void onListReceived(List<?> list) {
+                view.showSources((List<Source>) list);
+            }
 
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
-
 
     @Override
-    public void prepareNewsWithFilter(String category) {
+    public void prepareSourcesWithCategory(String category) {
+        dataSource.AllSourcesDataWithFilter(new NewsDataSource.getListCallback() {
+            @Override
+            public void onListReceived(List<?> sources) {
+                view.showSourcesWithCategory((List<Source>) sources);
+            }
 
+            @Override
+            public void onFailure() {
+
+            }
+        }, category);
     }
 
-    @Override
-    public void goToFullNews(String url) {
-
-    }
 }

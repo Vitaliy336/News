@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragmet(new TopNewsFragment(), "Top News");
         adapter.addFragmet(new AllNewsFragment(), "All News");
-        adapter.addFragmet(new SourcesFragment(), "NewsSource News");
+        adapter.addFragmet(new SourcesFragment(), "Sources");
         viewPager.setAdapter(adapter);
     }
 
@@ -77,5 +77,6 @@ public class MainActivity extends AppCompatActivity {
             return Titles.get(position);
         }
     }
+
 
 }
