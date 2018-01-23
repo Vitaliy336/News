@@ -8,6 +8,8 @@ import com.example.vitaliy.news.data.rest.ApiInterface;
 import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.data.sourceModel.SourceModel;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +24,23 @@ public class RemoteNewsDataSource implements NewsDataSource {
 
     public RemoteNewsDataSource() {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
+    }
+
+    @Override
+    public void topNewsWithSource(final getListCallback callback, final String source) {
+        if(callback != null){
+            apiInterface.getNewsWithSource(source, API_KEY).enqueue(new Callback<NewsModel>() {
+                @Override
+                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                    callback.onListReceived(response.body().getArticles());
+                }
+
+                @Override
+                public void onFailure(Call<NewsModel> call, Throwable t) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -44,9 +63,9 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void AllDataFromApi(final getListCallback callback) {
+    public void allDataFromApi(final getListCallback callback) {
         if(callback != null){
-            apiInterface.getAllNews("us", API_KEY).enqueue(new Callback<NewsModel>() {
+            apiInterface.getAllNews("bitcoin", API_KEY).enqueue(new Callback<NewsModel>() {
                 @Override
                 public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                     callback.onListReceived(response.body().getArticles());
@@ -62,7 +81,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void SourcesDataFromApi(final getListCallback callback) {
+    public void sourcesDataFromApi(final getListCallback callback) {
         if(callback!=null){
             apiInterface.getSources(API_KEY).enqueue(new Callback<SourceModel>() {
                 @Override
@@ -97,7 +116,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void AllNewsWithSearchQuery(final getListCallback callback, String query) {
+    public void allNewsWithSearchQuery(final getListCallback callback, String query) {
         if(callback != null){
             apiInterface.getAllNews(query, API_KEY).enqueue(new Callback<NewsModel>() {
                 @Override
@@ -114,7 +133,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void AllSourcesDataWithFilter(final getListCallback callback, String category) {
+    public void allSourcesDataWithFilter(final getListCallback callback, String category) {
         if(callback != null){
             apiInterface.getSourcesWithCategory(category, API_KEY).enqueue(new Callback<SourceModel>() {
                 @Override
@@ -129,4 +148,5 @@ public class RemoteNewsDataSource implements NewsDataSource {
             });
         }
     }
+
 }

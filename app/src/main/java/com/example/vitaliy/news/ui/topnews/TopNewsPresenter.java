@@ -1,4 +1,7 @@
+
 package com.example.vitaliy.news.ui.topnews;
+
+import android.util.Log;
 
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
@@ -55,7 +58,10 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         dataSource.topDataFromApi(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
+
                 view.displayNews((List<Article>) list);
+                Log.e("presenter", "dispaly news");
+
             }
 
             @Override
@@ -83,5 +89,20 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     @Override
     public void goToFullNews(String url) {
         view.ShowFullNews(url);
+    }
+
+    @Override
+    public void prepareNewsWithSources(String source) {
+        dataSource.topNewsWithSource(new NewsDataSource.getListCallback() {
+            @Override
+            public void onListReceived(List<?> article) {
+                view.showNewsWithSource((List<Article>) article);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }, source);
     }
 }

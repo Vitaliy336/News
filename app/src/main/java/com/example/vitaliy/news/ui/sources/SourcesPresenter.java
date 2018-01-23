@@ -51,7 +51,7 @@ public class SourcesPresenter implements ISourcesPresenter{
 
     @Override
     public void prepareSources() {
-        dataSource.SourcesDataFromApi(new NewsDataSource.getListCallback() {
+        dataSource.sourcesDataFromApi(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
                 view.showSources((List<Source>) list);
@@ -66,7 +66,7 @@ public class SourcesPresenter implements ISourcesPresenter{
 
     @Override
     public void prepareSourcesWithCategory(String category) {
-        dataSource.AllSourcesDataWithFilter(new NewsDataSource.getListCallback() {
+        dataSource.allSourcesDataWithFilter(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> sources) {
                 view.showSourcesWithCategory((List<Source>) sources);

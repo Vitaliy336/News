@@ -28,4 +28,8 @@ public interface ApiInterface {
     @GET("/v2/sources")
     Call<SourceModel> getSourcesWithCategory(@Query("category") String category, @Query("apiKey") String apiKey);
 
+    @GET("/v2/top-headlines")
+    Call<NewsModel> getNewsWithSource(@Query("sources") String sources, @Query("apiKey") String apiKey);
+
+
 }

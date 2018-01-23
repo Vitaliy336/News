@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         presenter.attachView(this);
         presenter.prepareCategories();
         presenter.prepareNews();
+        Log.e("All news", "call");
     }
 
     private void intiListener() {
@@ -105,12 +107,17 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     @Override
     public void displayNews(List<Article> news) {
+        Log.e("Allnews", "show");
         newsAdapter.setData(news, getActivity());
+        newsAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void displayNewsbySearch(List<Article> news) {
         newsAdapter.setData(news, getActivity());
+        newsAdapter.notifyDataSetChanged();
+        Log.e("All news search", "show");
     }
 
     @Override

@@ -27,8 +27,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private onNewsClickListener mListener;
     private Context mContext;
-    List<Article> newsList = new ArrayList<>();
-    View view;
+    private List<Article> newsList = new ArrayList<>();
+    private View view;
 
 
     public interface onNewsClickListener {
@@ -57,13 +57,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         mListener = listener;
     }
 
+
     public void setData(List<Article> news, FragmentActivity activity) {
         newsList.clear();
-        newsList.addAll(news);
         notifyDataSetChanged();
+        newsList.addAll(news);
         mContext = activity;
 
+
         Log.e("newsAdapter", "news size = "+news.size());
+    }
+
+    public void updateList(List<Article> news, FragmentActivity activity){
+        newsList.clear();
+        newsList.addAll(news);
+        mContext = activity;
+
+        Log.e("newsAdapter, Update", "news size = "+news.size());
     }
 
 

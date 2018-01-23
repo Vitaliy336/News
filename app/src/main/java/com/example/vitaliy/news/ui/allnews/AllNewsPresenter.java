@@ -38,7 +38,7 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
 
     @Override
     public void prepareNews() {
-        newsDataSource.AllDataFromApi(new NewsDataSource.getListCallback() {
+        newsDataSource.allDataFromApi(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
                 view.displayNews((List<Article>) list);
@@ -69,7 +69,7 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
 
     @Override
     public void searchNews(String query) {
-        newsDataSource.AllNewsWithSearchQuery(new NewsDataSource.getListCallback() {
+        newsDataSource.allNewsWithSearchQuery(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
                 view.displayNewsbySearch((List<Article>) article);

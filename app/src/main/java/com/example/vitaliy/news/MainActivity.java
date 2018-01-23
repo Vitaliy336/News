@@ -17,10 +17,12 @@ import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SourcesFragment.OnSourceDataListener{
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
+    private TopNewsFragment topNewsFragment = new TopNewsFragment();
 
 
     @SuppressLint("RestrictedApi")
@@ -42,14 +44,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragmet(new TopNewsFragment(), "Top News");
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragmet(topNewsFragment, "Top News");
         adapter.addFragmet(new AllNewsFragment(), "All News");
         adapter.addFragmet(new SourcesFragment(), "Sources");
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onSourceDataReceived(String data) {
+        adapter.onSourceDataReceived(data);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter implements SourcesFragment.OnSourceDataListener{
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> Titles = new ArrayList<>();
 
@@ -75,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return Titles.get(position);
+        }
+
+        @Override
+        public void onSourceDataReceived(String data) {
+            if(topNewsFragment !=null){
+                topNewsFragment.onSourceDataReceived(data);
+            }
         }
     }
 

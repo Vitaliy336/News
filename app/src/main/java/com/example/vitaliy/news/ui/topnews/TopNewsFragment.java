@@ -1,3 +1,4 @@
+
 package com.example.vitaliy.news.ui.topnews;
 
 import android.annotation.SuppressLint;
@@ -20,6 +21,7 @@ import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
+import com.example.vitaliy.news.ui.sources.SourcesFragment;
 
 import java.util.List;
 
@@ -27,9 +29,9 @@ import java.util.List;
  * Created by Vitaliy on 1/11/2018.
  */
 
-public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
+public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView, SourcesFragment.OnSourceDataListener {
 
-    TopNewsContract.ITopNewsPresenter presenter;
+    private TopNewsContract.ITopNewsPresenter presenter;
     private View rootView;
     private RecyclerView categoriesRV, newsRV ;
     private CategoriesAdapter categoriesAdapter;
@@ -38,6 +40,13 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
+        presenter = new TopNewsPresenter(dataSource);
+        presenter.attachView(this);
+        Log.e("TopNews", "Prepare news");
+        presenter.prepareNews();
+
+
     }
 
     @Override
@@ -48,6 +57,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         initPresenter();
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,12 +66,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initPresenter() {
-        RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
-        presenter = new TopNewsPresenter(dataSource);
-        presenter.attachView(this);
+        Log.e("TopNews", "Prepare Categories");
         presenter.prepareCategories();
-        presenter.prepareNews();
-
+        Log.e("Top news", "get source from SP");
     }
 
     private void initView() {
@@ -76,8 +83,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         newsRV.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         newsRV.setLayoutManager(layoutManagerForNews);
         newsRV.setAdapter(newsAdapter);
-
-
 
         categoriesRV = rootView.findViewById(R.id.categoriesT);
         categoriesRV.setLayoutManager(layoutManagerForCategories);
@@ -102,16 +107,18 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         });
     }
 
-
     @Override
     public void displayCategories(List<String> categories) {
+        Log.e("TopNews", "display categories");
         categoriesAdapter.setData(categories);
-    }
 
+    }
 
     @Override
     public void displayNews(List<Article> news) {
+        Log.e("top news", "display news");
         newsAdapter.setData(news, getActivity());
+        newsAdapter.notifyDataSetChanged();
     }
 
 
@@ -129,9 +136,21 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     @Override
     public void showNewsWithFilter(List<Article> articles) {
+        Log.e("top news", "show news with filter");
         newsAdapter.setData(articles, getActivity());
-
+        newsAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void showNewsWithSource(List<Article> article) {
+        Log.e("top news", "show news with source");
+        newsAdapter.setData(article, getActivity());
+        newsAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void onSourceDataReceived(String data) {
+        Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
+        presenter.prepareNewsWithSources(data);
+    }
 }

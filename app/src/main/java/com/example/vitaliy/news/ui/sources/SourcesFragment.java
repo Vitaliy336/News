@@ -1,10 +1,10 @@
 package com.example.vitaliy.news.ui.sources;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +36,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     private CategoriesAdapter sCategoriesAdapter;
 
     public interface OnSourceDataListener{
-        public void onSourceDataReceived(String data);
+        void onSourceDataReceived(String data);
     }
 
     @Override
@@ -49,6 +49,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
 
         }
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,20 +88,18 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
             public void onCatClick(String str) {
                 presenter.prepareSourcesWithCategory(str);
                 Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+
             }
         });
 
         sourcesAdapter.setSourceItemClickListener(new SourcesAdapter.onSourceClickListener() {
             @Override
             public void onClick(Source source) {
-                Toast.makeText(getActivity(), source.getName(), Toast.LENGTH_SHORT).show();
 
-                mSourceDataListener.onSourceDataReceived(source.getName());//cc
-//                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
-//                viewPager.setCurrentItem(0);
+                mSourceDataListener.onSourceDataReceived(source.getId());
+                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
+                viewPager.setCurrentItem(0);
 
-//                TopNewsFragment topNewsFragment = new TopNewsFragment();
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.topNews, topNewsFragment).commit();
             }
         });
     }
