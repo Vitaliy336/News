@@ -3,11 +3,6 @@ package com.example.vitaliy.news.ui;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-
-import com.example.vitaliy.news.ui.allnews.AllNewsFragment;
-import com.example.vitaliy.news.ui.sources.SourcesFragment;
-import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
 import java.util.ArrayList;
 import java.util.List;

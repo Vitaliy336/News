@@ -37,10 +37,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         view = null;
     }
 
-    @Override
-    public void onTextClick() {
-        view.displayToastMessage();
-    }
 
     @Override
     public void prepareCategories() {
@@ -72,15 +68,19 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         },category, source);
     }
 
-
     @Override
     public void goToFullNews(String url) {
         view.ShowFullNews(url);
     }
 
     @Override
-    public void getCategoryName(String category) {
+    public void setCategoryName(String category) {
         this.category = category;
+    }
+
+    @Override
+    public void setSourceID(String source) {
+        this.source = source;
     }
 
 

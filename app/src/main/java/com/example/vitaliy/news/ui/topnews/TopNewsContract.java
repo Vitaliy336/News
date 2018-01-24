@@ -13,18 +13,17 @@ import java.util.List;
 public interface TopNewsContract{
     interface ITopNewsView extends BaseView {
         void displayCategories(List<String> categories);
-        void displayToastMessage();
         void ShowFullNews(String url);
         void displayNews(List<Article> article);
 
     }
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {
-        void onTextClick();
         void prepareCategories();
         void prepareNews();
         void goToFullNews(String url);
-        void getCategoryName(String category);
+        void setCategoryName(String category);
+        void setSourceID(String source);
 
     }
 }

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/topNews">
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categoriesT"
         android:layout_width="match_parent"
@@ -19,6 +18,22 @@
         app:layout_constraintVertical_weight="1">
 
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/sourceID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/recycler_iews_margin"
+        android:layout_marginStart="@dimen/recycler_iews_margin"
+        android:layout_marginTop="@dimen/recycler_iews_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:searchIcon="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1">
+
+
+    </android.support.v7.widget.SearchView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/newsT"
