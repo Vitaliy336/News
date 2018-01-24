@@ -15,9 +15,11 @@ import java.util.List;
  */
 
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
-
+    private String category = "";
+    private String source = "";
     private RemoteNewsDataSource dataSource;
     private TopNewsContract.ITopNewsView view;
+
 
 
     public TopNewsPresenter(RemoteNewsDataSource dataSource) {
@@ -55,7 +57,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void prepareNews() {
-        dataSource.topDataFromApi(new NewsDataSource.getListCallback() {
+        dataSource.getHotNews(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
 
@@ -67,22 +69,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
             @Override
             public void onFailure() {
             }
-        });
-    }
-
-    @Override
-    public void prepareNewsWithFilter(String category) {
-        dataSource.hotNewsWithFilter(new NewsDataSource.getListCallback() {
-            @Override
-            public void onListReceived(List<?> list) {
-                view.showNewsWithFilter((List<Article>) list);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        }, category);
+        },category, source);
     }
 
 
@@ -92,17 +79,9 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     }
 
     @Override
-    public void prepareNewsWithSources(String source) {
-        dataSource.topNewsWithSource(new NewsDataSource.getListCallback() {
-            @Override
-            public void onListReceived(List<?> article) {
-                view.showNewsWithSource((List<Article>) article);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        }, source);
+    public void getCategoryName(String category) {
+        this.category = category;
     }
+
+
 }

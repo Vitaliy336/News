@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
+    private String query = "android";
     private AllNewsContract.IAllNewsView view;
     private RemoteNewsDataSource newsDataSource;
 
@@ -38,7 +39,7 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
 
     @Override
     public void prepareNews() {
-        newsDataSource.allDataFromApi(new NewsDataSource.getListCallback() {
+        newsDataSource.getEverything(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
                 view.displayNews((List<Article>) list);
@@ -48,7 +49,7 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
             public void onFailure() {
                 Log.e("Failure", "fail");
             }
-        } );
+        }, query);
     }
 
     @Override
@@ -68,17 +69,8 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     }
 
     @Override
-    public void searchNews(String query) {
-        newsDataSource.allNewsWithSearchQuery(new NewsDataSource.getListCallback() {
-            @Override
-            public void onListReceived(List<?> article) {
-                view.displayNewsbySearch((List<Article>) article);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        }, query);
+    public void getSearchQuery(String query) {
+        this.query = query;
     }
+
 }

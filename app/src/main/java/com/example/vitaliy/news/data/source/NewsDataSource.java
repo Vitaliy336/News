@@ -18,14 +18,8 @@ public interface NewsDataSource {
         void onFailure();
     }
 
-    void topDataFromApi(getListCallback callback);
-    void allDataFromApi(getListCallback callback);
-    void sourcesDataFromApi(getListCallback callback);
-
-    void hotNewsWithFilter(getListCallback callback, String category);
-    void allNewsWithSearchQuery(getListCallback callback, String query);
-    void allSourcesDataWithFilter(getListCallback callback, String category);
-    void topNewsWithSource(getListCallback callback, String source);
-
+    void getHotNews(getListCallback callback, String category, String source);
+    void getEverything(getListCallback callback, String query);
+    void getSources(getListCallback callback, String category);
 
 }

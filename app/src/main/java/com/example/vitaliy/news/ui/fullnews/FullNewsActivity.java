@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.example.vitaliy.news.R;
+import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
 public class FullNewsActivity extends AppCompatActivity implements FullNewsContract.IFullNewsView {
     private FullNewsContract.IFullNewsPresenter presenter;

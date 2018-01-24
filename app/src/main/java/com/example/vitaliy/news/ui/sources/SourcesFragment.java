@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.data.sourceModel.Source;
@@ -28,27 +29,12 @@ import java.util.List;
 
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView{
     private View rootView;
-    private OnSourceDataListener mSourceDataListener;
     private SourcesPresenter presenter;
     private RemoteNewsDataSource dataSource;
     private RecyclerView sourcesRV, categoriesS;
     private SourcesAdapter sourcesAdapter;
     private CategoriesAdapter sCategoriesAdapter;
 
-    public interface OnSourceDataListener{
-        void onSourceDataReceived(String data);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try{
-            mSourceDataListener = (OnSourceDataListener)activity;
-        }
-        catch (Exception e){
-
-        }
-    }
 
 
     @Override
@@ -86,8 +72,9 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sCategoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
             @Override
             public void onCatClick(String str) {
-                presenter.prepareSourcesWithCategory(str);
                 Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+                presenter.getSourceCategory(str);
+                presenter.prepareSources();
 
             }
         });
@@ -95,11 +82,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sourcesAdapter.setSourceItemClickListener(new SourcesAdapter.onSourceClickListener() {
             @Override
             public void onClick(Source source) {
-
-                mSourceDataListener.onSourceDataReceived(source.getId());
-                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
-                viewPager.setCurrentItem(0);
-
+                Toast.makeText(getActivity(), source.getId(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -142,8 +125,4 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         Log.e("SSS", list.size() + "");
     }
 
-    @Override
-    public void showSourcesWithCategory(List<Source> list) {
-        sourcesAdapter.setInfo(list, getActivity());
-    }
 }

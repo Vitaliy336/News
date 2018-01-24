@@ -17,8 +17,8 @@
 
             <ImageView
                 android:id="@+id/newsImgView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/post_img_height"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="@dimen/post_item_margin" />
@@ -39,8 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/newsTitleTV"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="@dimen/post_item_margin"
+                android:layout_marginRight="@dimen/post_item_margin"
                 android:textSize="@dimen/post_description" />
 
         </RelativeLayout>

@@ -14,6 +14,7 @@ import java.util.List;
 
 public class SourcesPresenter implements ISourcesPresenter{
 
+    private String category = "";
     private RemoteNewsDataSource dataSource;
     private SourcesContract.ISourcesView view;
 
@@ -51,7 +52,7 @@ public class SourcesPresenter implements ISourcesPresenter{
 
     @Override
     public void prepareSources() {
-        dataSource.sourcesDataFromApi(new NewsDataSource.getListCallback() {
+        dataSource.getSources(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
                 view.showSources((List<Source>) list);
@@ -61,22 +62,11 @@ public class SourcesPresenter implements ISourcesPresenter{
             public void onFailure() {
 
             }
-        });
-    }
-
-    @Override
-    public void prepareSourcesWithCategory(String category) {
-        dataSource.allSourcesDataWithFilter(new NewsDataSource.getListCallback() {
-            @Override
-            public void onListReceived(List<?> sources) {
-                view.showSourcesWithCategory((List<Source>) sources);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
         }, category);
     }
 
+    @Override
+    public void getSourceCategory(String category) {
+        this.category = category;
+    }
 }

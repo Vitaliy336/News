@@ -5,10 +5,10 @@ import android.util.Log;
 import com.example.vitaliy.news.data.newsModel.NewsModel;
 import com.example.vitaliy.news.data.rest.ApiClient;
 import com.example.vitaliy.news.data.rest.ApiInterface;
-import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.data.sourceModel.SourceModel;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,26 +27,20 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void topNewsWithSource(final getListCallback callback, final String source) {
-        if(callback != null){
-            apiInterface.getNewsWithSource(source, API_KEY).enqueue(new Callback<NewsModel>() {
-                @Override
-                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                    callback.onListReceived(response.body().getArticles());
-                }
-
-                @Override
-                public void onFailure(Call<NewsModel> call, Throwable t) {
-
-                }
-            });
+    public void getHotNews(final getListCallback callback, String category, String source) {
+        Map<String, String> map = new HashMap<>();
+        map.put("country", "us");
+        if (category != "") {
+            map.put("category", category);
         }
-    }
-
-    @Override
-    public void topDataFromApi(final getListCallback callback) {
+        if (source != "") {
+            map.put("sources", source);
+            map.remove("category");
+            map.remove("country");
+        }
+        map.put("apiKey", API_KEY);
         if (callback != null) {
-            apiInterface.getTopNews("us", API_KEY).enqueue(new Callback<NewsModel>() {
+            apiInterface.getHotNews(map).enqueue(new Callback<NewsModel>() {
                 @Override
                 public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                     callback.onListReceived(response.body().getArticles());
@@ -54,36 +48,41 @@ public class RemoteNewsDataSource implements NewsDataSource {
 
                 @Override
                 public void onFailure(Call<NewsModel> call, Throwable t) {
-                    callback.onFailure();
-                    Log.e("Error", t.toString());
+
                 }
             });
         }
-
     }
 
     @Override
-    public void allDataFromApi(final getListCallback callback) {
+    public void getEverything(final getListCallback callback, String query) {
+        Map<String, String> map = new HashMap<>();
+        map.put("q", query);
+        map.put("apiKey", API_KEY);
+        if (callback != null){
+            apiInterface.getEverything(map).enqueue(new Callback<NewsModel>() {
+                @Override
+                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                    callback.onListReceived(response.body().getArticles());
+                }
+
+                @Override
+                public void onFailure(Call<NewsModel> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
+    @Override
+    public void getSources(final getListCallback callback, String category) {
+        Map<String, String> map = new HashMap<>();
+        if(category != ""){
+            map.put("category", category);
+        }
+        map.put("apiKey", API_KEY);
         if(callback != null){
-            apiInterface.getAllNews("bitcoin", API_KEY).enqueue(new Callback<NewsModel>() {
-                @Override
-                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                    callback.onListReceived(response.body().getArticles());
-                }
-
-                @Override
-                public void onFailure(Call<NewsModel> call, Throwable t) {
-                    callback.onFailure();
-                    Log.e("Error", t.toString());
-                }
-            });
-        }
-    }
-
-    @Override
-    public void sourcesDataFromApi(final getListCallback callback) {
-        if(callback!=null){
-            apiInterface.getSources(API_KEY).enqueue(new Callback<SourceModel>() {
+            apiInterface.getSources(map).enqueue(new Callback<SourceModel>() {
                 @Override
                 public void onResponse(Call<SourceModel> call, Response<SourceModel> response) {
                     callback.onListReceived(response.body().getSources());
@@ -96,57 +95,4 @@ public class RemoteNewsDataSource implements NewsDataSource {
             });
         }
     }
-
-
-    @Override
-    public void hotNewsWithFilter(final getListCallback callback, String category) {
-        if(callback != null){
-            apiInterface.getTopNewsFiltered("us", category, API_KEY).enqueue(new Callback<NewsModel>() {
-                @Override
-                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                    callback.onListReceived(response.body().getArticles());
-                }
-
-                @Override
-                public void onFailure(Call<NewsModel> call, Throwable t) {
-                    Log.e("Error", t.toString());
-                }
-            });
-        }
-    }
-
-    @Override
-    public void allNewsWithSearchQuery(final getListCallback callback, String query) {
-        if(callback != null){
-            apiInterface.getAllNews(query, API_KEY).enqueue(new Callback<NewsModel>() {
-                @Override
-                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                    callback.onListReceived(response.body().getArticles());
-                }
-
-                @Override
-                public void onFailure(Call<NewsModel> call, Throwable t) {
-                    Log.e("Error", t.toString());
-                }
-            });
-        }
-    }
-
-    @Override
-    public void allSourcesDataWithFilter(final getListCallback callback, String category) {
-        if(callback != null){
-            apiInterface.getSourcesWithCategory(category, API_KEY).enqueue(new Callback<SourceModel>() {
-                @Override
-                public void onResponse(Call<SourceModel> call, Response<SourceModel> response) {
-                    callback.onListReceived(response.body().getSources());
-                }
-
-                @Override
-                public void onFailure(Call<SourceModel> call, Throwable t) {
-
-                }
-            });
-        }
-    }
-
 }

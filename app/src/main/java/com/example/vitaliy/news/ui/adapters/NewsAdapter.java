@@ -24,7 +24,8 @@ import java.util.List;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-
+    private final static int TOP_POST = 0;
+    private final static int OTHER_POSTS = 1;
     private onNewsClickListener mListener;
     private Context mContext;
     private List<Article> newsList = new ArrayList<>();
@@ -35,10 +36,28 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         void OnClick(Article article);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        switch (position) {
+            case 0:
+                return TOP_POST;
+            default:
+                return OTHER_POSTS;
+        }
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
+        int id = 0;
+        switch (viewType) {
+            case TOP_POST:
+                id = R.layout.news_item;
+                break;
+            case OTHER_POSTS:
+                id = R.layout.news_items;
+                break;
+        }
+        view = LayoutInflater.from(parent.getContext()).inflate(id, parent, false);
         return new ViewHolder(view);
     }
 
@@ -68,14 +87,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         Log.e("newsAdapter", "news size = "+news.size());
     }
 
-    public void updateList(List<Article> news, FragmentActivity activity){
-        newsList.clear();
-        newsList.addAll(news);
-        mContext = activity;
-
-        Log.e("newsAdapter, Update", "news size = "+news.size());
-    }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
@@ -97,8 +108,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             description.setTypeface(null, Typeface.ITALIC);
             Glide.with(mContext)
                     .load(news.getUrlToImage())
-                    .override(300, 150)
-                    .error(R.drawable.n_f)
+                    .error(R.drawable.n_ff)
                     .centerCrop()
                     .into(newsPicture);
         }

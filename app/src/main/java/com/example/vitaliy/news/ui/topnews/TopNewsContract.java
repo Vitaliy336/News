@@ -15,18 +15,16 @@ public interface TopNewsContract{
         void displayCategories(List<String> categories);
         void displayToastMessage();
         void ShowFullNews(String url);
-        void showNewsWithFilter(List<Article> article);
         void displayNews(List<Article> article);
-        void showNewsWithSource(List<Article> article);
+
     }
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {
         void onTextClick();
         void prepareCategories();
         void prepareNews();
-        void prepareNewsWithFilter(String category);
         void goToFullNews(String url);
-        void prepareNewsWithSources(String source);
+        void getCategoryName(String category);
 
     }
 }

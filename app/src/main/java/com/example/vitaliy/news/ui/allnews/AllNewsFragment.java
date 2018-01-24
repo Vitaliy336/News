@@ -69,8 +69,8 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
            @Override
            public boolean onQueryTextSubmit(String query) {
                Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
-               presenter.searchNews(query);
-               searchNews.clearFocus();
+               presenter.getSearchQuery(query);
+               presenter.prepareNews();
                return false;
            }
 
@@ -111,13 +111,6 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         newsAdapter.setData(news, getActivity());
         newsAdapter.notifyDataSetChanged();
 
-    }
-
-    @Override
-    public void displayNewsbySearch(List<Article> news) {
-        newsAdapter.setData(news, getActivity());
-        newsAdapter.notifyDataSetChanged();
-        Log.e("All news search", "show");
     }
 
     @Override

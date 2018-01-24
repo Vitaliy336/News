@@ -16,13 +16,12 @@ public interface SourcesContract {
         void displayCategories(List<String> categories);
         void displayToastMessage();
         void showSources(List<Source> list);
-        void showSourcesWithCategory(List<Source> list);
     }
 
     interface ISourcesPresenter extends BasePresenter<ISourcesView>{
         void onTextClick();
         void prepareCategories();
         void prepareSources();
-        void prepareSourcesWithCategory(String category);
+        void getSourceCategory(String category);
     }
 }
