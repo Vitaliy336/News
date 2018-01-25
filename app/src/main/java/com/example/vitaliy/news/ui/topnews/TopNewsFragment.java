@@ -4,8 +4,6 @@ package com.example.vitaliy.news.ui.topnews;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,23 +11,20 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
+import com.example.vitaliy.news.ui.ActivityCallBack;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Vitaliy on 1/11/2018.
@@ -39,18 +34,16 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     private TopNewsContract.ITopNewsPresenter presenter;
     private View rootView;
+    private ActivityCallBack callBack;
     private RecyclerView categoriesRV, newsRV;
     private CategoriesAdapter categoriesAdapter;
     private NewsAdapter newsAdapter;
     private SearchView sourceSV;
-    private Editor editor;
-    private SharedPreferences sharedPreferences;
     private final String SAVED_TEXT = "sourceID";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -60,9 +53,14 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         initView();
         initListener();
         initPresenter();
-        loadSourceText();
+        getSourceID();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callBack = (ActivityCallBack) context;
+    }
 
     @Nullable
     @Override
@@ -140,23 +138,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         startActivity(intent);
     }
 
-    void loadSourceText() {
-        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String savedText = sharedPreferences.getString(SAVED_TEXT, "");
-        Log.e("TOP", savedText);
-        if (savedText != "") {
-            categoriesRV.setAlpha(0);
-            sourceSV.setQuery(savedText, false);
-            presenter.setSourceID(savedText);
-            presenter.prepareNews();
-            saveSourceText();
-        }
+    void getSourceID() {
+        presenter.setSourceID(callBack.getSourceID());
+        presenter.prepareNews();
     }
 
-    void saveSourceText() {
-        sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(SAVED_TEXT, "");
-
-    }
 }

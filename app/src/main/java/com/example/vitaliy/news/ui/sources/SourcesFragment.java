@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.ui.sources;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.data.sourceModel.Source;
+import com.example.vitaliy.news.ui.ActivityCallBack;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
@@ -33,6 +35,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView{
     private View rootView;
+    private ActivityCallBack callBack;
     private SourcesPresenter presenter;
     private RemoteNewsDataSource dataSource;
     private RecyclerView sourcesRV, categoriesS;
@@ -42,6 +45,11 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     private final String SAVED_TEXT = "sourceID";
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callBack = (ActivityCallBack)context;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,8 +96,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sourcesAdapter.setSourceItemClickListener(new SourcesAdapter.onSourceClickListener() {
             @Override
             public void onClick(Source source) {
-                Toast.makeText(getActivity(), source.getId(), Toast.LENGTH_SHORT).show();
-                saveSourceText(source.getId());
+                callBack.sendSourceID(source.getId());
                 ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
                 viewPager.setCurrentItem(0);
             }
@@ -132,14 +139,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     public void showSources(List<Source> list) {
         sourcesAdapter.setInfo(list, getActivity());
         Log.e("SSS", list.size() + "");
-    }
-
-    void saveSourceText(String text){
-        sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(SAVED_TEXT, text);
-        editor.commit();
-
     }
 
 }
