@@ -13,8 +13,8 @@ public class ApiClient {
     public static final String BASE_URL = "https://newsapi.org";
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(){
-        if(retrofit==null){
+    public static Retrofit getClient() {
+        if (retrofit == null) {
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

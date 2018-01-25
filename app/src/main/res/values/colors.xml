@@ -3,7 +3,8 @@
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
-    <color name="colorRed">#dc0813</color>
+    <color name="colorCategoryItem">#dc0813</color>
     <color name="colorBlack">#080808</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorCategorySelectedItem">#ab2b2b</color>
 </resources>

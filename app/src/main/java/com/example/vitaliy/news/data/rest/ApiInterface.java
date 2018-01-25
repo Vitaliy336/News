@@ -1,14 +1,12 @@
 package com.example.vitaliy.news.data.rest;
 
 import com.example.vitaliy.news.data.newsModel.NewsModel;
-import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.data.sourceModel.SourceModel;
 
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**

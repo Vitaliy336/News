@@ -12,17 +12,23 @@ import java.util.List;
 
 public interface AllNewsContract {
     interface IAllNewsView extends BaseView {
+
         void displayCategories(List<String> categories);
+
         void displayNews(List<Article> news);
-        void showToastMessage();
+
         void showFullNews(String url);
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
-        void onTextClickListener();
+        void start();
+
         void prepareNews();
+
         void prepareCategories();
+
         void goTofullNews(String url);
+
         void getSearchQuery(String query);
     }
 }

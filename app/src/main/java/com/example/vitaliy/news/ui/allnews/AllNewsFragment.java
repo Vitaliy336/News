@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
@@ -47,15 +46,19 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         initView();
         intiListener();
         initPresenter();
+        updateData();
+    }
+
+    private void updateData() {
+        presenter.start();
+        presenter.prepareCategories();
+        presenter.prepareNews();
     }
 
     private void initPresenter() {
         RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
         presenter = new AllNewsPresenter(dataSource);
         presenter.attachView(this);
-        presenter.prepareCategories();
-        presenter.prepareNews();
-        Log.e("All news", "call");
     }
 
     private void intiListener() {
@@ -68,9 +71,9 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
        searchNews.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
            @Override
            public boolean onQueryTextSubmit(String query) {
-               Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
                presenter.getSearchQuery(query);
                presenter.prepareNews();
+               searchNews.clearFocus();
                return false;
            }
 
@@ -84,6 +87,7 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
     private void initView() {
         newsAdapter = new NewsAdapter();
         searchNews = rootView.findViewById(R.id.searchA);
+
 
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -113,10 +117,6 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     }
 
-    @Override
-    public void showToastMessage() {
-        Toast.makeText(getActivity(), "Did i understand it?", Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void showFullNews(String url) {

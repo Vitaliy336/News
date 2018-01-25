@@ -1,7 +1,5 @@
 package com.example.vitaliy.news.ui.fullnews;
 
-import android.content.Intent;
-
 /**
  * Created by v_shevchyk on 18.01.18.
  */
@@ -9,6 +7,7 @@ import android.content.Intent;
 public class FullNewsPresenter implements FullNewsContract.IFullNewsPresenter {
 
     private FullNewsContract.IFullNewsView view;
+
     @Override
     public void attachView(FullNewsContract.IFullNewsView view) {
         this.view = view;

@@ -1,6 +1,5 @@
 package com.example.vitaliy.news.ui.sources;
 
-import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.ui.base.BasePresenter;
 import com.example.vitaliy.news.ui.base.BaseView;
@@ -14,12 +13,11 @@ import java.util.List;
 public interface SourcesContract {
     interface ISourcesView extends BaseView{
         void displayCategories(List<String> categories);
-        void displayToastMessage();
         void showSources(List<Source> list);
     }
 
     interface ISourcesPresenter extends BasePresenter<ISourcesView>{
-        void onTextClick();
+        void start();
         void prepareCategories();
         void prepareSources();
         void getSourceCategory(String category);

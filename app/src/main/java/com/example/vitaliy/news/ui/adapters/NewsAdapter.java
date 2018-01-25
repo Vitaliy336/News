@@ -63,7 +63,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.click(newsList.get(position),mListener);
+        holder.click(newsList.get(position), mListener);
         holder.bind(newsList.get(position));
     }
 
@@ -72,7 +72,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return newsList.size();
     }
 
-    public void setOnItemClickListener(onNewsClickListener listener){
+    public void setOnItemClickListener(onNewsClickListener listener) {
         mListener = listener;
     }
 
@@ -84,11 +84,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         mContext = activity;
 
 
-        Log.e("newsAdapter", "news size = "+news.size());
+        Log.e("newsAdapter", "news size = " + news.size());
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView title, description;
         ImageView newsPicture;
@@ -113,7 +113,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     .into(newsPicture);
         }
 
-        public void click(final Article article, final onNewsClickListener onNewsClickListener){
+        public void click(final Article article, final onNewsClickListener onNewsClickListener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

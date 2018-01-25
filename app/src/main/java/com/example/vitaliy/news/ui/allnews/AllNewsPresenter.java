@@ -32,9 +32,11 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
         view = null;
     }
 
+
     @Override
-    public void onTextClickListener() {
-        view.showToastMessage();
+    public void start() {
+        prepareNews();
+        prepareCategories();
     }
 
     @Override

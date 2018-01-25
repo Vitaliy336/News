@@ -1,6 +1,5 @@
 package com.example.vitaliy.news.ui.adapters;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vitaliy.news.R;

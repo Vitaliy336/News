@@ -89,6 +89,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         }else{
             view.hideSourceFilter();
             view.showCategories();
+            prepareNews();
         }
     }
 }

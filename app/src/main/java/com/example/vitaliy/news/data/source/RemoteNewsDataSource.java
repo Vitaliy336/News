@@ -1,7 +1,6 @@
 package com.example.vitaliy.news.data.source;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.vitaliy.news.data.newsModel.NewsModel;
 import com.example.vitaliy.news.data.rest.ApiClient;
@@ -60,7 +59,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
         Map<String, String> map = new HashMap<>();
         map.put("q", query);
         map.put("apiKey", API_KEY);
-        if (callback != null){
+        if (callback != null) {
             apiInterface.getEverything(map).enqueue(new Callback<NewsModel>() {
                 @Override
                 public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
@@ -78,11 +77,11 @@ public class RemoteNewsDataSource implements NewsDataSource {
     @Override
     public void getSources(final getListCallback callback, String category) {
         Map<String, String> map = new HashMap<>();
-        if(!TextUtils.isEmpty(category)){
+        if (!TextUtils.isEmpty(category)) {
             map.put("category", category);
         }
         map.put("apiKey", API_KEY);
-        if(callback != null){
+        if (callback != null) {
             apiInterface.getSources(map).enqueue(new Callback<SourceModel>() {
                 @Override
                 public void onResponse(Call<SourceModel> call, Response<SourceModel> response) {

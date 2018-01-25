@@ -1,7 +1,6 @@
 package com.example.vitaliy.news.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
+    private int selectedPos = RecyclerView.NO_POSITION;
     private onCategoryItemClick onCategoryItemClick;
     List<String> data = new ArrayList<>();
     View view;
@@ -33,8 +33,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.onClick(data.get(position), onCategoryItemClick);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.onClick(data.get(position), position, onCategoryItemClick);
+        if (selectedPos == position) {
+            holder.categoryName.setBackgroundResource(R.drawable.round_borders_selected);
+        } else {
+            holder.categoryName.setBackgroundResource(R.drawable.round_borders);
+        }
         holder.bind(data.get(position));
     }
 
@@ -51,7 +56,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         data.clear();
         data.addAll(categories);
         notifyDataSetChanged();
-        Log.d("qweee", "size =" + getItemCount());
     }
 
 
@@ -67,11 +71,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             categoryName.setText(str);
         }
 
-        public void onClick(final String str, final onCategoryItemClick onCategoryItemClick){
+        public void onClick(final String str, final int position, final onCategoryItemClick onCategoryItemClick) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onCategoryItemClick.onCatClick(str);
+                    selectedPos = position;
+                    notifyDataSetChanged();
                 }
             });
         }

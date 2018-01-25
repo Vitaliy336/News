@@ -2,7 +2,6 @@
 package com.example.vitaliy.news.ui.topnews;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,13 +15,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
-import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
@@ -41,7 +38,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private RecyclerView categoriesRV, newsRV;
     private CategoriesAdapter categoriesAdapter;
     private NewsAdapter newsAdapter;
-    private TextView sourceID;
+    private TextView sourceEt;
     private ImageView clear;
 
     @Override
@@ -72,7 +69,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initView() {
-        sourceID = rootView.findViewById(R.id.sourceID);
+        sourceEt = rootView.findViewById(R.id.sourceID);
+        sourceEt.setFocusable(false);
+        sourceEt.setClickable(false);
 
         clear = rootView.findViewById(R.id.clearbtn);
 
@@ -107,7 +106,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         categoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
             @Override
             public void onCatClick(String str) {
-                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
                 presenter.setCategoryName(str);
                 presenter.prepareNews();
                 //categoriesRV.setAlpha(0);
@@ -156,12 +154,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     void getSourceID() {
         final String sourceId =((MainActivity)getActivity()).getSourceId();
         presenter.setSourceID(sourceId);
-        sourceID.setText(sourceId);
-        sourceID.setFocusable(false);
+        sourceEt.setText(sourceId);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sourceID.setText(null);
+                sourceEt.setText(null);
                 presenter.setSourceID(null);
             }
         });

@@ -1,9 +1,5 @@
 package com.example.vitaliy.news.data.source;
 
-import android.widget.ListView;
-
-import com.example.vitaliy.news.data.newsModel.Article;
-
 import java.util.List;
 
 /**
@@ -19,7 +15,9 @@ public interface NewsDataSource {
     }
 
     void getHotNews(getListCallback callback, String category, String source);
+
     void getEverything(getListCallback callback, String query);
+
     void getSources(getListCallback callback, String category);
 
 }

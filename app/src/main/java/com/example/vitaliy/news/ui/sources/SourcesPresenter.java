@@ -33,8 +33,9 @@ public class SourcesPresenter implements ISourcesPresenter{
     }
 
     @Override
-    public void onTextClick() {
-
+    public void start() {
+        prepareSources();
+        prepareCategories();
     }
 
     @Override

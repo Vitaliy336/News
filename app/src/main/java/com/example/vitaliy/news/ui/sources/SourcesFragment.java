@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
@@ -58,15 +57,19 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         initView();
         initListener();
         initPresenter();
+        updateData();
 
+    }
+
+    private void updateData() {
+        presenter.prepareCategories();
+        presenter.prepareSources();
     }
 
     private void initPresenter() {
         dataSource = new RemoteNewsDataSource();
         presenter = new SourcesPresenter(dataSource);
         presenter.attachView(this);
-        presenter.prepareCategories();
-        presenter.prepareSources();
 
 
     }
@@ -75,7 +78,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sCategoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
             @Override
             public void onCatClick(String str) {
-                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
                 presenter.getSourceCategory(str);
                 presenter.prepareSources();
 
@@ -86,10 +88,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
             @Override
             public void onClick(Source source) {
                 ((MainActivity)getActivity()).showTopNews(source.getId());
-
-//                callBack.sendSourceID(source.getId());
-//                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
-//                viewPager.setCurrentItem(0);
             }
         });
     }
@@ -121,10 +119,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sCategoriesAdapter.setData(categories);
     }
 
-    @Override
-    public void displayToastMessage() {
-
-    }
 
     @Override
     public void showSources(List<Source> list) {
