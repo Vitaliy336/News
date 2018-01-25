@@ -10,16 +10,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
-import com.example.vitaliy.news.ui.ActivityCallBack;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
@@ -33,19 +35,13 @@ import java.util.List;
 public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
 
     private TopNewsContract.ITopNewsPresenter presenter;
+    private RelativeLayout relativeLayout;
     private View rootView;
-    private ActivityCallBack callBack;
     private RecyclerView categoriesRV, newsRV;
     private CategoriesAdapter categoriesAdapter;
     private NewsAdapter newsAdapter;
-    private SearchView sourceSV;
-    private final String SAVED_TEXT = "sourceID";
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+    private TextView sourceID;
+    private ImageView clear;
 
     @Override
     public void onResume() {
@@ -54,12 +50,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         initListener();
         initPresenter();
         getSourceID();
+        updateData();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        callBack = (ActivityCallBack) context;
+    private void updateData() {
+        presenter.start();
     }
 
     @Nullable
@@ -73,13 +68,17 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
         presenter = new TopNewsPresenter(dataSource);
         presenter.attachView(this);
-        presenter.prepareNews();
-        presenter.prepareCategories();
     }
 
     private void initView() {
+        sourceID = rootView.findViewById(R.id.sourceID);
+
+        clear = rootView.findViewById(R.id.clearbtn);
+
+        relativeLayout = rootView.findViewById(R.id.sourcesFilter);
         categoriesAdapter = new CategoriesAdapter();
         newsAdapter = new NewsAdapter();
+
         LinearLayoutManager layoutManagerForCategories = new LinearLayoutManager(getActivity());
         layoutManagerForCategories.setOrientation(LinearLayoutManager.HORIZONTAL);
         LinearLayoutManager layoutManagerForNews = new LinearLayoutManager(getActivity());
@@ -89,9 +88,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         newsRV.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         newsRV.setLayoutManager(layoutManagerForNews);
         newsRV.setAdapter(newsAdapter);
-
-        sourceSV = rootView.findViewById(R.id.sourceID);
-        sourceSV.setFocusable(false);
 
         categoriesRV = rootView.findViewById(R.id.categoriesT);
         categoriesRV.setLayoutManager(layoutManagerForCategories);
@@ -121,7 +117,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     @Override
     public void displayCategories(List<String> categories) {
         categoriesAdapter.setData(categories);
-
     }
 
     @Override
@@ -130,6 +125,25 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         newsAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void hideCategories() {
+        categoriesRV.setAlpha(0);
+    }
+
+    @Override
+    public void showCategories() {
+        categoriesRV.setAlpha(1);
+    }
+
+    @Override
+    public void showSourceFilter() {
+        relativeLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideSourceFilter() {
+        relativeLayout.setVisibility(View.GONE);
+    }
 
     @Override
     public void ShowFullNews(String url) {
@@ -139,8 +153,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     void getSourceID() {
-        presenter.setSourceID(callBack.getSourceID());
-        presenter.prepareNews();
+        String sourceId =((MainActivity)getActivity()).getSourceId();
+        presenter.setSourceID(sourceId);
     }
-
 }

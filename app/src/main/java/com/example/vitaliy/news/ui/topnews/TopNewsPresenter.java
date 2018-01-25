@@ -1,6 +1,7 @@
 
 package com.example.vitaliy.news.ui.topnews;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.vitaliy.news.data.newsModel.Article;
@@ -20,12 +21,9 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private RemoteNewsDataSource dataSource;
     private TopNewsContract.ITopNewsView view;
 
-
-
     public TopNewsPresenter(RemoteNewsDataSource dataSource) {
         this.dataSource = dataSource;
     }
-
 
     @Override
     public void attachView(TopNewsContract.ITopNewsView view) {
@@ -37,6 +35,11 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         view = null;
     }
 
+    @Override
+    public void start() {
+        prepareNews();
+        prepareCategories();
+    }
 
     @Override
     public void prepareCategories() {
@@ -56,10 +59,8 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         dataSource.getHotNews(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> list) {
-
                 view.displayNews((List<Article>) list);
                 Log.e("presenter", "dispaly news");
-
             }
 
             @Override
@@ -80,8 +81,11 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void setSourceID(String source) {
+        view.hideSourceFilter();
         this.source = source;
+        if (!TextUtils.isEmpty(this.source)){
+            view.hideCategories();
+            view.showSourceFilter();
+        }
     }
-
-
 }

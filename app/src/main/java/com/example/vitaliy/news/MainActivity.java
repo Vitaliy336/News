@@ -5,16 +5,18 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
-import com.example.vitaliy.news.ui.ActivityCallBack;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.allnews.AllNewsFragment;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
-public class MainActivity extends AppCompatActivity implements ActivityCallBack {
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     private Toolbar toolbar;
-    private String sourceID = "";
+    private String sourceId = "";
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -42,20 +44,41 @@ public class MainActivity extends AppCompatActivity implements ActivityCallBack 
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragmet(new TopNewsFragment(), "Top News");
-        adapter.addFragmet(new AllNewsFragment(), "All News");
-        adapter.addFragmet(new SourcesFragment(), "Sources");
+        adapter.addFragment(new TopNewsFragment(), "Top News");
+        adapter.addFragment(new AllNewsFragment(), "All News");
+        adapter.addFragment(new SourcesFragment(), "Sources");
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.d(TAG, "onPageScrolled " + position);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.d(TAG, "onPageSelected " + position);
+                sourceId = null;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.d(TAG, "onPageScrollStateChanged " + state);
+
+            }
+        });
     }
 
-
-    @Override
-    public void sendSourceID(String id) {
-        sourceID = id;
+    public void showTopNews() {
+        viewPager.setCurrentItem(0);
     }
 
-    @Override
-    public String getSourceID() {
-        return sourceID;
+    public void showTopNews(String sourceId) {
+        Log.d(TAG, "showTopNews " + sourceId);
+        this.sourceId = sourceId;
+        showTopNews();
+    }
+
+    public String getSourceId() {
+        return sourceId;
     }
 }

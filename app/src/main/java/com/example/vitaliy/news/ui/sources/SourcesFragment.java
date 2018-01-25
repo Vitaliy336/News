@@ -1,12 +1,9 @@
 package com.example.vitaliy.news.ui.sources;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,14 +17,10 @@ import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.data.sourceModel.Source;
-import com.example.vitaliy.news.ui.ActivityCallBack;
-import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
 
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by v_shevchyk on 19.01.18.
@@ -35,20 +28,16 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView{
     private View rootView;
-    private ActivityCallBack callBack;
     private SourcesPresenter presenter;
     private RemoteNewsDataSource dataSource;
     private RecyclerView sourcesRV, categoriesS;
-    private SharedPreferences sharedPreferences;
     private SourcesAdapter sourcesAdapter;
     private CategoriesAdapter sCategoriesAdapter;
-    private final String SAVED_TEXT = "sourceID";
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        callBack = (ActivityCallBack)context;
     }
 
     @Override
@@ -96,9 +85,11 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sourcesAdapter.setSourceItemClickListener(new SourcesAdapter.onSourceClickListener() {
             @Override
             public void onClick(Source source) {
-                callBack.sendSourceID(source.getId());
-                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
-                viewPager.setCurrentItem(0);
+                ((MainActivity)getActivity()).showTopNews(source.getId());
+
+//                callBack.sendSourceID(source.getId());
+//                ViewPager viewPager = getActivity().findViewById(R.id.viewpager);
+//                viewPager.setCurrentItem(0);
             }
         });
     }
