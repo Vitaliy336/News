@@ -22,6 +22,7 @@ import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
+import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
@@ -127,12 +128,12 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     @Override
     public void hideCategories() {
-        categoriesRV.setAlpha(0);
+        categoriesRV.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showCategories() {
-        categoriesRV.setAlpha(1);
+        categoriesRV.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -153,7 +154,17 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     void getSourceID() {
-        String sourceId =((MainActivity)getActivity()).getSourceId();
+        final String sourceId =((MainActivity)getActivity()).getSourceId();
         presenter.setSourceID(sourceId);
+        sourceID.setText(sourceId);
+        sourceID.setFocusable(false);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sourceID.setText(null);
+                presenter.setSourceID(null);
+            }
+        });
+
     }
 }

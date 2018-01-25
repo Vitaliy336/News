@@ -86,6 +86,9 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         if (!TextUtils.isEmpty(this.source)){
             view.hideCategories();
             view.showSourceFilter();
+        }else{
+            view.hideSourceFilter();
+            view.showCategories();
         }
     }
 }
