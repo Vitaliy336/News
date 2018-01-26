@@ -7,30 +7,31 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/searchA"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/recycler_iews_margin"
-        android:layout_marginStart="@dimen/recycler_iews_margin"
-        android:layout_marginTop="@dimen/recycler_iews_margin"
-        android:defaultFocusHighlightEnabled="false"
-        android:focusedByDefault="true"
-        android:visibility="visible"
-        app:defaultQueryHint="@string/search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        android:focusedByDefault="false"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/searchNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search"
+            android:imeOptions="actionSearch"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/newsA"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchA"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_name"
         app:layout_constraintVertical_weight="3">
 
     </android.support.v7.widget.RecyclerView>

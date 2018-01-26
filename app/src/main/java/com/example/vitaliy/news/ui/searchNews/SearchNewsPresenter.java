@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.ui.searchNews;
 
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.vitaliy.news.R;
@@ -17,10 +18,9 @@ import java.util.List;
  */
 
 public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter {
-    private String query = "android";
+    private String query = null;
     private SearchNewsContract.IAllNewsView view;
     private RemoteNewsDataSource newsDataSource;
-    private String res[];
 
     public SearchNewsPresenter(RemoteNewsDataSource newsDataSource) {
         this.newsDataSource = newsDataSource;
@@ -36,10 +36,8 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
         view = null;
     }
 
-
     @Override
     public void start() {
-        prepareNews();
     }
 
     @Override

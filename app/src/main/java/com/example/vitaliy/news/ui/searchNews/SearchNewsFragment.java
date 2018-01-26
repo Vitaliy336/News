@@ -1,7 +1,9 @@
 package com.example.vitaliy.news.ui.searchNews;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -9,9 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
@@ -32,7 +39,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private NewsAdapter newsAdapter;
     private RecyclerView news;
     private LinearLayoutManager lm;
-    private SearchView searchNews;
+    private EditText searchNews;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +58,6 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
 
     private void updateData() {
         presenter.start();
-        presenter.prepareNews();
     }
 
     private void initPresenter() {
@@ -67,26 +73,25 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
                 presenter.goTofullNews(article.getUrl());
             }
         });
-       searchNews.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-           @Override
-           public boolean onQueryTextSubmit(String query) {
-               presenter.getSearchQuery(query);
-               presenter.prepareNews();
-               searchNews.clearFocus();
-               return false;
-           }
+        searchNews.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    presenter.getSearchQuery(searchNews.getText().toString());
+                    presenter.prepareNews();
+                    searchNews.clearFocus();
+                    closeKeyboard(getActivity(), searchNews.getWindowToken());
+                    return true;
+                }
+                return false;
+            };
+        });
 
-           @Override
-           public boolean onQueryTextChange(String newText) {
-               return false;
-           }
-       });
     }
 
     private void initView() {
         newsAdapter = new NewsAdapter();
-        searchNews = rootView.findViewById(R.id.searchA);
-
+        searchNews = rootView.findViewById(R.id.searchNews);
 
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -100,7 +105,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.all_news_fragment, container, false);
+        rootView = inflater.inflate(R.layout.search_news_fragment, container, false);
         return rootView;
     }
 
@@ -119,6 +124,11 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         Intent intent = new Intent(getActivity(), FullNewsActivity.class);
         intent.putExtra("Url", url);
         startActivity(intent);
+    }
+
+    public static void closeKeyboard(Context c, IBinder windowToken) {
+        InputMethodManager mgr = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(windowToken, 0);
     }
 
 

@@ -62,8 +62,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     }
 
     private void updateData() {
-        presenter.prepareCategories();
-        presenter.prepareSources();
+        presenter.start();
     }
 
     private void initPresenter() {

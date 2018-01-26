@@ -19,6 +19,7 @@ public interface SearchNewsContract {
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
+
         void start();
 
         void prepareNews();
