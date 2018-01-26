@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
-import com.example.vitaliy.news.ui.allnews.AllNewsFragment;
+import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new TopNewsFragment(), "Top News");
-        adapter.addFragment(new AllNewsFragment(), "All News");
+        adapter.addFragment(new SearchNewsFragment(), "All News");
         adapter.addFragment(new SourcesFragment(), "Sources");
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

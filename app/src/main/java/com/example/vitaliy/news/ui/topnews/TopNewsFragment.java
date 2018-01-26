@@ -64,7 +64,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     private void initPresenter() {
         RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
-        presenter = new TopNewsPresenter(dataSource);
+        presenter = new TopNewsPresenter(dataSource, getActivity());
         presenter.attachView(this);
     }
 
@@ -103,12 +103,19 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
                 presenter.goToFullNews(article.getUrl());
             }
         });
+
         categoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
             @Override
             public void onCatClick(String str) {
                 presenter.setCategoryName(str);
                 presenter.prepareNews();
-                //categoriesRV.setAlpha(0);
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.setSourceID(null);
             }
         });
     }
@@ -145,6 +152,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     @Override
+    public void viewSetText(String text) {
+        sourceEt.setText(text);
+    }
+
+    @Override
     public void ShowFullNews(String url) {
         Intent intent = new Intent(getActivity(), FullNewsActivity.class);
         intent.putExtra("Url", url);
@@ -154,14 +166,5 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     void getSourceID() {
         final String sourceId =((MainActivity)getActivity()).getSourceId();
         presenter.setSourceID(sourceId);
-        sourceEt.setText(sourceId);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sourceEt.setText(null);
-                presenter.setSourceID(null);
-            }
-        });
-
     }
 }

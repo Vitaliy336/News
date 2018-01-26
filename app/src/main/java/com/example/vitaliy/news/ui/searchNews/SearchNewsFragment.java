@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui.allnews;
+package com.example.vitaliy.news.ui.searchNews;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,10 +25,10 @@ import java.util.List;
  * Created by Vitaliy on 1/11/2018.
  */
 
-public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNewsView {
+public class SearchNewsFragment extends Fragment implements SearchNewsContract.IAllNewsView {
 
     private View rootView;
-    private AllNewsContract.IAllNewsPresenter presenter;
+    private SearchNewsContract.IAllNewsPresenter presenter;
     private NewsAdapter newsAdapter;
     private RecyclerView news;
     private LinearLayoutManager lm;
@@ -51,13 +51,12 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
 
     private void updateData() {
         presenter.start();
-        presenter.prepareCategories();
         presenter.prepareNews();
     }
 
     private void initPresenter() {
         RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
-        presenter = new AllNewsPresenter(dataSource);
+        presenter = new SearchNewsPresenter(dataSource);
         presenter.attachView(this);
     }
 
@@ -105,9 +104,6 @@ public class AllNewsFragment extends Fragment implements AllNewsContract.IAllNew
         return rootView;
     }
 
-    @Override
-    public void displayCategories(List<String> categories) {
-    }
 
     @Override
     public void displayNews(List<Article> news) {

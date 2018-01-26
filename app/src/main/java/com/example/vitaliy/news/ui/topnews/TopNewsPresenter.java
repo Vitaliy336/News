@@ -1,14 +1,19 @@
 
 package com.example.vitaliy.news.ui.topnews;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,8 +25,10 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String source = "";
     private RemoteNewsDataSource dataSource;
     private TopNewsContract.ITopNewsView view;
+    private Context mContext;
 
-    public TopNewsPresenter(RemoteNewsDataSource dataSource) {
+    public TopNewsPresenter(RemoteNewsDataSource dataSource, Activity activity) {
+        this.mContext = activity;
         this.dataSource = dataSource;
     }
 
@@ -43,15 +50,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void prepareCategories() {
-        List<String> categories = new ArrayList<>();
-        categories.add("Sports");
-        categories.add("Technology");
-        categories.add("Business");
-        categories.add("Entertainment");
-        categories.add("General");
-        categories.add("Health");
-        categories.add("Science");
-        view.displayCategories(categories);
+        view.displayCategories(Arrays.asList(mContext.getResources().getStringArray(R.array.ctList)));
     }
 
     @Override
@@ -86,10 +85,13 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         if (!TextUtils.isEmpty(this.source)){
             view.hideCategories();
             view.showSourceFilter();
+            view.viewSetText(source);
         }else{
             view.hideSourceFilter();
             view.showCategories();
             prepareNews();
         }
     }
+
+
 }

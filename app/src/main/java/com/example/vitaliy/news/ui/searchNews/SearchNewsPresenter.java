@@ -1,29 +1,33 @@
-package com.example.vitaliy.news.ui.allnews;
+package com.example.vitaliy.news.ui.searchNews;
 
+import android.content.res.Resources;
 import android.util.Log;
 
+import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by v_shevchyk on 12.01.18.
  */
 
-public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
+public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter {
     private String query = "android";
-    private AllNewsContract.IAllNewsView view;
+    private SearchNewsContract.IAllNewsView view;
     private RemoteNewsDataSource newsDataSource;
+    private String res[];
 
-    public AllNewsPresenter(RemoteNewsDataSource newsDataSource) {
+    public SearchNewsPresenter(RemoteNewsDataSource newsDataSource) {
         this.newsDataSource = newsDataSource;
     }
 
     @Override
-    public void attachView(AllNewsContract.IAllNewsView view) {
+    public void attachView(SearchNewsContract.IAllNewsView view) {
         this.view = view;
     }
 
@@ -36,7 +40,6 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
     @Override
     public void start() {
         prepareNews();
-        prepareCategories();
     }
 
     @Override
@@ -54,16 +57,6 @@ public class AllNewsPresenter implements AllNewsContract.IAllNewsPresenter {
         }, query);
     }
 
-    @Override
-    public void prepareCategories() {
-        List<String> categories = new ArrayList<>();
-        categories.add("Sport");
-        categories.add("Politic");
-        categories.add("Woirld");
-        categories.add("BBC");
-        categories.add("Others");
-        view.displayCategories(categories);
-    }
 
     @Override
     public void goTofullNews(String url) {

@@ -1,11 +1,16 @@
 package com.example.vitaliy.news.ui.sources;
 
+import android.app.Activity;
+import android.content.Context;
+
+import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.data.sourceModel.Source;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,9 +22,11 @@ public class SourcesPresenter implements ISourcesPresenter{
     private String category = "";
     private RemoteNewsDataSource dataSource;
     private SourcesContract.ISourcesView view;
+    private Context mContext;
 
-    public SourcesPresenter(RemoteNewsDataSource dataSource) {
+    public SourcesPresenter(RemoteNewsDataSource dataSource, Activity activity) {
         this.dataSource = dataSource;
+        this.mContext = activity;
     }
 
     @Override
@@ -40,15 +47,7 @@ public class SourcesPresenter implements ISourcesPresenter{
 
     @Override
     public void prepareCategories() {
-        List<String> categories = new ArrayList<>();
-        categories.add("Sports");
-        categories.add("Technology");
-        categories.add("Business");
-        categories.add("Entertainment");
-        categories.add("General");
-        categories.add("Health");
-        categories.add("Science");
-        view.displayCategories(categories);
+        view.displayCategories(Arrays.asList(mContext.getResources().getStringArray(R.array.ctList)));
     }
 
     @Override

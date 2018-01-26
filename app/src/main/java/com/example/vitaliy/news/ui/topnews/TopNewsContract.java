@@ -26,6 +26,8 @@ public interface TopNewsContract {
 
         void hideSourceFilter();
 
+        void viewSetText(String text);
+
     }
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {
@@ -40,6 +42,8 @@ public interface TopNewsContract {
         void setCategoryName(String category);
 
         void setSourceID(String source);
+
+
 
     }
 }

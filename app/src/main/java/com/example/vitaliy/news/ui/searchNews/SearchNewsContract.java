@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui.allnews;
+package com.example.vitaliy.news.ui.searchNews;
 
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.ui.base.BasePresenter;
@@ -10,10 +10,8 @@ import java.util.List;
  * Created by v_shevchyk on 12.01.18.
  */
 
-public interface AllNewsContract {
+public interface SearchNewsContract {
     interface IAllNewsView extends BaseView {
-
-        void displayCategories(List<String> categories);
 
         void displayNews(List<Article> news);
 
@@ -24,8 +22,6 @@ public interface AllNewsContract {
         void start();
 
         void prepareNews();
-
-        void prepareCategories();
 
         void goTofullNews(String url);
 

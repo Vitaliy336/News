@@ -68,7 +68,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
 
     private void initPresenter() {
         dataSource = new RemoteNewsDataSource();
-        presenter = new SourcesPresenter(dataSource);
+        presenter = new SourcesPresenter(dataSource, getActivity());
         presenter.attachView(this);
 
 
