@@ -38,6 +38,13 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
 
     @Override
     public void start() {
+        if(!TextUtils.isEmpty(query)){
+            view.hideMessage();
+            prepareNews();
+        }
+        else {
+            view.showMessage();
+        }
     }
 
     @Override

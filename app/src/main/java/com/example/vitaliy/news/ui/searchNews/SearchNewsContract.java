@@ -16,6 +16,10 @@ public interface SearchNewsContract {
         void displayNews(List<Article> news);
 
         void showFullNews(String url);
+
+        void hideMessage();
+
+        void showMessage();
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {

@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,6 +27,7 @@ import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Vitaliy on 1/11/2018.
@@ -40,6 +41,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private RecyclerView news;
     private LinearLayoutManager lm;
     private EditText searchNews;
+    private TextView info;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,15 +78,19 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         searchNews.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    presenter.getSearchQuery(searchNews.getText().toString());
-                    presenter.prepareNews();
-                    searchNews.clearFocus();
+                if(!TextUtils.isEmpty(searchNews.getText().toString())) {
+                    if (i == EditorInfo.IME_ACTION_SEARCH) {
+                        presenter.getSearchQuery(searchNews.getText().toString());
+                        presenter.prepareNews();
+                        searchNews.clearFocus();
+                        closeKeyboard(getActivity(), searchNews.getWindowToken());
+                        return true;
+                    }
+                } else {
                     closeKeyboard(getActivity(), searchNews.getWindowToken());
-                    return true;
                 }
                 return false;
-            };
+            }
         });
 
     }
@@ -92,6 +98,8 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private void initView() {
         newsAdapter = new NewsAdapter();
         searchNews = rootView.findViewById(R.id.searchNews);
+
+        info = rootView.findViewById(R.id.infotv);
 
         lm = new LinearLayoutManager(getActivity());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -124,6 +132,16 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         Intent intent = new Intent(getActivity(), FullNewsActivity.class);
         intent.putExtra("Url", url);
         startActivity(intent);
+    }
+
+    @Override
+    public void hideMessage() {
+        info.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showMessage() {
+        info.setVisibility(View.VISIBLE);
     }
 
     public static void closeKeyboard(Context c, IBinder windowToken) {
