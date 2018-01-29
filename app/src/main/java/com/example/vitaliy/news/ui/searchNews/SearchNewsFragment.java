@@ -40,7 +40,6 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private LinearLayoutManager layoutManagerForNews;
     private EditText searchNews;
     private TextView info;
-    private String blockCharacterSet = "@#$%&*-+()!\"':;/?~`|•√π÷×{}\t£¢€°^_=[]™®©¶\\„…,.";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

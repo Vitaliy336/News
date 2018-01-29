@@ -1,5 +1,7 @@
 package com.example.vitaliy.news.data.model.news;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
@@ -12,14 +14,13 @@ import com.google.gson.annotations.SerializedName;
  * Created by v_shevchyk on 16.01.18.
  */
 
-@Entity (tableName = "news", foreignKeys = @ForeignKey(entity = NewsSource.class,
-parentColumns = "newsSource",
-childColumns = "id"))
+@Entity (tableName = "news")
 
 public class Article {
 
     @SerializedName("newsSource")
     @Expose
+    @Embedded
     private NewsSource newsSource;
     @SerializedName("author")
     @Expose

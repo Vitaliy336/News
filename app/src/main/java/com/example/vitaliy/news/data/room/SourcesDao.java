@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.data.room;
 
+import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by v_shevchyk on 29.01.18.
  */
 
+@Dao
 public interface SourcesDao {
     @Insert
     void insertAll (List<Source> sources);
