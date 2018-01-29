@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.sourceModel;
+package com.example.vitaliy.news.data.model.source;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

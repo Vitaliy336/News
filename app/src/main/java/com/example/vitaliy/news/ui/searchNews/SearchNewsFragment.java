@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.newsModel.Article;
+import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 

@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.sourceModel;
+package com.example.vitaliy.news.data.model.source;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +9,7 @@ import java.util.List;
  * Created by v_shevchyk on 19.01.18.
  */
 
-public class SourceModel {
+public class SourceResponse {
     @SerializedName("status")
     @Expose
     private String status;

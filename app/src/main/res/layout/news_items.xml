@@ -33,7 +33,7 @@
                 android:layout_marginRight="@dimen/post_item_margin"
                 android:layout_marginTop="@dimen/post_item_margin"
                 android:layout_toRightOf="@id/newsImgView"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/post_title" />
 
             <TextView

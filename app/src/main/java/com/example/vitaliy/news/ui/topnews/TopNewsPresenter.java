@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.newsModel.Article;
+import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 

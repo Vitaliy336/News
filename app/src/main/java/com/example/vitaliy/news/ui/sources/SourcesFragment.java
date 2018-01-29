@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
-import com.example.vitaliy.news.data.sourceModel.Source;
+import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
 

@@ -30,7 +30,7 @@
                 android:layout_marginBottom="@dimen/post_text_margin_bottom"
                 android:layout_marginLeft="@dimen/post_item_margin"
                 android:layout_marginRight="@dimen/post_item_margin"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/post_title" />
 
             <TextView

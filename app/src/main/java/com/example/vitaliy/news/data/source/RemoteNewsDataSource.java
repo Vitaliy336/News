@@ -2,10 +2,10 @@ package com.example.vitaliy.news.data.source;
 
 import android.text.TextUtils;
 
-import com.example.vitaliy.news.data.newsModel.NewsModel;
+import com.example.vitaliy.news.data.model.news.NewsResponse;
 import com.example.vitaliy.news.data.rest.ApiClient;
 import com.example.vitaliy.news.data.rest.ApiInterface;
-import com.example.vitaliy.news.data.sourceModel.SourceModel;
+import com.example.vitaliy.news.data.model.source.SourceResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,14 +40,14 @@ public class RemoteNewsDataSource implements NewsDataSource {
         }
         map.put("apiKey", API_KEY);
         if (callback != null) {
-            apiInterface.getHotNews(map).enqueue(new Callback<NewsModel>() {
+            apiInterface.getHotNews(map).enqueue(new Callback<NewsResponse>() {
                 @Override
-                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                     callback.onListReceived(response.body().getArticles());
                 }
 
                 @Override
-                public void onFailure(Call<NewsModel> call, Throwable t) {
+                public void onFailure(Call<NewsResponse> call, Throwable t) {
 
                 }
             });
@@ -62,14 +62,14 @@ public class RemoteNewsDataSource implements NewsDataSource {
         }
         map.put("apiKey", API_KEY);
         if (callback != null) {
-            apiInterface.getEverything(map).enqueue(new Callback<NewsModel>() {
+            apiInterface.getEverything(map).enqueue(new Callback<NewsResponse>() {
                 @Override
-                public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                     callback.onListReceived(response.body().getArticles());
                 }
 
                 @Override
-                public void onFailure(Call<NewsModel> call, Throwable t) {
+                public void onFailure(Call<NewsResponse> call, Throwable t) {
 
                 }
             });
@@ -84,14 +84,14 @@ public class RemoteNewsDataSource implements NewsDataSource {
         }
         map.put("apiKey", API_KEY);
         if (callback != null) {
-            apiInterface.getSources(map).enqueue(new Callback<SourceModel>() {
+            apiInterface.getSources(map).enqueue(new Callback<SourceResponse>() {
                 @Override
-                public void onResponse(Call<SourceModel> call, Response<SourceModel> response) {
+                public void onResponse(Call<SourceResponse> call, Response<SourceResponse> response) {
                     callback.onListReceived(response.body().getSources());
                 }
 
                 @Override
-                public void onFailure(Call<SourceModel> call, Throwable t) {
+                public void onFailure(Call<SourceResponse> call, Throwable t) {
 
                 }
             });

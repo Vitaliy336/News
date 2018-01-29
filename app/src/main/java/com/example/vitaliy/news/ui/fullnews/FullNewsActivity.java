@@ -4,18 +4,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
 public class FullNewsActivity extends AppCompatActivity implements FullNewsContract.IFullNewsView {
     private FullNewsContract.IFullNewsPresenter presenter;
-    private ProgressBar newsPB;
-    private WebView fullNews;
+    private ProgressBar progressBar;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +39,15 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
     }
 
     private void initView() {
-        fullNews = findViewById(R.id.fullNewsWV);
-        fullNews.getSettings().setJavaScriptEnabled(true);
-        newsPB = findViewById(R.id.newsPB);
+        webView = findViewById(R.id.fullNewsWV);
+        webView.getSettings().setJavaScriptEnabled(true);
+        progressBar = findViewById(R.id.newsPB);
     }
 
     @Override
     public void showContent(String url) {
-        fullNews.setWebViewClient(new WebViewClient());
-        fullNews.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(url);
     }
 
     public class WebViewClient extends android.webkit.WebViewClient{
@@ -62,14 +59,14 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            fullNews.loadUrl(url);
+            webView.loadUrl(url);
             return true;
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            newsPB.setVisibility(view.GONE);
+            progressBar.setVisibility(view.GONE);
         }
     }
 

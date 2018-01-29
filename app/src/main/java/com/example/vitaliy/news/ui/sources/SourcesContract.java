@@ -1,6 +1,6 @@
 package com.example.vitaliy.news.ui.sources;
 
-import com.example.vitaliy.news.data.sourceModel.Source;
+import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.ui.base.BasePresenter;
 import com.example.vitaliy.news.ui.base.BaseView;
 

@@ -6,10 +6,9 @@ import android.content.Context;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
-import com.example.vitaliy.news.data.sourceModel.Source;
+import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.example.vitaliy.news.ui.topnews;
 
-import com.example.vitaliy.news.data.newsModel.Article;
+import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.ui.base.BasePresenter;
 import com.example.vitaliy.news.ui.base.BaseView;
 

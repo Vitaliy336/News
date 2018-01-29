@@ -1,16 +1,12 @@
 package com.example.vitaliy.news.ui.searchNews;
 
-import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.newsModel.Article;
+import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.sourceModel.Source;
+import com.example.vitaliy.news.data.model.source.Source;
 
 import java.util.ArrayList;
 import java.util.List;

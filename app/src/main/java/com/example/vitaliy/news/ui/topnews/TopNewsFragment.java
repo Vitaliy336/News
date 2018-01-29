@@ -2,7 +2,6 @@
 package com.example.vitaliy.news.ui.topnews;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,11 +17,10 @@ import android.widget.TextView;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.newsModel.Article;
+import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
-import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
 import java.util.List;
 
