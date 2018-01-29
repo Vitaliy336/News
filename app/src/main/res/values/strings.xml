@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">News</string>
     <string name="search">Search here</string>
+    <string name="allow">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890</string>
+    <string name="space">" "</string>
 
 </resources>
