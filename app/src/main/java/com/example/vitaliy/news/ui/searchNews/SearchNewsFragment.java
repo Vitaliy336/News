@@ -1,7 +1,6 @@
 package com.example.vitaliy.news.ui.searchNews;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -20,14 +19,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
-import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by Vitaliy on 1/11/2018.
@@ -39,7 +37,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private SearchNewsContract.IAllNewsPresenter presenter;
     private NewsAdapter newsAdapter;
     private RecyclerView news;
-    private LinearLayoutManager lm;
+    private LinearLayoutManager layoutManagerForNews;
     private EditText searchNews;
     private TextView info;
 
@@ -98,15 +96,16 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private void initView() {
         newsAdapter = new NewsAdapter();
         searchNews = rootView.findViewById(R.id.searchNews);
+        searchNews.clearFocus();
 
         info = rootView.findViewById(R.id.infotv);
 
-        lm = new LinearLayoutManager(getActivity());
-        lm.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManagerForNews = new LinearLayoutManager(getActivity());
+        layoutManagerForNews.setOrientation(LinearLayoutManager.VERTICAL);
 
         news = rootView.findViewById(R.id.newsA);
         news.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        news.setLayoutManager(lm);
+        news.setLayoutManager(layoutManagerForNews);
         news.setAdapter(newsAdapter);
     }
 
@@ -129,9 +128,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
 
     @Override
     public void showFullNews(String url) {
-        Intent intent = new Intent(getActivity(), FullNewsActivity.class);
-        intent.putExtra("Url", url);
-        startActivity(intent);
+        ((MainActivity)getActivity()).showFullInfo(url);
     }
 
     @Override

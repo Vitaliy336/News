@@ -3,17 +3,14 @@ package com.example.vitaliy.news.ui.topnews;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.newsModel.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,7 +68,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void goToFullNews(String url) {
-        view.ShowFullNews(url);
+        view.showFullNews(url);
     }
 
     @Override
@@ -93,6 +90,4 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
             prepareNews();
         }
     }
-
-
 }

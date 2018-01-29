@@ -1,5 +1,6 @@
 package com.example.vitaliy.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
+import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    private final String URL_TAG = "Url";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,4 +85,9 @@ public class MainActivity extends AppCompatActivity {
         return sourceId;
     }
 
+    public void showFullInfo(String url){
+        Intent intent = new Intent(this, FullNewsActivity.class);
+        intent.putExtra(URL_TAG, url);
+        startActivity(intent);
+    }
 }

@@ -14,7 +14,7 @@ public interface TopNewsContract {
     interface ITopNewsView extends BaseView {
         void displayCategories(List<String> categories);
 
-        void ShowFullNews(String url);
+        void showFullNews(String url);
 
         void displayNews(List<Article> article);
 
@@ -42,8 +42,6 @@ public interface TopNewsContract {
         void setCategoryName(String category);
 
         void setSourceID(String source);
-
-
 
     }
 }

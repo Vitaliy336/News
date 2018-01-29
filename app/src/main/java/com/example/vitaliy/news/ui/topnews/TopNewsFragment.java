@@ -37,6 +37,8 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private View rootView;
     private RecyclerView categoriesRV, newsRV;
     private CategoriesAdapter categoriesAdapter;
+    private LinearLayoutManager layoutManagerForCategories;
+    LinearLayoutManager layoutManagerForNews;
     private NewsAdapter newsAdapter;
     private TextView sourceEt;
     private ImageView clear;
@@ -79,9 +81,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         categoriesAdapter = new CategoriesAdapter();
         newsAdapter = new NewsAdapter();
 
-        LinearLayoutManager layoutManagerForCategories = new LinearLayoutManager(getActivity());
+        layoutManagerForCategories = new LinearLayoutManager(getActivity());
         layoutManagerForCategories.setOrientation(LinearLayoutManager.HORIZONTAL);
-        LinearLayoutManager layoutManagerForNews = new LinearLayoutManager(getActivity());
+        layoutManagerForNews = new LinearLayoutManager(getActivity());
         layoutManagerForNews.setOrientation(LinearLayoutManager.VERTICAL);
 
         newsRV = rootView.findViewById(R.id.newsT);
@@ -157,10 +159,8 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     @Override
-    public void ShowFullNews(String url) {
-        Intent intent = new Intent(getActivity(), FullNewsActivity.class);
-        intent.putExtra("Url", url);
-        startActivity(intent);
+    public void showFullNews(String url) {
+        ((MainActivity)getActivity()).showFullInfo(url);
     }
 
     void getSourceID() {
