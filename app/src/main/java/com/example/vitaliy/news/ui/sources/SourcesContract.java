@@ -12,13 +12,11 @@ import java.util.List;
 
 public interface SourcesContract {
     interface ISourcesView extends BaseView{
-        void displayCategories(List<String> categories);
         void showSources(List<Source> list);
     }
 
     interface ISourcesPresenter extends BasePresenter<ISourcesView>{
         void start();
-        void prepareCategories();
         void prepareSources();
         void getSourceCategory(String category);
     }

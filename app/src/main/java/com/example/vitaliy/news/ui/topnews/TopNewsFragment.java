@@ -22,6 +22,7 @@ import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     private void initPresenter() {
         RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
-        presenter = new TopNewsPresenter(dataSource, getActivity());
+        presenter = new TopNewsPresenter(dataSource);
         presenter.attachView(this);
     }
 
@@ -77,6 +78,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
         relativeLayout = rootView.findViewById(R.id.sourcesFilter);
         categoriesAdapter = new CategoriesAdapter();
+        categoriesAdapter.setData(Arrays.asList(rootView.getResources().getStringArray(R.array.ctList)));
         newsAdapter = new NewsAdapter();
 
         layoutManagerForCategories = new LinearLayoutManager(getActivity());
@@ -120,10 +122,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         });
     }
 
-    @Override
-    public void displayCategories(List<String> categories) {
-        categoriesAdapter.setData(categories);
-    }
 
     @Override
     public void displayNews(List<Article> news) {

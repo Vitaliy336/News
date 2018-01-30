@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.data.source;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.vitaliy.news.data.model.news.NewsResponse;
 import com.example.vitaliy.news.data.rest.ApiClient;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 public class RemoteNewsDataSource implements NewsDataSource {
     private final static String API_KEY = "8ba6904683434f37a16c07a1e0cde166";
     private final ApiInterface apiInterface;
+
 
     public RemoteNewsDataSource() {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -48,6 +50,8 @@ public class RemoteNewsDataSource implements NewsDataSource {
 
                 @Override
                 public void onFailure(Call<NewsResponse> call, Throwable t) {
+                    Log.e("REMOTE", "onFailure");
+                    callback.onFailure();
 
                 }
             });

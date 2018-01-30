@@ -21,11 +21,9 @@ public class SourcesPresenter implements ISourcesPresenter{
     private String category = "";
     private RemoteNewsDataSource dataSource;
     private SourcesContract.ISourcesView view;
-    private Context mContext;
 
     public SourcesPresenter(RemoteNewsDataSource dataSource, Activity activity) {
         this.dataSource = dataSource;
-        this.mContext = activity;
     }
 
     @Override
@@ -41,13 +39,9 @@ public class SourcesPresenter implements ISourcesPresenter{
     @Override
     public void start() {
         prepareSources();
-        prepareCategories();
     }
 
-    @Override
-    public void prepareCategories() {
-        view.displayCategories(Arrays.asList(mContext.getResources().getStringArray(R.array.ctList)));
-    }
+
 
     @Override
     public void prepareSources() {

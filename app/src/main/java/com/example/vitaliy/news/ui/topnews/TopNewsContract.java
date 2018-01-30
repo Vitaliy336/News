@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface TopNewsContract {
     interface ITopNewsView extends BaseView {
-        void displayCategories(List<String> categories);
 
         void showFullNews(String url);
 
@@ -32,8 +31,6 @@ public interface TopNewsContract {
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {
         void start();
-
-        void prepareCategories();
 
         void prepareNews();
 

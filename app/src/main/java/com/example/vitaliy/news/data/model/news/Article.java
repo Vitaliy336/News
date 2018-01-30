@@ -25,6 +25,7 @@ public class Article {
     @SerializedName("author")
     @Expose
     private String author;
+    private String category;
     @SerializedName("title")
     @Expose
     private String title;
@@ -97,6 +98,14 @@ public class Article {
 
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 }

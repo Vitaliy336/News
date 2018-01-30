@@ -23,10 +23,8 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String source = "";
     private RemoteNewsDataSource dataSource;
     private TopNewsContract.ITopNewsView view;
-    private Context mContext;
 
-    public TopNewsPresenter(RemoteNewsDataSource dataSource, Activity activity) {
-        this.mContext = activity;
+    public TopNewsPresenter(RemoteNewsDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -43,12 +41,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     @Override
     public void start() {
         prepareNews();
-        prepareCategories();
-    }
-
-    @Override
-    public void prepareCategories() {
-        view.displayCategories(Arrays.asList(mContext.getResources().getStringArray(R.array.ctList)));
     }
 
     @Override

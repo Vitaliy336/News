@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
-import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.data.model.source.Source;
+import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -70,7 +71,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         presenter = new SourcesPresenter(dataSource, getActivity());
         presenter.attachView(this);
 
-
     }
 
     private void initListener() {
@@ -94,6 +94,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     private void initView() {
         sCategoriesAdapter = new CategoriesAdapter();
         sourcesAdapter = new SourcesAdapter();
+        sCategoriesAdapter.setData(Arrays.asList(rootView.getResources().getStringArray(R.array.ctList)));
 
         LinearLayoutManager categoryLM = new LinearLayoutManager(getActivity());
         LinearLayoutManager sourcesLM = new LinearLayoutManager(getActivity());
@@ -110,12 +111,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
 
         categoriesS.setLayoutManager(categoryLM);
         categoriesS.setAdapter(sCategoriesAdapter);
-    }
-
-
-    @Override
-    public void displayCategories(List<String> categories) {
-        sCategoriesAdapter.setData(categories);
     }
 
 
