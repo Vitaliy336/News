@@ -21,8 +21,8 @@ public interface NewsDao {
     @Delete
     void delete (Article article);
 
-    @Delete
-    void deleteAll (List<Article> articles);
+    @Query("DELETE FROM NEWS")
+    public void nukeTable();
 
     @Query("Select * from  news")
     List<Article> getAllArticles();

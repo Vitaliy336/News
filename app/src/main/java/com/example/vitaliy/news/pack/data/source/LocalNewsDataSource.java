@@ -34,7 +34,7 @@ public class LocalNewsDataSource implements NewsDataSource {
     public void saveToCashe(List<?> article) {
         Log.e("LocalNDS", "isnert?");
         db = App.getInstance().getDatabaseInstance();
-        db.getDataDao().insertAll((List<Article>) article);
-        //db.getDataDao().deleteAll((List<Article>) article);
+        //db.getDataDao().insertAll((List<Article>) article);
+        db.getDataDao().nukeTable();
     }
 }
