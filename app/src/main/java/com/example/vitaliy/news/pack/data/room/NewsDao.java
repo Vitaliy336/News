@@ -25,6 +25,9 @@ public interface NewsDao {
     @Query("DELETE FROM NEWS")
     public void nukeTable();
 
-    @Query("Select * from  news")
+    @Query("SELECT * FROM NEWS WHERE _category LIKE :category")
+    List<Article> getAllArticles(String category);
+
+    @Query("SELECT * FROM NEWS")
     List<Article> getAllArticles();
 }

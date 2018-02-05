@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.pack.data.model.news;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
@@ -23,6 +24,7 @@ public class Article {
     @SerializedName("author")
     @Expose
     private String author;
+    @ColumnInfo(name = "_category")
     private String category;
     @SerializedName("title")
     @Expose

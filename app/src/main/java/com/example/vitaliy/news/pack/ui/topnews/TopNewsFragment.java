@@ -66,9 +66,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initPresenter() {
-        RemoteNewsDataSource dataSource = new RemoteNewsDataSource();
-        LocalNewsDataSource dataSource1 = new LocalNewsDataSource();
-        NewsDataRepository dataRepository = new NewsDataRepository(dataSource1 ,dataSource);
+        RemoteNewsDataSource remoteNewsDataSource = new RemoteNewsDataSource();
+        LocalNewsDataSource localNewsDataSource = new LocalNewsDataSource();
+        NewsDataRepository dataRepository = new NewsDataRepository(localNewsDataSource ,remoteNewsDataSource);
         presenter = new TopNewsPresenter(dataRepository);
         presenter.attachView(this);
     }

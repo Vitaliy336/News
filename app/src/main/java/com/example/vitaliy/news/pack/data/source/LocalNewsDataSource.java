@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.pack.data.source;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.vitaliy.news.App;
@@ -20,7 +21,12 @@ public class LocalNewsDataSource implements NewsDataSource {
     public void getHotNews(getListCallback callback, String category, String source) {
         Log.e("LocalNDS", "get?");
         db = App.getInstance().getDatabaseInstance();
-        callback.onListReceived(db.getDataDao().getAllArticles());
+        if(!TextUtils.isEmpty(category)) {
+            callback.onListReceived(db.getDataDao().getAllArticles(category));
+
+        } else{
+            callback.onListReceived(db.getDataDao().getAllArticles());
+        }
     }
 
     @Override
@@ -29,9 +35,7 @@ public class LocalNewsDataSource implements NewsDataSource {
 
     @Override
     public void getSources(getListCallback callback, String category) {
-
         db = App.getInstance().getDatabaseInstance();
-        callback.onListReceived(db.getSourcesDao().getAllSources());
     }
 
     public void saveToCashe(List<?> article) {
