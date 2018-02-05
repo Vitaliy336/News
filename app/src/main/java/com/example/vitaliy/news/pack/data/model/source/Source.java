@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.pack.data.model.source;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ public class Source {
     private String url;
     @SerializedName("category")
     @Expose
+    @ColumnInfo(name = "_category")
     private String category;
     @SerializedName("language")
     @Expose

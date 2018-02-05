@@ -2,6 +2,8 @@ package com.example.vitaliy.news.pack.data.source;
 
 import android.util.Log;
 
+import com.example.vitaliy.news.pack.data.model.source.Source;
+
 import java.util.List;
 
 /**
@@ -40,7 +42,6 @@ public class NewsDataRepository implements NewsDataSource {
     }
 
     @Override
-    public void getSources(getListCallback callback, String category) {
-
+    public void getSources(final getListCallback callback, final String category) {
     }
 }

@@ -22,6 +22,9 @@ public interface SourcesDao {
     @Delete
     void delete (Source source);
 
-    @Query("Select * FROM  SOURCES")
+    @Query("DELETE FROM sources")
+    void nukeTable();
+
+    @Query("Select * FROM SOURCES")
     List<Article> getAllSources();
 }

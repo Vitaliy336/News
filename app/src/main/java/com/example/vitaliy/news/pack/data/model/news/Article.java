@@ -16,9 +16,6 @@ import com.google.gson.annotations.SerializedName;
 @Entity (tableName = "news")
 
 public class Article {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
     @SerializedName("newsSource")
     @Expose
     @Ignore
@@ -33,6 +30,7 @@ public class Article {
     @SerializedName("description")
     @Expose
     private String description;
+    @PrimaryKey
     @NonNull
     @SerializedName("url")
     @Expose
@@ -43,14 +41,6 @@ public class Article {
     @SerializedName("publishedAt")
     @Expose
     private String publishedAt;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public NewsSource getNewsSource() {
         return newsSource;

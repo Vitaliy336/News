@@ -10,9 +10,9 @@ import com.example.vitaliy.news.pack.data.model.source.Source;
  * Created by v_shevchyk on 29.01.18.
  */
 
-@Database(entities = {Article.class, Source.class}, version = 2, exportSchema = false)
+@Database(entities = {Article.class, Source.class}, version = 4, exportSchema = false)
 public abstract class NewsDb extends RoomDatabase {
 
     public abstract NewsDao getDataDao();
-    public abstract SourcesDao sourcesDao();
+    public abstract SourcesDao getSourcesDao();
 }

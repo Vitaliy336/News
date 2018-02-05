@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.pack.data.model.news.Article;
+import com.example.vitaliy.news.pack.data.model.source.Source;
 import com.example.vitaliy.news.pack.data.room.NewsDb;
 
 import java.util.List;
@@ -28,13 +29,15 @@ public class LocalNewsDataSource implements NewsDataSource {
 
     @Override
     public void getSources(getListCallback callback, String category) {
-      //  callback.onListReceived(db.sourcesDao().getAllSources());
+
+        db = App.getInstance().getDatabaseInstance();
+        callback.onListReceived(db.getSourcesDao().getAllSources());
     }
 
     public void saveToCashe(List<?> article) {
         Log.e("LocalNDS", "isnert?");
         db = App.getInstance().getDatabaseInstance();
-        //db.getDataDao().insertAll((List<Article>) article);
-        db.getDataDao().nukeTable();
+        db.getDataDao().insertAll((List<Article>) article);
+        //db.getDataDao().nukeTable();
     }
 }
