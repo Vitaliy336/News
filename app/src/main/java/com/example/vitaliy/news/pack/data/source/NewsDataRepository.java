@@ -25,7 +25,7 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveToCashe(article);
+                localNewsDataSource.saveNewsToCache(article);
             }
 
             @Override
@@ -43,5 +43,18 @@ public class NewsDataRepository implements NewsDataSource {
 
     @Override
     public void getSources(final getListCallback callback, final String category) {
+        remoteNewsDataSource.getSources(new getListCallback() {
+            @Override
+            public void onListReceived(List<?> article) {
+                callback.onListReceived((List<Source>)article);
+                localNewsDataSource.saveSourcesToCache((List<Source>) article);
+            }
+
+            @Override
+            public void onFailure() {
+                Log.e("LocalNDSSources", "OnFailure");
+                localNewsDataSource.getSources(callback, category);
+            }
+        }, category);
     }
 }

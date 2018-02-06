@@ -35,13 +35,25 @@ public class LocalNewsDataSource implements NewsDataSource {
 
     @Override
     public void getSources(getListCallback callback, String category) {
+        Log.e("LocalNDS", "display?");
         db = App.getInstance().getDatabaseInstance();
+        if (!TextUtils.isEmpty(category)) {
+            callback.onListReceived(db.getSourcesDao().getSourtedSources(category));
+        } else {
+            callback.onListReceived(db.getSourcesDao().getAllSources());
+        }
     }
 
-    public void saveToCashe(List<?> article) {
+    public void saveNewsToCache(List<?> article) {
         Log.e("LocalNDS", "isnert?");
         db = App.getInstance().getDatabaseInstance();
         db.getDataDao().insertAll((List<Article>) article);
         //db.getDataDao().nukeTable();
+    }
+
+    public void saveSourcesToCache(List<Source> sources){
+        Log.e("LocalNDS", "insertSources?");
+        db = App.getInstance().getDatabaseInstance();
+        db.getSourcesDao().insertAll(sources);
     }
 }

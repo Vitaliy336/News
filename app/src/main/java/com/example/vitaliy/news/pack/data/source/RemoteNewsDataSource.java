@@ -94,7 +94,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
 
                 @Override
                 public void onFailure(Call<SourceResponse> call, Throwable t) {
-
+                    callback.onFailure();
                 }
             });
         }

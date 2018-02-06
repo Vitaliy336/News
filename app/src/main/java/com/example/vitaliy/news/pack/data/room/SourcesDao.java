@@ -3,6 +3,7 @@ package com.example.vitaliy.news.pack.data.room;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.vitaliy.news.pack.data.model.news.Article;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Dao
 public interface SourcesDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll (List<Source> sources);
 
     @Delete
@@ -25,6 +26,9 @@ public interface SourcesDao {
     @Query("DELETE FROM sources")
     void nukeTable();
 
-    @Query("Select * FROM SOURCES")
-    List<Article> getAllSources();
+    @Query("Select * FROM SOURCES WHERE _category LIKE :category")
+    List<Source> getSourtedSources(String category);
+
+    @Query("SELECT * FROM SOURCES")
+    List<Source> getAllSources();
 }
