@@ -44,6 +44,7 @@
                 android:layout_marginLeft="@dimen/post_item_margin"
                 android:layout_marginRight="@dimen/post_item_margin"
                 android:layout_marginStart="@dimen/post_item_margin"
+                android:layout_marginTop="@dimen/post_item_margin"
                 android:textSize="@dimen/post_description" />
 
         </RelativeLayout>
