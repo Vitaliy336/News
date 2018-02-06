@@ -22,7 +22,7 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveNewsToCache((List<Article>) article);
+                localNewsDataSource.saveNewsToCache(setCategory((List<Article>) article, category));//here
             }
 
             @Override
@@ -32,6 +32,8 @@ public class NewsDataRepository implements NewsDataSource {
             }
         }, category, source);
     }
+
+
 
     @Override
     public void getEverything(getListCallback callback, String query) {
@@ -53,5 +55,12 @@ public class NewsDataRepository implements NewsDataSource {
                 localNewsDataSource.getSources(callback, category);
             }
         }, category);
+    }
+
+    public List<Article> setCategory(List<Article> articles, String category){
+        for(Article article : articles){
+            article.setCategory(category);
+        }
+        return articles;
     }
 }

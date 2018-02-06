@@ -7,6 +7,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.data.model.source.Source;
 
 import java.util.List;
 
@@ -16,14 +17,11 @@ public interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll (List<Article> articles);
 
-    @Delete
-    void delete (Article article);
-
     @Query("DELETE FROM NEWS")
     public void nukeTable();
 
-    @Query("SELECT * FROM NEWS WHERE _category LIKE :category")
-    List<Article> getAllArticles(String category);
+    @Query("Select * FROM news WHERE _category LIKE :category")
+    List<Article> getSourtedNews(String category);
 
     @Query("SELECT * FROM NEWS")
     List<Article> getAllArticles();

@@ -20,7 +20,6 @@ public class Article {
     @SerializedName("author")
     @Expose
     private String author;
-    @ColumnInfo(name = "_category")
     @SerializedName("title")
     @Expose
     private String title;
@@ -38,6 +37,7 @@ public class Article {
     @SerializedName("publishedAt")
     @Expose
     private String publishedAt;
+    @ColumnInfo(name = "_category")
     private String category;
 
     public NewsSource getNewsSource() {

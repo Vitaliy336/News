@@ -15,9 +15,6 @@ public interface SourcesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll (List<Source> sources);
 
-    @Delete
-    void delete (Source source);
-
     @Query("DELETE FROM sources")
     void nukeTable();
 
