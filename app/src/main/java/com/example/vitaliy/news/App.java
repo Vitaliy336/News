@@ -3,7 +3,7 @@ package com.example.vitaliy.news;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
-import com.example.vitaliy.news.pack.data.room.NewsDb;
+import com.example.vitaliy.news.data.room.NewsDb;
 
 /**
  * Created by gleb on 11/16/17.
