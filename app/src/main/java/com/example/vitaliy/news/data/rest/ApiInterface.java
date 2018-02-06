@@ -9,9 +9,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
-/**
- * Created by v_shevchyk on 15.01.18.
- */
 
 public interface ApiInterface {
 

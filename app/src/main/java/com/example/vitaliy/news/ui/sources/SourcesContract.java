@@ -6,10 +6,6 @@ import com.example.vitaliy.news.ui.base.BaseView;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 19.01.18.
- */
-
 public interface SourcesContract {
     interface ISourcesView extends BaseView{
         void showSources(List<Source> list);

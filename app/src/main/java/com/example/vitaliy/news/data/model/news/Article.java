@@ -9,9 +9,6 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by v_shevchyk on 16.01.18.
- */
 
 @Entity (tableName = "news")
 

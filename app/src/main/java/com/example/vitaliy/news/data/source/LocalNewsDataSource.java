@@ -1,7 +1,6 @@
 package com.example.vitaliy.news.data.source;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
@@ -10,9 +9,6 @@ import com.example.vitaliy.news.data.room.NewsDb;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 29.01.18.
- */
 
 public class LocalNewsDataSource implements NewsDataSource {
     private NewsDb db;

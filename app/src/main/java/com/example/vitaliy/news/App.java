@@ -5,9 +5,6 @@ import android.arch.persistence.room.Room;
 
 import com.example.vitaliy.news.data.room.NewsDb;
 
-/**
- * Created by gleb on 11/16/17.
- */
 
 public class App extends Application {
 

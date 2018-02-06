@@ -6,9 +6,6 @@ import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 19.01.18.
- */
 
 public class SourcesPresenter implements ISourcesPresenter{
 

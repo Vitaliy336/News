@@ -19,10 +19,6 @@ import com.example.vitaliy.news.data.model.news.Article;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 15.01.18.
- */
-
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private final static int TOP_POST = 0;
     private final static int OTHER_POSTS = 1;

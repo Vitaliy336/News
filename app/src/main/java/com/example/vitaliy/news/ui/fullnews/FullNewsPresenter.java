@@ -1,8 +1,5 @@
 package com.example.vitaliy.news.ui.fullnews;
 
-/**
- * Created by v_shevchyk on 18.01.18.
- */
 
 public class FullNewsPresenter implements FullNewsContract.IFullNewsPresenter {
 

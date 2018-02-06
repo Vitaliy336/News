@@ -16,10 +16,6 @@ import com.example.vitaliy.news.data.model.source.Source;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 22.01.18.
- */
-
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.SourcesVH> {
     private List<Source> sources = new ArrayList<>();
     private onSourceClickListener sourceClickListener;

@@ -10,10 +10,6 @@ import com.example.vitaliy.news.data.model.source.Source;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 29.01.18.
- */
-
 @Dao
 public interface SourcesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

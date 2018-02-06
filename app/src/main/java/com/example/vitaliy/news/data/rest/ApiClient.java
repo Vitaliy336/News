@@ -5,9 +5,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by v_shevchyk on 15.01.18.
- */
 
 public class ApiClient {
     public static final String BASE_URL = "https://newsapi.org";

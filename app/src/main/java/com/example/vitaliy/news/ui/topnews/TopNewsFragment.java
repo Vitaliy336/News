@@ -27,9 +27,6 @@ import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Vitaliy on 1/11/2018.
- */
 
 public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
 

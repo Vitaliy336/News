@@ -7,10 +7,6 @@ import com.example.vitaliy.news.data.model.source.Source;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 29.01.18.
- */
-
 public class NewsDataRepository implements NewsDataSource {
     private LocalNewsDataSource localNewsDataSource;
     private RemoteNewsDataSource remoteNewsDataSource;

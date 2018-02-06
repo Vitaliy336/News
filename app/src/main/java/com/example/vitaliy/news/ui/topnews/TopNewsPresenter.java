@@ -9,9 +9,6 @@ import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 12.01.18.
- */
 
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String category = "";

@@ -4,9 +4,6 @@ package com.example.vitaliy.news.data.model.news;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by v_shevchyk on 16.01.18.
- */
 
 public class NewsSource {
     @SerializedName("id")

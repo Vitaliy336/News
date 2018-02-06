@@ -10,9 +10,6 @@ import com.example.vitaliy.news.data.model.news.Article;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 29.01.18.
- */
 
 @Dao
 public interface NewsDao {

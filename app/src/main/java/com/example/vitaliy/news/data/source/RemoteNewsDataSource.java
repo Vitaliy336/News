@@ -15,9 +15,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by v_shevchyk on 15.01.18.
- */
 
 public class RemoteNewsDataSource implements NewsDataSource {
     private final static String API_KEY = "8ba6904683434f37a16c07a1e0cde166";

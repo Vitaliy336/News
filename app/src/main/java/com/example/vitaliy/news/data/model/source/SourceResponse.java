@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 19.01.18.
- */
 
 public class SourceResponse {
     @SerializedName("status")

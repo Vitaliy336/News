@@ -11,10 +11,6 @@ import com.example.vitaliy.news.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Vitaliy on 1/14/2018.
- */
-
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
     private int selectedPos = RecyclerView.NO_POSITION;

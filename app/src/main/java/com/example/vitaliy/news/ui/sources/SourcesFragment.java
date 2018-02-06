@@ -24,9 +24,6 @@ import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 19.01.18.
- */
 
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView{
     private View rootView;
