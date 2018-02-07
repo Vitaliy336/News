@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.data.source;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public interface NewsDataSource {
@@ -11,7 +12,7 @@ public interface NewsDataSource {
         void onFailure();
     }
 
-    void getHotNews(getListCallback callback, String category, String source);
+    void getHotNews(getListCallback callback, String category, String source) throws ExecutionException, InterruptedException;
 
     void getEverything(getListCallback callback, String query);
 

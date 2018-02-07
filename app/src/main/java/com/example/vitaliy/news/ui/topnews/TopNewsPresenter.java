@@ -17,10 +17,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private NewsDataRepository dataRepository;
     private TopNewsContract.ITopNewsView view;
 
-//    public TopNewsPresenter(RemoteNewsDataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
-
 
     public TopNewsPresenter(NewsDataRepository dataRepository) {
         this.dataRepository = dataRepository;
@@ -40,22 +36,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     public void start() {
         prepareNews();
     }
-
-//    @Override
-//    public void prepareNews() {
-//        dataSource.getHotNews(new NewsDataSource.getListCallback() {
-//            @Override
-//            public void onListReceived(List<?> list) {
-//                view.displayNews((List<Article>) list);
-//                Log.e("presenter", "dispaly news");
-//            }
-//
-//            @Override
-//            public void onFailure() {
-//
-//            }
-//        },category, source);
-//    }
 
     @Override
     public void prepareNews(){

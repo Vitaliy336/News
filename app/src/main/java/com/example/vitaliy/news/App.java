@@ -20,7 +20,6 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         db = Room.databaseBuilder(getApplicationContext(), NewsDb.class, "data-database")
-                .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
     }
