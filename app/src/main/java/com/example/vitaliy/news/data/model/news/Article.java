@@ -40,6 +40,8 @@ public class Article {
     private String publishedAt;
     @ColumnInfo(name = "_category")
     private String category;
+    @ColumnInfo(name = "_sourceId")
+    private String sourceId;
 
     public NewsSource getNewsSource() {
         return newsSource;
@@ -105,6 +107,11 @@ public class Article {
         this.category = category;
     }
 
-//    2018-02-05T13:35:29Z
-    //2010-04-05T17:16:00Z
+    public String getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId;
+    }
 }

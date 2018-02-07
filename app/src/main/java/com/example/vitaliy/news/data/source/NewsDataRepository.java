@@ -1,5 +1,7 @@
 package com.example.vitaliy.news.data.source;
 
+import android.text.TextUtils;
+
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
 
@@ -20,7 +22,7 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveNewsToCache(setCategory((List<Article>) article, category));
+                localNewsDataSource.saveNewsToCache(setCategory((List<Article>) article, category, source));
             }
 
             @Override
@@ -62,9 +64,15 @@ public class NewsDataRepository implements NewsDataSource {
         }, category);
     }
 
-    public List<Article> setCategory(List<Article> articles, String category){
-        for(Article article : articles){
-            article.setCategory(category);
+    public List<Article> setCategory(List<Article> articles, String category, String source){
+        if(!TextUtils.isEmpty(category)) {
+            for (Article article : articles) {
+                article.setCategory(category);
+            }
+        } else {
+            for(Article article : articles){
+                article.setSourceId(source);
+            }
         }
         return articles;
     }

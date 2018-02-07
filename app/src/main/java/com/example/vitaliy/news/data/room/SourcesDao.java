@@ -15,7 +15,7 @@ public interface SourcesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll (List<Source> sources);
 
-    @Query("DELETE FROM sources")
+    @Query("DELETE FROM SOURCES")
     void nukeTable();
 
     @Query("Select * FROM SOURCES WHERE _category LIKE :category")

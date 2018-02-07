@@ -20,8 +20,11 @@ public interface NewsDao {
     @Query("DELETE FROM NEWS")
     public void nukeTable();
 
-    @Query("Select * FROM news WHERE _category LIKE :category")
-    List<Article> getSourtedNews(String category);
+    @Query("Select * FROM NEWS WHERE _category LIKE :category")
+    List<Article> getNewsWithCategory(String category);
+
+    @Query("SELECT * FROM NEWS WHERE _sourceId LIKE :source")
+    List<Article> getNewsWithSource(String source);
 
     @Query("SELECT * FROM NEWS")
     List<Article> getAllArticles();

@@ -63,8 +63,11 @@ public class MyNewsTask {
 
             db = App.getInstance().getDatabaseInstance();
             if (!TextUtils.isEmpty(category)) {
-                return db.getDataDao().getSourtedNews(category);
-            } else {
+                return db.getDataDao().getNewsWithCategory(category);
+            }
+            if (!TextUtils.isEmpty(source)) {
+                return db.getDataDao().getNewsWithSource(source);
+            }else {
                 return db.getDataDao().getAllArticles();
             }
         }
