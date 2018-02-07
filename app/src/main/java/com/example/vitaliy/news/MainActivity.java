@@ -14,10 +14,6 @@ import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -99,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         return sourceId;
     }
 
-    public void showFullInfo(String url){
+    public void showFullInfo(String url) {
         Intent intent = new Intent(this, FullNewsActivity.class);
         intent.putExtra(URL_TAG, url);
         startActivity(intent);

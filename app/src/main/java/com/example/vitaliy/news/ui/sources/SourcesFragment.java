@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView{
+public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView {
     private View rootView;
     private SourcesPresenter presenter;
     private RemoteNewsDataSource remoteNewsDataSource;
@@ -88,7 +88,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         sourcesAdapter.setSourceItemClickListener(new SourcesAdapter.onSourceClickListener() {
             @Override
             public void onClick(Source source) {
-                ((MainActivity)getActivity()).showTopNews(source.getId());
+                ((MainActivity) getActivity()).showTopNews(source.getId());
             }
         });
     }

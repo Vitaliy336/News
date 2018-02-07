@@ -35,9 +35,8 @@
             android:id="@+id/clearbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_close_black_24dp"
             android:layout_toRightOf="@+id/sourceID"
-             />
+            android:background="@drawable/ic_close_black_24dp" />
 
         <EditText
             android:id="@+id/sourceID"

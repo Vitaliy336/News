@@ -1,21 +1,17 @@
 package com.example.vitaliy.news.data.source;
 
-import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
-import com.example.vitaliy.news.data.room.NewsDb;
 
 import java.util.List;
 
 
 public class LocalNewsDataSource implements NewsDataSource {
-    private NewsDb db;
-
 
     @Override
     public void getHotNews(getListCallback callback, String category, String source) {
-        MyNewsTask myTask = new MyNewsTask();
-        myTask.loadNews(callback, category, source);
+        MyNewsTask myNewsTask = new MyNewsTask();
+        myNewsTask.loadNews(callback, category, source);
     }
 
     @Override

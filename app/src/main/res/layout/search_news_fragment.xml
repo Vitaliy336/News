@@ -26,11 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:defaultFocusHighlightEnabled="false"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiujklmnopqrst "
             android:focusedByDefault="false"
             android:hint="@string/search"
             android:imeOptions="actionSearch"
             android:selectAllOnFocus="false"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiujklmnopqrst "
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_name"
-        app:layout_constraintVertical_weight="3"/>
+        app:layout_constraintVertical_weight="3" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/newsA"

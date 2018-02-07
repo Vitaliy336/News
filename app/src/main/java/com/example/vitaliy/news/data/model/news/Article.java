@@ -10,7 +10,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-@Entity (tableName = "news")
+@Entity(tableName = "news")
 
 public class Article {
     @SerializedName("newsSource")
@@ -42,6 +42,8 @@ public class Article {
     private String category;
     @ColumnInfo(name = "_sourceId")
     private String sourceId;
+    @ColumnInfo(name = "_addTime")
+    private String addTime;
 
     public NewsSource getNewsSource() {
         return newsSource;
@@ -113,5 +115,13 @@ public class Article {
 
     public void setSourceId(String sourceId) {
         this.sourceId = sourceId;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
     }
 }

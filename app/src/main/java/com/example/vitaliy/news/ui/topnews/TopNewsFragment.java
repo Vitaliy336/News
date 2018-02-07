@@ -65,7 +65,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private void initPresenter() {
         RemoteNewsDataSource remoteNewsDataSource = new RemoteNewsDataSource();
         LocalNewsDataSource localNewsDataSource = new LocalNewsDataSource();
-        NewsDataRepository dataRepository = new NewsDataRepository(localNewsDataSource ,remoteNewsDataSource);
+        NewsDataRepository dataRepository = new NewsDataRepository(localNewsDataSource, remoteNewsDataSource);
         presenter = new TopNewsPresenter(dataRepository);
         presenter.attachView(this);
     }
@@ -157,11 +157,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     @Override
     public void showFullNews(String url) {
-        ((MainActivity)getActivity()).showFullInfo(url);
+        ((MainActivity) getActivity()).showFullInfo(url);
     }
 
     void getSourceID() {
-        final String sourceId =((MainActivity)getActivity()).getSourceId();
+        final String sourceId = ((MainActivity) getActivity()).getSourceId();
         presenter.setSourceID(sourceId);
     }
 }

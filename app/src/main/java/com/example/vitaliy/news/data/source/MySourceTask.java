@@ -10,17 +10,14 @@ import com.example.vitaliy.news.data.room.NewsDb;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 07.02.18.
- */
-
 public class MySourceTask {
     private NewsDb db;
 
-    public void loadsources(NewsDataSource.getListCallback callback, String category){
+    public void loadsources(NewsDataSource.getListCallback callback, String category) {
         LoadSourceTask loadSourceTask = new LoadSourceTask(callback, category);
         loadSourceTask.execute();
     }
+
     public void addSources(List<Source> sources) {
         AddSourceTask addSourceTask = new AddSourceTask(sources);
         addSourceTask.execute();
@@ -52,7 +49,7 @@ public class MySourceTask {
         }
     }
 
-    class AddSourceTask extends AsyncTask<Void, Void, Void>{
+    class AddSourceTask extends AsyncTask<Void, Void, Void> {
         List<Source> sources = new ArrayList<>();
 
         public AddSourceTask(List<Source> sources) {

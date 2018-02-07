@@ -10,10 +10,6 @@ import com.example.vitaliy.news.data.room.NewsDb;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 07.02.18.
- */
-
 public class MyNewsTask {
     NewsDb db;
 

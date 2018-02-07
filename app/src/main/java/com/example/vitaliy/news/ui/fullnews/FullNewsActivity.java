@@ -50,7 +50,7 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
         webView.loadUrl(url);
     }
 
-    public class WebViewClient extends android.webkit.WebViewClient{
+    public class WebViewClient extends android.webkit.WebViewClient {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {

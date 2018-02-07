@@ -7,13 +7,15 @@ import com.example.vitaliy.news.ui.base.BaseView;
 import java.util.List;
 
 public interface SourcesContract {
-    interface ISourcesView extends BaseView{
+    interface ISourcesView extends BaseView {
         void showSources(List<Source> list);
     }
 
-    interface ISourcesPresenter extends BasePresenter<ISourcesView>{
+    interface ISourcesPresenter extends BasePresenter<ISourcesView> {
         void start();
+
         void prepareSources();
+
         void getSourceCategory(String category);
     }
 }

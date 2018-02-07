@@ -18,7 +18,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     List<String> data = new ArrayList<>();
     View view;
 
-    public interface onCategoryItemClick{
+    public interface onCategoryItemClick {
         void onCatClick(String str);
     }
 
@@ -44,7 +44,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         return data.size();
     }
 
-    public void setCategoryItemClick(onCategoryItemClick categoryItemClick){
+    public void setCategoryItemClick(onCategoryItemClick categoryItemClick) {
         onCategoryItemClick = categoryItemClick;
     }
 
@@ -55,12 +55,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder  {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView categoryName;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            categoryName =  itemView.findViewById(R.id.categoryName);
+            categoryName = itemView.findViewById(R.id.categoryName);
         }
 
         void bind(String str) {

@@ -38,7 +38,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     }
 
     @Override
-    public void prepareNews(){
+    public void prepareNews() {
         dataRepository.getHotNews(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
@@ -49,7 +49,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
             public void onFailure() {
 
             }
-        },category, source);
+        }, category, source);
     }
 
     @Override
@@ -66,11 +66,11 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     public void setSourceID(String source) {
         view.hideSourceFilter();
         this.source = source;
-        if (!TextUtils.isEmpty(this.source)){
+        if (!TextUtils.isEmpty(this.source)) {
             view.hideCategories();
             view.showSourceFilter();
             view.viewSetText(source);
-        }else{
+        } else {
             view.hideSourceFilter();
             view.showCategories();
             prepareNews();

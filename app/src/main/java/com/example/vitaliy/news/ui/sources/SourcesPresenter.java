@@ -1,13 +1,13 @@
 package com.example.vitaliy.news.ui.sources;
 
-import com.example.vitaliy.news.data.source.NewsDataRepository;
 import com.example.vitaliy.news.data.model.source.Source;
+import com.example.vitaliy.news.data.source.NewsDataRepository;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.List;
 
 
-public class SourcesPresenter implements ISourcesPresenter{
+public class SourcesPresenter implements ISourcesPresenter {
 
     private String category = "";
     private NewsDataRepository repository;
@@ -24,7 +24,7 @@ public class SourcesPresenter implements ISourcesPresenter{
 
     @Override
     public void detachView() {
-        view= null;
+        view = null;
     }
 
     @Override

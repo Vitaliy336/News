@@ -27,7 +27,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private List<Article> newsList = new ArrayList<>();
     private View view;
 
-
     public interface onNewsClickListener {
         void OnClick(Article article);
     }

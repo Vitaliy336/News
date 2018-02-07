@@ -7,15 +7,16 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.model.source.Source;
 
 import java.util.List;
+
+import retrofit2.http.DELETE;
 
 
 @Dao
 public interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAll (List<Article> articles);
+    void insertAll(List<Article> articles);
 
     @Query("DELETE FROM NEWS")
     public void nukeTable();
@@ -31,4 +32,7 @@ public interface NewsDao {
 
     @Query("SELECT * FROM NEWS WHERE _title LIKE :title")
     List<Article> searchNews(String title);
+
+    @Delete
+    void deleteArticle(Article article);
 }

@@ -5,6 +5,9 @@ import android.text.TextUtils;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NewsDataRepository implements NewsDataSource {
@@ -22,7 +25,7 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveNewsToCache(setCategory((List<Article>) article, category, source));
+                localNewsDataSource.saveNewsToCache(setFilters((List<Article>) article, category, source));
             }
 
             @Override
@@ -64,15 +67,24 @@ public class NewsDataRepository implements NewsDataSource {
         }, category);
     }
 
-    public List<Article> setCategory(List<Article> articles, String category, String source){
-        if(!TextUtils.isEmpty(category)) {
+    public List<Article> setFilters(List<Article> articles, String category, String source) {
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        if (!TextUtils.isEmpty(category)) {
             for (Article article : articles) {
                 article.setCategory(category);
+                article.setAddTime(dateFormat.format(date));
+            }
+        }
+        if(!TextUtils.isEmpty(source)) {
+            for (Article article : articles) {
+                article.setSourceId(source);
+                article.setAddTime(dateFormat.format(date));
             }
         } else {
-            for(Article article : articles){
-                article.setSourceId(source);
-            }
+          for (Article article : articles){
+              article.setAddTime(dateFormat.format(date));
+          }
         }
         return articles;
     }

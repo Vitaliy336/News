@@ -4,9 +4,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.vitaliy.news.data.model.news.NewsResponse;
+import com.example.vitaliy.news.data.model.source.SourceResponse;
 import com.example.vitaliy.news.data.rest.ApiClient;
 import com.example.vitaliy.news.data.rest.ApiInterface;
-import com.example.vitaliy.news.data.model.source.SourceResponse;
 
 import java.util.HashMap;
 import java.util.Map;

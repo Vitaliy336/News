@@ -20,7 +20,6 @@
                 android:text="sss1"
                 android:textSize="30sp" />
 
-
             <TextView
                 android:id="@+id/sourceDescription"
                 android:layout_width="wrap_content"

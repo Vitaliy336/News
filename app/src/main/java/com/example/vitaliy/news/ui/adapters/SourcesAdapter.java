@@ -22,11 +22,11 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.SourcesV
     private Context mContext;
     View view;
 
-    public interface onSourceClickListener{
+    public interface onSourceClickListener {
         void onClick(Source source);
     }
 
-    public void setSourceItemClickListener(onSourceClickListener sourceItemClickListener){
+    public void setSourceItemClickListener(onSourceClickListener sourceItemClickListener) {
         this.sourceClickListener = sourceItemClickListener;
     }
 
@@ -47,17 +47,17 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.SourcesV
         return sources.size();
     }
 
-    public void setInfo(List<Source> sourceList, FragmentActivity activity){
+    public void setInfo(List<Source> sourceList, FragmentActivity activity) {
         sources.clear();
         sources.addAll(sourceList);
         mContext = activity;
         notifyDataSetChanged();
 
-        Log.e("SourcesAdapter", "sources size = "+sources.size());
+        Log.e("SourcesAdapter", "sources size = " + sources.size());
     }
 
 
-    public class SourcesVH extends RecyclerView.ViewHolder{
+    public class SourcesVH extends RecyclerView.ViewHolder {
         private TextView sourceName, sourceDescription;
 
 
@@ -68,14 +68,14 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.SourcesV
             sourceDescription = itemView.findViewById(R.id.sourceDescription);
         }
 
-        void bind(Source source){
+        void bind(Source source) {
             sourceName.setText(source.getName());
             sourceName.setTypeface(null, Typeface.BOLD);
             sourceDescription.setText(source.getDescription());
             sourceDescription.setTypeface(null, Typeface.ITALIC);
         }
 
-        public void sourceClick(final Source source, final onSourceClickListener sourceClick){
+        public void sourceClick(final Source source, final onSourceClickListener sourceClick) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
