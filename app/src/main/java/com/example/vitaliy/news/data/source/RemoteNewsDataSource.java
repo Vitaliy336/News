@@ -69,7 +69,7 @@ public class RemoteNewsDataSource implements NewsDataSource {
 
                 @Override
                 public void onFailure(Call<NewsResponse> call, Throwable t) {
-
+                    callback.onFailure();
                 }
             });
         }

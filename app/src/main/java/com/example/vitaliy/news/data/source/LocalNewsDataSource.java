@@ -27,6 +27,8 @@ public class LocalNewsDataSource implements NewsDataSource {
 
     @Override
     public void getEverything(getListCallback callback, String query) {
+        db = App.getInstance().getDatabaseInstance();
+        callback.onListReceived(db.getDataDao().searchNews('%'+query+'%'));
     }
 
     @Override

@@ -1,11 +1,10 @@
 package com.example.vitaliy.news.ui.searchNews;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.data.source.NewsDataRepository;
 import com.example.vitaliy.news.data.source.NewsDataSource;
-import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.util.List;
 
@@ -13,10 +12,10 @@ import java.util.List;
 public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter {
     private String query = null;
     private SearchNewsContract.IAllNewsView view;
-    private RemoteNewsDataSource newsDataSource;
+    private NewsDataRepository repository;
 
-    public SearchNewsPresenter(RemoteNewsDataSource newsDataSource) {
-        this.newsDataSource = newsDataSource;
+    public SearchNewsPresenter(NewsDataRepository repository) {
+        this.repository = repository;
     }
 
     @Override
@@ -42,19 +41,18 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
 
     @Override
     public void prepareNews() {
-        newsDataSource.getEverything(new NewsDataSource.getListCallback() {
+        repository.getEverything(new NewsDataSource.getListCallback() {
             @Override
-            public void onListReceived(List<?> list) {
-                view.displayNews((List<Article>) list);
+            public void onListReceived(List<?> article) {
+                view.displayNews((List<Article>) article);
             }
 
             @Override
             public void onFailure() {
-                Log.e("Failure", "fail");
+                onFailure();
             }
         }, query);
     }
-
 
     @Override
     public void goTofullNews(String url) {

@@ -22,6 +22,7 @@ public class Article {
     private String author;
     @SerializedName("title")
     @Expose
+    @ColumnInfo(name = "_title")
     private String title;
     @SerializedName("description")
     @Expose

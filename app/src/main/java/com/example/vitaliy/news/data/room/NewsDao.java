@@ -25,4 +25,7 @@ public interface NewsDao {
 
     @Query("SELECT * FROM NEWS")
     List<Article> getAllArticles();
+
+    @Query("SELECT * FROM NEWS WHERE _title LIKE :title")
+    List<Article> searchNews(String title);
 }

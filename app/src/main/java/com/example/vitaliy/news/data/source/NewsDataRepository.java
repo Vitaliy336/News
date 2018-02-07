@@ -1,7 +1,5 @@
 package com.example.vitaliy.news.data.source;
 
-import android.util.Log;
-
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
 
@@ -22,22 +20,30 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveNewsToCache(setCategory((List<Article>) article, category));//here
+                localNewsDataSource.saveNewsToCache(setCategory((List<Article>) article, category));
             }
 
             @Override
             public void onFailure() {
-                Log.e("NewsDR", "onFailure");
                 localNewsDataSource.getHotNews(callback, category, source);
             }
         }, category, source);
     }
 
-
-
     @Override
-    public void getEverything(getListCallback callback, String query) {
+    public void getEverything(final getListCallback callback, final String query) {
+        remoteNewsDataSource.getEverything(new getListCallback() {
+            @Override
+            public void onListReceived(List<?> article) {
+                callback.onListReceived(article);
+                localNewsDataSource.saveNewsToCache((List<Article>) article);
+            }
 
+            @Override
+            public void onFailure() {
+                localNewsDataSource.getEverything(callback, query);
+            }
+        }, query);
     }
 
     @Override
@@ -51,7 +57,6 @@ public class NewsDataRepository implements NewsDataSource {
 
             @Override
             public void onFailure() {
-                Log.e("LocalNDSSources", "OnFailure");
                 localNewsDataSource.getSources(callback, category);
             }
         }, category);
