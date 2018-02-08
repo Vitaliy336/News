@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MyNewsTask {
-    NewsDb db;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    private NewsDb db;
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     public void loadNews(NewsDataSource.getListCallback callback, String category, String source) {
         LoadNewsTask loadNewsTask = new LoadNewsTask(callback, category, source);
@@ -108,12 +108,12 @@ public class MyNewsTask {
         }
 
         public List<Article> sort(List<Article> articles){
-            final SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            final SimpleDateFormat sortedDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Collections.sort(articles, new Comparator<Article>() {
                 @Override
                 public int compare(Article article, Article t1) {
                     try {
-                        return dateFormat1.parse(article.getPublishedAt()).compareTo(dateFormat1.parse(t1.getPublishedAt()));
+                        return sortedDateFormat.parse(article.getPublishedAt()).compareTo(sortedDateFormat.parse(t1.getPublishedAt()));
                     } catch (ParseException e) {
                         throw new IllegalArgumentException(e);
                     }
