@@ -11,12 +11,15 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MyNewsTask {
     NewsDb db;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     public void loadNews(NewsDataSource.getListCallback callback, String category, String source) {
         LoadNewsTask loadNewsTask = new LoadNewsTask(callback, category, source);
@@ -59,7 +62,6 @@ public class MyNewsTask {
         protected Void doInBackground(Void... voids) {
             Date currentdate = new Date();
             Date postDate;
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             db = App.getInstance().getDatabaseInstance();
             for (Article article : db.getDataDao().getAllArticles()) {
                 try {
@@ -90,12 +92,12 @@ public class MyNewsTask {
         protected List<Article> doInBackground(Void... voids) {
             db = App.getInstance().getDatabaseInstance();
             if (!TextUtils.isEmpty(category)) {
-                return db.getDataDao().getNewsWithCategory(category);
+                return sort(db.getDataDao().getNewsWithCategory(category));
             }
             if (!TextUtils.isEmpty(source)) {
-                return db.getDataDao().getNewsWithSource(source);
+                return sort(db.getDataDao().getNewsWithSource(source));
             }else {
-                return db.getDataDao().getAllArticles();
+                return sort(db.getDataDao().getAllArticles());
             }
         }
 
@@ -103,6 +105,21 @@ public class MyNewsTask {
         protected void onPostExecute(List<Article> articles) {
             super.onPostExecute(articles);
             callback.onListReceived(articles);
+        }
+
+        public List<Article> sort(List<Article> articles){
+            final SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            Collections.sort(articles, new Comparator<Article>() {
+                @Override
+                public int compare(Article article, Article t1) {
+                    try {
+                        return dateFormat1.parse(article.getPublishedAt()).compareTo(dateFormat1.parse(t1.getPublishedAt()));
+                    } catch (ParseException e) {
+                        throw new IllegalArgumentException(e);
+                    }
+                }
+            });
+            return articles;
         }
     }
 

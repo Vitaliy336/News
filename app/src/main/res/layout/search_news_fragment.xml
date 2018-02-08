@@ -16,6 +16,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:focusedByDefault="false"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         app:layout_constraintBottom_toTopOf="@+id/newsA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
