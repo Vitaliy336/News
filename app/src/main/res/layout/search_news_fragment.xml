@@ -29,6 +29,7 @@
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiujklmnopqrst "
             android:focusedByDefault="false"
             android:hint="@string/search"
+            android:textColor="@color/colorPrimaryDark"
             android:imeOptions="actionSearch"
             android:selectAllOnFocus="false"
             android:singleLine="true" />

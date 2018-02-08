@@ -2,7 +2,6 @@ package com.example.vitaliy.news.data.source;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
