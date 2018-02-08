@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
