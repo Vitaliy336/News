@@ -11,6 +11,7 @@ public class LocalNewsDataSource implements NewsDataSource {
     @Override
     public void getHotNews(getListCallback callback, String category, String source) {
         MyNewsTask myNewsTask = new MyNewsTask();
+        myNewsTask.deleteOld();
         myNewsTask.loadNews(callback, category, source);
     }
 

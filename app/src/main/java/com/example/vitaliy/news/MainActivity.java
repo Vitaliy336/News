@@ -28,16 +28,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        String s = "2018-02-03T13:35:29Z";
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-//        try {
-//            Date date = dateFormat.parse(s);
-//            Date date1 = new Date();
-//            long difference = (date1.getTime() - date.getTime())/(1000 * 60 * 60 * 24);
-//            Log.e("DATE", date.toString()+" ||||| " + date1.toString() + " ||||| " + difference);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
         initView();
     }
 
