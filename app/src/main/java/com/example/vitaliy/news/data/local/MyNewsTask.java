@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.source;
+package com.example.vitaliy.news.data.local;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.room.NewsDb;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MyNewsTask {
+    private final int daysCount = 3;
     private NewsDb db;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -66,7 +68,7 @@ public class MyNewsTask {
             for (Article article : db.getDataDao().getAllArticles()) {
                 try {
                     postDate = dateFormat.parse(article.getAddTime());
-                    if (TimeUnit.MICROSECONDS.toDays(Math.abs(currentdate.getTime() - postDate.getTime())) > 3) {
+                    if (TimeUnit.MICROSECONDS.toDays(Math.abs(currentdate.getTime() - postDate.getTime())) > daysCount) {
                         db.getDataDao().deleteArticle(article);
                     }
                 } catch (ParseException e) {
@@ -113,7 +115,7 @@ public class MyNewsTask {
                 @Override
                 public int compare(Article article, Article t1) {
                     try {
-                        return sortedDateFormat.parse(article.getPublishedAt()).compareTo(sortedDateFormat.parse(t1.getPublishedAt()));
+                        return sortedDateFormat.parse(t1.getPublishedAt()).compareTo(sortedDateFormat.parse(article.getPublishedAt()));
                     } catch (ParseException e) {
                         throw new IllegalArgumentException(e);
                     }

@@ -1,7 +1,8 @@
-package com.example.vitaliy.news.data.source;
+package com.example.vitaliy.news.data.local;
 
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.List;
 
@@ -11,7 +12,6 @@ public class LocalNewsDataSource implements NewsDataSource {
     @Override
     public void getHotNews(getListCallback callback, String category, String source) {
         MyNewsTask myNewsTask = new MyNewsTask();
-        myNewsTask.deleteOld();
         myNewsTask.loadNews(callback, category, source);
     }
 
@@ -36,5 +36,10 @@ public class LocalNewsDataSource implements NewsDataSource {
     public void saveSourcesToCache(List<Source> sources) {
       MySourceTask mySourceTask = new MySourceTask();
       mySourceTask.addSources(sources);
+    }
+
+    public void deleteOldNews(){
+        MyNewsTask myNewsTask = new MyNewsTask();
+        myNewsTask.deleteOld();
     }
 }

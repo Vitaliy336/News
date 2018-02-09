@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.source.NewsDataRepository;
-import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.util.List;
 
@@ -13,10 +12,8 @@ import java.util.List;
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String category = "";
     private String source = "";
-    private RemoteNewsDataSource dataSource;
     private NewsDataRepository dataRepository;
     private TopNewsContract.ITopNewsView view;
-
 
     public TopNewsPresenter(NewsDataRepository dataRepository) {
         this.dataRepository = dataRepository;

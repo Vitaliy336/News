@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.source.Source;
-import com.example.vitaliy.news.data.source.LocalNewsDataSource;
+import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.data.source.NewsDataRepository;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
@@ -28,8 +28,6 @@ import java.util.List;
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView {
     private View rootView;
     private SourcesPresenter presenter;
-    private RemoteNewsDataSource remoteNewsDataSource;
-    private LocalNewsDataSource localNewsDataSource;
     private RecyclerView sourcesRV, categoriesS;
     private SourcesAdapter sourcesAdapter;
     private CategoriesAdapter sCategoriesAdapter;
@@ -67,9 +65,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     }
 
     private void initPresenter() {
-        remoteNewsDataSource = new RemoteNewsDataSource();
-        localNewsDataSource = new LocalNewsDataSource();
-        NewsDataRepository repository = new NewsDataRepository(localNewsDataSource, remoteNewsDataSource);
+        NewsDataRepository repository = new NewsDataRepository();
         presenter = new SourcesPresenter(repository);
         presenter.attachView(this);
 

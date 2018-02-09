@@ -22,9 +22,7 @@ import android.widget.TextView;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.source.LocalNewsDataSource;
 import com.example.vitaliy.news.data.source.NewsDataRepository;
-import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
 import java.util.List;
@@ -59,9 +57,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     }
 
     private void initPresenter() {
-        RemoteNewsDataSource remoteNewsDataSource = new RemoteNewsDataSource();
-        LocalNewsDataSource localNewsDataSource = new LocalNewsDataSource();
-        NewsDataRepository repository = new NewsDataRepository(localNewsDataSource, remoteNewsDataSource);
+        NewsDataRepository repository = new NewsDataRepository();
         presenter = new SearchNewsPresenter(repository);
         presenter.attachView(this);
     }

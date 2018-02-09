@@ -15,12 +15,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.source.LocalNewsDataSource;
+import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.data.source.NewsDataRepository;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
@@ -53,6 +52,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         updateData();
     }
 
+
     private void updateData() {
         presenter.start();
     }
@@ -65,9 +65,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initPresenter() {
-        RemoteNewsDataSource remoteNewsDataSource = new RemoteNewsDataSource();
-        LocalNewsDataSource localNewsDataSource = new LocalNewsDataSource();
-        NewsDataRepository dataRepository = new NewsDataRepository(localNewsDataSource, remoteNewsDataSource);
+        NewsDataRepository dataRepository = new NewsDataRepository();
         presenter = new TopNewsPresenter(dataRepository);
         presenter.attachView(this);
     }
@@ -127,10 +125,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
         newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int pastVisiblesItems, visibleItemCount, totalItemCount;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(dy > 0){
+                if (dy > 0) {
                     visibleItemCount = layoutManagerForNews.getChildCount();
                     totalItemCount = layoutManagerForNews.getItemCount();
                     pastVisiblesItems = layoutManagerForNews.findFirstVisibleItemPosition();

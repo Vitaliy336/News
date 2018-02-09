@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.source;
+package com.example.vitaliy.news.data.local;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.data.room.NewsDb;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.ArrayList;
 import java.util.List;

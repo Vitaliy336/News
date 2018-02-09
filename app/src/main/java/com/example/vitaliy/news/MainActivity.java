@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private Toolbar toolbar;
+    private LocalNewsDataSource localNewsDataSource;
     private String sourceId = "";
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -29,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        localNewsDataSource = new LocalNewsDataSource();
+        localNewsDataSource.deleteOldNews();
     }
 
     private void initView() {

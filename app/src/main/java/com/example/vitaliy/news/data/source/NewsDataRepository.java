@@ -2,6 +2,7 @@ package com.example.vitaliy.news.data.source;
 
 import android.text.TextUtils;
 
+import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
 
@@ -17,6 +18,11 @@ public class NewsDataRepository implements NewsDataSource {
     public NewsDataRepository(LocalNewsDataSource localNewsDataSource, RemoteNewsDataSource remoteNewsDataSource) {
         this.localNewsDataSource = localNewsDataSource;
         this.remoteNewsDataSource = remoteNewsDataSource;
+    }
+
+    public NewsDataRepository(){
+        this.localNewsDataSource = new LocalNewsDataSource();
+        this.remoteNewsDataSource = new RemoteNewsDataSource();
     }
 
     @Override
