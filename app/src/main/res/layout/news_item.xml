@@ -17,10 +17,11 @@
             <ImageView
                 android:id="@+id/newsImgView"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_margin="@dimen/post_item_margin" />
+                android:layout_margin="@dimen/post_item_margin"
+                android:adjustViewBounds="true" />
 
             <TextView
                 android:id="@+id/newsTitleTV"

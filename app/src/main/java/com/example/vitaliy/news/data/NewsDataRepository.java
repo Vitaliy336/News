@@ -1,10 +1,12 @@
-package com.example.vitaliy.news.data.source;
+package com.example.vitaliy.news.data;
 
 import android.text.TextUtils;
 
 import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
+import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

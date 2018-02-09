@@ -4,7 +4,7 @@ package com.example.vitaliy.news.ui.topnews;
 import android.text.TextUtils;
 
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.source.NewsDataRepository;
+import com.example.vitaliy.news.data.NewsDataRepository;
 
 import java.util.List;
 

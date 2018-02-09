@@ -3,7 +3,7 @@ package com.example.vitaliy.news.ui.searchNews;
 import android.text.TextUtils;
 
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.source.NewsDataRepository;
+import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.vitaliy.news.ui.sources;
 
 import com.example.vitaliy.news.data.model.source.Source;
-import com.example.vitaliy.news.data.source.NewsDataRepository;
+import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.List;
