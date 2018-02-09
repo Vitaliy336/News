@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
@@ -33,12 +35,12 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private TopNewsContract.ITopNewsPresenter presenter;
     private RelativeLayout relativeLayout;
     private View rootView;
-    private RecyclerView categoriesRV, newsRV;
+    private RecyclerView categories, newsRecyclerView;
     private CategoriesAdapter categoriesAdapter;
     private LinearLayoutManager layoutManagerForCategories;
-    LinearLayoutManager layoutManagerForNews;
+    private LinearLayoutManager layoutManagerForNews;
     private NewsAdapter newsAdapter;
-    private TextView sourceEt;
+    private EditText sourceEt;
     private ImageView clear;
 
     @Override
@@ -87,18 +89,19 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         layoutManagerForNews = new LinearLayoutManager(getActivity());
         layoutManagerForNews.setOrientation(LinearLayoutManager.VERTICAL);
 
-        newsRV = rootView.findViewById(R.id.newsT);
-        newsRV.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        newsRV.setLayoutManager(layoutManagerForNews);
-        newsRV.setAdapter(newsAdapter);
+        newsRecyclerView = rootView.findViewById(R.id.newsT);
+        newsRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        newsRecyclerView.setLayoutManager(layoutManagerForNews);
+        newsRecyclerView.setAdapter(newsAdapter);
 
-        categoriesRV = rootView.findViewById(R.id.categoriesT);
-        categoriesRV.setLayoutManager(layoutManagerForCategories);
-        categoriesRV.setAdapter(categoriesAdapter);
+        categories = rootView.findViewById(R.id.categoriesT);
+        categories.setLayoutManager(layoutManagerForCategories);
+        categories.setAdapter(categoriesAdapter);
     }
 
 
     private void initListener() {
+
         newsAdapter.setOnItemClickListener(new NewsAdapter.onNewsClickListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -121,6 +124,22 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
                 presenter.setSourceID(null);
             }
         });
+
+        newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int pastVisiblesItems, visibleItemCount, totalItemCount;
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy > 0){
+                    visibleItemCount = layoutManagerForNews.getChildCount();
+                    totalItemCount = layoutManagerForNews.getItemCount();
+                    pastVisiblesItems = layoutManagerForNews.findFirstVisibleItemPosition();
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        Log.e("...", "Call Load More !");
+                    }
+                }
+            }
+        });
     }
 
 
@@ -132,12 +151,12 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     @Override
     public void hideCategories() {
-        categoriesRV.setVisibility(View.INVISIBLE);
+        categories.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showCategories() {
-        categoriesRV.setVisibility(View.VISIBLE);
+        categories.setVisibility(View.VISIBLE);
     }
 
     @Override
