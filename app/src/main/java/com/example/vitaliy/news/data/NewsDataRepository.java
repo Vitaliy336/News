@@ -17,10 +17,6 @@ public class NewsDataRepository implements NewsDataSource {
     private LocalNewsDataSource localNewsDataSource;
     private RemoteNewsDataSource remoteNewsDataSource;
 
-    public NewsDataRepository(LocalNewsDataSource localNewsDataSource, RemoteNewsDataSource remoteNewsDataSource) {
-        this.localNewsDataSource = localNewsDataSource;
-        this.remoteNewsDataSource = remoteNewsDataSource;
-    }
 
     public NewsDataRepository(){
         this.localNewsDataSource = new LocalNewsDataSource();
@@ -28,7 +24,7 @@ public class NewsDataRepository implements NewsDataSource {
     }
 
     @Override
-    public void getHotNews(final getListCallback callback, final String category, final String source) {
+    public void getHotNews(final getListCallback callback, final String category, final String source, final int page) {
         remoteNewsDataSource.getHotNews(new getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
@@ -38,9 +34,9 @@ public class NewsDataRepository implements NewsDataSource {
 
             @Override
             public void onFailure() {
-                localNewsDataSource.getHotNews(callback, category, source);
+                localNewsDataSource.getHotNews(callback, category, source, page);
             }
-        }, category, source);
+        }, category, source, page);
     }
 
     @Override

@@ -23,6 +23,8 @@ public interface TopNewsContract {
 
         void viewSetText(String text);
 
+        void pagination(List<Article> articles);
+
     }
 
     interface ITopNewsPresenter extends BasePresenter<ITopNewsView> {
@@ -35,6 +37,8 @@ public interface TopNewsContract {
         void setCategoryName(String category);
 
         void setSourceID(String source);
+
+        void setPageNumber(int page);
 
     }
 }

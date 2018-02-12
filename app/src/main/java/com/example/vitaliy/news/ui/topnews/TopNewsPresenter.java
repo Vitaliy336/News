@@ -13,12 +13,9 @@ import java.util.List;
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String category = "";
     private String source = "";
+    private int page = 1;
     private NewsDataRepository dataRepository;
     private TopNewsContract.ITopNewsView view;
-
-    public TopNewsPresenter(NewsDataRepository dataRepository) {
-        this.dataRepository = dataRepository;
-    }
 
     public TopNewsPresenter() {
     }
@@ -44,14 +41,14 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         dataRepository.getHotNews(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
-                view.displayNews((List<Article>) article);
+                    view.displayNews((List<Article>) article);
             }
 
             @Override
             public void onFailure() {
 
             }
-        }, category, source);
+        }, category, source, page);
     }
 
     @Override
@@ -77,5 +74,10 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
             view.showCategories();
             prepareNews();
         }
+    }
+
+    @Override
+    public void setPageNumber(int page) {
+        this.page = page;
     }
 }

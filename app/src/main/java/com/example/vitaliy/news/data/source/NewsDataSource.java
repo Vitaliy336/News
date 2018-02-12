@@ -12,7 +12,7 @@ public interface NewsDataSource {
         void onFailure();
     }
 
-    void getHotNews(getListCallback callback, String category, String source) throws ExecutionException, InterruptedException;
+    void getHotNews(getListCallback callback, String category, String source, int page) throws ExecutionException, InterruptedException;
 
     void getEverything(getListCallback callback, String query);
 

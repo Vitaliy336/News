@@ -82,6 +82,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         Log.e("newsAdapter", "news size = " + news.size());
     }
 
+    public void addArticles(List<Article> articles) {
+        newsList.addAll(articles);
+        notifyDataSetChanged();
+    }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;

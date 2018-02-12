@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
@@ -39,6 +38,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private NewsAdapter newsAdapter;
     private EditText sourceEt;
     private ImageView clear;
+    private int page = 1;
 
     @Override
     public void onResume() {
@@ -109,6 +109,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             @Override
             public void onCatClick(String str) {
                 presenter.setCategoryName(str);
+                presenter.setPageNumber(0);
                 presenter.prepareNews();
             }
         });
@@ -132,6 +133,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
                     pastVisiblesItems = layoutManagerForNews.findFirstVisibleItemPosition();
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         Log.e("...", "Call Load More !");
+                        page++;
+//                        presenter.setPageNumber(page);
+//                        presenter.prepareNews();
                     }
                 }
             }
@@ -168,6 +172,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     @Override
     public void viewSetText(String text) {
         sourceEt.setText(text);
+    }
+
+    @Override
+    public void pagination(List<Article> articles) {
+        newsAdapter.addArticles(articles);
     }
 
     @Override
