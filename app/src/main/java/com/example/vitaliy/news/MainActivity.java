@@ -15,6 +15,13 @@ import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -31,14 +38,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        checkForDelete();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void checkForDelete() {
+        Log.e("Check for delete", " IN");
         localNewsDataSource = new LocalNewsDataSource();
         localNewsDataSource.deleteOldNews();
     }
+
 
     private void initView() {
         toolbar = findViewById(R.id.toolbar);

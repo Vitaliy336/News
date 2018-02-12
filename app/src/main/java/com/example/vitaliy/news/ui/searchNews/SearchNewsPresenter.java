@@ -2,6 +2,7 @@ package com.example.vitaliy.news.ui.searchNews;
 
 import android.text.TextUtils;
 
+import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.data.source.NewsDataSource;
@@ -14,8 +15,8 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
     private SearchNewsContract.IAllNewsView view;
     private NewsDataRepository repository;
 
-    public SearchNewsPresenter(NewsDataRepository repository) {
-        this.repository = repository;
+    public SearchNewsPresenter() {
+
     }
 
     @Override
@@ -40,6 +41,7 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
 
     @Override
     public void prepareNews() {
+        repository = App.getInstance().getDataRepositoryInstance();
         repository.getEverything(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {

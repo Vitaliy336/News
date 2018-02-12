@@ -63,8 +63,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     }
 
     private void initPresenter() {
-        NewsDataRepository repository = new NewsDataRepository();
-        presenter = new SourcesPresenter(repository);
+        presenter = new SourcesPresenter();
         presenter.attachView(this);
 
     }

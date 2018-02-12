@@ -3,6 +3,7 @@ package com.example.vitaliy.news.ui.topnews;
 
 import android.text.TextUtils;
 
+import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
 
@@ -17,6 +18,9 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     public TopNewsPresenter(NewsDataRepository dataRepository) {
         this.dataRepository = dataRepository;
+    }
+
+    public TopNewsPresenter() {
     }
 
     @Override
@@ -36,6 +40,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void prepareNews() {
+        dataRepository = App.getInstance().getDataRepositoryInstance();
         dataRepository.getHotNews(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {

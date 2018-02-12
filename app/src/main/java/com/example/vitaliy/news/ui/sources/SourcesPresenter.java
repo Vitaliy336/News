@@ -1,5 +1,6 @@
 package com.example.vitaliy.news.ui.sources;
 
+import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
@@ -13,8 +14,8 @@ public class SourcesPresenter implements ISourcesPresenter {
     private NewsDataRepository repository;
     private SourcesContract.ISourcesView view;
 
-    public SourcesPresenter(NewsDataRepository repository) {
-        this.repository = repository;
+    public SourcesPresenter() {
+
     }
 
     @Override
@@ -34,6 +35,7 @@ public class SourcesPresenter implements ISourcesPresenter {
 
     @Override
     public void prepareSources() {
+        repository = App.getInstance().getDataRepositoryInstance();
         repository.getSources(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {

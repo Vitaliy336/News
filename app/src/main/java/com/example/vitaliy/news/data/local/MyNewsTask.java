@@ -2,6 +2,7 @@ package com.example.vitaliy.news.data.local;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
@@ -64,14 +65,19 @@ public class MyNewsTask {
         protected Void doInBackground(Void... voids) {
             Date currentdate = new Date();
             Date postDate;
+            long dif;
             db = App.getInstance().getDatabaseInstance();
             for (Article article : db.getDataDao().getAllArticles()) {
                 try {
+                    if(TextUtils.isEmpty(article.getAddTime())){
+                        article.setAddTime(currentdate.toString());//Need to fix this
+                    }
                     postDate = dateFormat.parse(article.getAddTime());
-                    if (TimeUnit.MICROSECONDS.toDays(Math.abs(currentdate.getTime() - postDate.getTime())) > daysCount) {
+                    dif = currentdate.getTime() - postDate.getTime();
+                    if(TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS)>= daysCount){
                         db.getDataDao().deleteArticle(article);
                     }
-                } catch (ParseException e) {
+                    } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }

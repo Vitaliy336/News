@@ -63,8 +63,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     private void initPresenter() {
-        NewsDataRepository dataRepository = new NewsDataRepository();
-        presenter = new TopNewsPresenter(dataRepository);
+        presenter = new TopNewsPresenter();
         presenter.attachView(this);
     }
 

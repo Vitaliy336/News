@@ -3,5 +3,6 @@
     <string name="search">Search here</string>
     <string name="search_something">Search something</string>
     <string name="space">" "</string>
+    <string name="nothing">"No mathces"</string>
 
 </resources>

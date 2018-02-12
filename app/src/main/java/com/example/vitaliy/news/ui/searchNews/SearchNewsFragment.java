@@ -25,6 +25,7 @@ import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SearchNewsFragment extends Fragment implements SearchNewsContract.IAllNewsView {
@@ -57,8 +58,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     }
 
     private void initPresenter() {
-        NewsDataRepository repository = new NewsDataRepository();
-        presenter = new SearchNewsPresenter(repository);
+        presenter = new SearchNewsPresenter();
         presenter.attachView(this);
     }
 
@@ -76,6 +76,10 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
                     if (i == EditorInfo.IME_ACTION_SEARCH) {
                         presenter.getSearchQuery(searchNews.getText().toString());
                         presenter.prepareNews();
+                        if(newsAdapter.getItemCount() == 0);{
+                            info.setText(R.string.nothing);
+                        }
+                        Log.e("after query submit", String.valueOf(newsAdapter.getItemCount()));
                         searchNews.clearFocus();
                         closeKeyboard(getActivity(), searchNews.getWindowToken());
                         return true;
