@@ -1,9 +1,14 @@
 package com.example.vitaliy.news;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -102,8 +107,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showFullInfo(String url) {
-        Intent intent = new Intent(this, FullNewsActivity.class);
-        intent.putExtra(URL_TAG, url);
-        startActivity(intent);
+        ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(manager.getActiveNetworkInfo() != null) {
+            Intent intent = new Intent(this, FullNewsActivity.class);
+            intent.putExtra(URL_TAG, url);
+            startActivity(intent);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+            builder.setMessage(R.string.alert_message)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 }

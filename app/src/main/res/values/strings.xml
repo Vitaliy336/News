@@ -3,6 +3,8 @@
     <string name="search">Search here</string>
     <string name="search_something">Search something</string>
     <string name="space">" "</string>
+    <string name="ok">"OK"</string>
     <string name="nothing">"No mathces"</string>
+    <string name="alert_message">"Ups... internet connection lost"</string>
 
 </resources>

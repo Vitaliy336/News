@@ -70,7 +70,7 @@ public class MyNewsTask {
             for (Article article : db.getDataDao().getAllArticles()) {
                 try {
                     if(TextUtils.isEmpty(article.getAddTime())){
-                        article.setAddTime(currentdate.toString());//Need to fix this
+                        db.getDataDao().deleteArticle(article);
                     }
                     postDate = dateFormat.parse(article.getAddTime());
                     dif = currentdate.getTime() - postDate.getTime();
