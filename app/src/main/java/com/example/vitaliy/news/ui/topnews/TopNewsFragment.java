@@ -37,6 +37,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private NewsAdapter newsAdapter;
     private EndlessRecyclerView endlessRecycler;
     private EditText sourceEt;
+    private final int startingPage = 1;
     private ImageView clear;
 
     @Override
@@ -109,7 +110,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             public void onCatClick(String str) {
                 newsAdapter.clear();
                 presenter.setCategoryName(str);
-                presenter.setPageNumber(1);
+                presenter.setPageNumber(startingPage);
                 presenter.prepareNews();
             }
         });
@@ -117,8 +118,13 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         endlessRecycler = new EndlessRecyclerView(layoutManagerForNews) {
             @Override
             public void onLoadMore(int page, int totalitemCount, RecyclerView view) {
-                presenter.setPageNumber(page);
-                presenter.prepareNews();
+                if(((MainActivity) getActivity()).checkNetwork()) {
+                    presenter.setPageNumber(page);
+                    presenter.prepareNews();
+                } else {
+                    presenter.setPageNumber(startingPage);
+                    presenter.prepareNews();
+                }
             }
         };
 
@@ -130,8 +136,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         });
 
         newsRecyclerView.addOnScrollListener(endlessRecycler);
-
-
     }
 
 

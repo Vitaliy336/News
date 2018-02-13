@@ -1,13 +1,16 @@
 package com.example.vitaliy.news.data.local;
 
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.room.NewsDb;
 import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -64,23 +67,21 @@ public class MyNewsTask {
 
         @Override
         protected Void doInBackground(Void... voids) {
-//            Date postDate;
-//            long dif;
-//            db = App.getInstance().getDatabaseInstance();
-//            for (Article article : db.getDataDao().getAllArticles()) {
-//                try {
-//                    postDate = dateFormat.parse(article.getAddTime());
-//                    if(postDate == null){
-//                        db.getDataDao().deleteArticle(article);
-//                    }
-//                    dif = dateFormat.parse(currentDate.toString()).getTime() - postDate.getTime();
-//                    if(TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS)>= daysCount){
-//                        db.getDataDao().deleteArticle(article);
-//                    }
-//                    } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            Date postDate;
+            long dif;
+            db = App.getInstance().getDatabaseInstance();
+            //db.getDataDao().nukeTable();
+            for (Article article : db.getDataDao().getAllArticles()) {
+                try {
+                    postDate = dateFormat.parse(article.getAddTime());
+                    dif = dateFormat.parse(currentDate.toString()).getTime() - postDate.getTime();
+                    if(TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS)>= daysCount){
+                        db.getDataDao().deleteArticle(article);
+                    }
+                    } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
             return null;
         }
     }
@@ -89,7 +90,6 @@ public class MyNewsTask {
         private final NewsDataSource.getListCallback callback;
         private String category;
         private String source;
-
         LoadNewsTask(NewsDataSource.getListCallback callback, String category, String source) {
             this.callback = callback;
             this.category = category;

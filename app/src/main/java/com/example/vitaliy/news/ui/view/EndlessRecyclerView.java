@@ -11,8 +11,15 @@ public abstract class EndlessRecyclerView extends RecyclerView.OnScrollListener 
     private final int startingPage = 1;
     private RecyclerView.LayoutManager layoutManager;
 
+    public EndlessRecyclerView(){
+    }
+
     public EndlessRecyclerView(LinearLayoutManager layoutManager) {
         this.layoutManager = layoutManager;
+    }
+
+    public void turnOff(){
+        this.isLoading = false;
     }
 
     @Override

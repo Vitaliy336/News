@@ -10,8 +10,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
@@ -19,6 +21,7 @@ import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
+import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
+    ConnectivityManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -92,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public boolean checkNetwork(){
+        if(manager.getActiveNetworkInfo()!=null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void showTopNews() {
         viewPager.setCurrentItem(0);
     }
@@ -107,12 +120,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showFullInfo(String url) {
-        ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(manager.getActiveNetworkInfo() != null) {
+        if(checkNetwork()) {
             Intent intent = new Intent(this, FullNewsActivity.class);
             intent.putExtra(URL_TAG, url);
             startActivity(intent);
         } else {
+            EndlessRecyclerView endlessRecyclerView = new EndlessRecyclerView() {
+                @Override
+                public void onLoadMore(int page, int totalitemCount, RecyclerView view) {
+                    Toast.makeText(getApplicationContext(), "Congratulations, all readed", Toast.LENGTH_SHORT).show();
+                }
+            };
+            endlessRecyclerView.turnOff();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
             builder.setMessage(R.string.alert_message)
                     .setCancelable(false)
