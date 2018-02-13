@@ -14,6 +14,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String category = "";
     private String source = "";
     private int page = 1;
+    private final int startingPage = 1;
     private NewsDataRepository dataRepository;
     private TopNewsContract.ITopNewsView view;
 
@@ -41,7 +42,11 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         dataRepository.getHotNews(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
+                if (page > startingPage){
+                    view.pagination((List<Article>) article);
+                } else {
                     view.displayNews((List<Article>) article);
+                }
             }
 
             @Override

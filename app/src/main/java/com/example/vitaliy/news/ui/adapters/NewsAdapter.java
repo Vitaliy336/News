@@ -17,7 +17,9 @@ import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private final static int TOP_POST = 0;
@@ -77,17 +79,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         notifyDataSetChanged();
         newsList.addAll(news);
         mContext = activity;
-
-
         Log.e("newsAdapter", "news size = " + news.size());
     }
 
-    public void addArticles(List<Article> articles) {
-        newsList.addAll(articles);
+    public void clear(){
+        newsList.clear();
         notifyDataSetChanged();
     }
 
-
+    public void addArticles(List<Article> articles) {
+        Set<Article> articlesSet = new HashSet<>();
+        articlesSet.addAll(articles);
+        newsList.addAll(articlesSet);
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;

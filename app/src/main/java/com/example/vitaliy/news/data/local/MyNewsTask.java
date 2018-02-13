@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class MyNewsTask {
     private final int daysCount = 3;
     private NewsDb db;
+    private Date currentDate = new Date();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     public void loadNews(NewsDataSource.getListCallback callback, String category, String source) {
@@ -63,24 +64,23 @@ public class MyNewsTask {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            Date currentdate = new Date();
-            Date postDate;
-            long dif;
-            db = App.getInstance().getDatabaseInstance();
-            for (Article article : db.getDataDao().getAllArticles()) {
-                try {
-                    if(TextUtils.isEmpty(article.getAddTime())){
-                        db.getDataDao().deleteArticle(article);
-                    }
-                    postDate = dateFormat.parse(article.getAddTime());
-                    dif = currentdate.getTime() - postDate.getTime();
-                    if(TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS)>= daysCount){
-                        db.getDataDao().deleteArticle(article);
-                    }
-                    } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
+//            Date postDate;
+//            long dif;
+//            db = App.getInstance().getDatabaseInstance();
+//            for (Article article : db.getDataDao().getAllArticles()) {
+//                try {
+//                    postDate = dateFormat.parse(article.getAddTime());
+//                    if(postDate == null){
+//                        db.getDataDao().deleteArticle(article);
+//                    }
+//                    dif = dateFormat.parse(currentDate.toString()).getTime() - postDate.getTime();
+//                    if(TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS)>= daysCount){
+//                        db.getDataDao().deleteArticle(article);
+//                    }
+//                    } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             return null;
         }
     }

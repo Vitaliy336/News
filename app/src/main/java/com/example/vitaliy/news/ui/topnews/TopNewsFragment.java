@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import android.widget.RelativeLayout;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 
@@ -27,7 +27,6 @@ import java.util.List;
 
 
 public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
-
     private TopNewsContract.ITopNewsPresenter presenter;
     private RelativeLayout relativeLayout;
     private View rootView;
@@ -36,9 +35,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     private LinearLayoutManager layoutManagerForCategories;
     private LinearLayoutManager layoutManagerForNews;
     private NewsAdapter newsAdapter;
+    private EndlessRecyclerView endlessRecycler;
     private EditText sourceEt;
     private ImageView clear;
-    private int page = 1;
 
     @Override
     public void onResume() {
@@ -53,6 +52,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     private void updateData() {
         presenter.start();
+        endlessRecycler.reset();
     }
 
     @Nullable
@@ -96,7 +96,6 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
 
     private void initListener() {
-
         newsAdapter.setOnItemClickListener(new NewsAdapter.onNewsClickListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -108,11 +107,20 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         categoriesAdapter.setCategoryItemClick(new CategoriesAdapter.onCategoryItemClick() {
             @Override
             public void onCatClick(String str) {
+                newsAdapter.clear();
                 presenter.setCategoryName(str);
-                presenter.setPageNumber(0);
+                presenter.setPageNumber(1);
                 presenter.prepareNews();
             }
         });
+
+        endlessRecycler = new EndlessRecyclerView(layoutManagerForNews) {
+            @Override
+            public void onLoadMore(int page, int totalitemCount, RecyclerView view) {
+                presenter.setPageNumber(page);
+                presenter.prepareNews();
+            }
+        };
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,25 +129,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
             }
         });
 
-        newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            int pastVisiblesItems, visibleItemCount, totalItemCount;
+        newsRecyclerView.addOnScrollListener(endlessRecycler);
 
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) {
-                    visibleItemCount = layoutManagerForNews.getChildCount();
-                    totalItemCount = layoutManagerForNews.getItemCount();
-                    pastVisiblesItems = layoutManagerForNews.findFirstVisibleItemPosition();
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        Log.e("...", "Call Load More !");
-                        page++;
-//                        presenter.setPageNumber(page);
-//                        presenter.prepareNews();
-                    }
-                }
-            }
-        });
+
     }
 
 
@@ -188,4 +180,5 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         final String sourceId = ((MainActivity) getActivity()).getSourceId();
         presenter.setSourceID(sourceId);
     }
+
 }
