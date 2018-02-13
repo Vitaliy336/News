@@ -9,6 +9,7 @@ import java.util.List;
 public interface SourcesContract {
     interface ISourcesView extends BaseView {
         void showSources(List<Source> list);
+
     }
 
     interface ISourcesPresenter extends BasePresenter<ISourcesView> {

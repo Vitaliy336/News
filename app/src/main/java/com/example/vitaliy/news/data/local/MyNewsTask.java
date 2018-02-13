@@ -70,15 +70,19 @@ public class MyNewsTask {
             Date postDate;
             long dif;
             db = App.getInstance().getDatabaseInstance();
-            //db.getDataDao().nukeTable();
+            //db.getDataDao().nukeTable()
             for (Article article : db.getDataDao().getAllArticles()) {
                 try {
-                    postDate = dateFormat.parse(article.getAddTime());
-                    dif = dateFormat.parse(currentDate.toString()).getTime() - postDate.getTime();
-                    if(TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS)>= daysCount){
+                    if (TextUtils.isEmpty(article.getAddTime())) {
                         db.getDataDao().deleteArticle(article);
+                    } else {
+                        postDate = dateFormat.parse(article.getAddTime());
+                        dif = dateFormat.parse(currentDate.toString()).getTime() - postDate.getTime();
+                        if (TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS) >= daysCount) {
+                            db.getDataDao().deleteArticle(article);
+                        }
                     }
-                    } catch (ParseException e) {
+                }catch (ParseException e) {
                     e.printStackTrace();
                 }
             }

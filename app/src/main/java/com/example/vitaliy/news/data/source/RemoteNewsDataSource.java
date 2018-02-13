@@ -56,12 +56,13 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void getEverything(final getListCallback callback, String query) {
+    public void getEverything(final getListCallback callback, String query, int page) {
         Map<String, String> map = new HashMap<>();
         if (!TextUtils.isEmpty(query)) {
             map.put("q", query);
         }
         map.put("apiKey", API_KEY);
+        map.put("page", String.valueOf(page));
         if (callback != null) {
             apiInterface.getEverything(map).enqueue(new Callback<NewsResponse>() {
                 @Override

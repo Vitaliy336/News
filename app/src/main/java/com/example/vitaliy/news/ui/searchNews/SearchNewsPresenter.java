@@ -14,6 +14,8 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
     private String query = null;
     private SearchNewsContract.IAllNewsView view;
     private NewsDataRepository repository;
+    private int page = 1;
+    private final int startingPage = 1;
 
     public SearchNewsPresenter() {
 
@@ -45,14 +47,18 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
         repository.getEverything(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
-                view.displayNews((List<Article>) article);
+                if (page > startingPage){
+                    view.pagination((List<Article>) article);
+                } else {
+                    view.displayNews((List<Article>) article);
+                }
             }
 
             @Override
             public void onFailure() {
                 onFailure();
             }
-        }, query);
+        }, query, page);
     }
 
     @Override
@@ -63,6 +69,11 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
     @Override
     public void getSearchQuery(String query) {
         this.query = query;
+    }
+
+    @Override
+    public void setPageNumber(int page) {
+        this.page = page;
     }
 
 }

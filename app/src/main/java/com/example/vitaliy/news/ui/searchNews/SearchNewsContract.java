@@ -16,6 +16,8 @@ public interface SearchNewsContract {
         void hideMessage();
 
         void showMessage();
+
+        void pagination(List<Article> articles);
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
@@ -27,5 +29,7 @@ public interface SearchNewsContract {
         void goTofullNews(String url);
 
         void getSearchQuery(String query);
+
+        void setPageNumber(int page);
     }
 }

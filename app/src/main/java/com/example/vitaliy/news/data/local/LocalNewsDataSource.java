@@ -16,7 +16,7 @@ public class LocalNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void getEverything(getListCallback callback, String query) {
+    public void getEverything(getListCallback callback, String query, int page) {
         MyNewsTask myNewsTask = new MyNewsTask();
         myNewsTask.searchNews(callback, query);
     }

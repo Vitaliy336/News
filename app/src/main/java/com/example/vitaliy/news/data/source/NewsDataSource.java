@@ -14,7 +14,7 @@ public interface NewsDataSource {
 
     void getHotNews(getListCallback callback, String category, String source, int page) throws ExecutionException, InterruptedException;
 
-    void getEverything(getListCallback callback, String query);
+    void getEverything(getListCallback callback, String query, int page);
 
     void getSources(getListCallback callback, String category);
 

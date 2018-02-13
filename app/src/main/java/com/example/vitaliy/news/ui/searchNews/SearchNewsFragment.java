@@ -24,6 +24,7 @@ import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
+import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private LinearLayoutManager layoutManagerForNews;
     private EditText searchNews;
     private TextView info;
+    private EndlessRecyclerView endlessRecycler;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
 
     private void updateData() {
         presenter.start();
+        endlessRecycler.reset();
     }
 
     private void initPresenter() {
@@ -76,11 +79,14 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
                     if (i == EditorInfo.IME_ACTION_SEARCH) {
                         presenter.getSearchQuery(searchNews.getText().toString());
                         presenter.prepareNews();
+
                         if(newsAdapter.getItemCount() == 0);{
                             info.setText(R.string.nothing);
                         }
+
                         Log.e("after query submit", String.valueOf(newsAdapter.getItemCount()));
                         searchNews.clearFocus();
+                        newsAdapter.clear();
                         closeKeyboard(getActivity(), searchNews.getWindowToken());
                         return true;
                     }
@@ -90,6 +96,22 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
                 return false;
             }
         });
+
+        endlessRecycler = new EndlessRecyclerView(layoutManagerForNews) {
+            @Override
+            public void onLoadMore(int page, int totalitemCount, RecyclerView view) {
+                Log.e("PAGESSSS", String.valueOf(page));
+                if(((MainActivity) getActivity()).checkNetwork()) {
+                    presenter.setPageNumber(page);
+                    presenter.prepareNews();
+                } else {
+                    presenter.setPageNumber(1);
+                    presenter.prepareNews();
+                }
+            }
+        };
+
+        news.addOnScrollListener(endlessRecycler);
 
     }
 
@@ -139,6 +161,11 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     @Override
     public void showMessage() {
         info.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void pagination(List<Article> articles) {
+        newsAdapter.addArticles(articles);
     }
 
     public static void closeKeyboard(Context c, IBinder windowToken) {

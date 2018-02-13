@@ -74,7 +74,6 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
             public void onCatClick(String str) {
                 presenter.getSourceCategory(str);
                 presenter.prepareSources();
-
             }
         });
 
