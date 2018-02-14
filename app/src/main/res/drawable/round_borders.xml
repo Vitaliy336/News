@@ -7,10 +7,10 @@
     <solid android:color="@color/colorCategoryItem" />
 
     <padding
-        android:bottom="10dp"
-        android:left="10dp"
-        android:right="10dp"
-        android:top="10dp" />
+        android:bottom="@dimen/category_item_size"
+        android:left="@dimen/category_item_size"
+        android:right="@dimen/category_item_size"
+        android:top="@dimen/category_item_size" />
 
-    <corners android:radius="30dp" />
+    <corners android:radius="@dimen/category_item_radius" />
 </shape>

@@ -10,4 +10,6 @@
     <dimen name="category_item_margin_top">5dp</dimen>
     <dimen name="category_item_margin_l_r">10dp</dimen>
     <dimen name="category_item_textsize">18sp</dimen>
+    <dimen name="category_item_size">15dp</dimen>
+    <dimen name="category_item_radius">30dp</dimen>
 </resources>
