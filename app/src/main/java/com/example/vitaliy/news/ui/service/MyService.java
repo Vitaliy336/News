@@ -19,6 +19,6 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(getApplicationContext(), "HiThere", Toast.LENGTH_SHORT).show();
         Log.e("HELLO", "HELLO");
-        return 0;
+        return Service.START_STICKY;
     }
 }
