@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -21,12 +20,12 @@
                 android:id="@+id/newsImgView"
                 android:layout_width="200dp"
                 android:layout_height="150dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="@dimen/post_item_margin"
                 app:layout_constraintBottom_toTopOf="@+id/newsDescriptionTV"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/newsTitleTV"
@@ -37,7 +36,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_toRightOf="@id/newsImgView"
+                android:layout_toEndOf="@id/newsImgView"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/post_title"
                 app:layout_constraintBottom_toTopOf="@+id/newsDescriptionTV"

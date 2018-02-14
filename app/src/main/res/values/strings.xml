@@ -5,6 +5,7 @@
     <string name="space">" "</string>
     <string name="ok">"OK"</string>
     <string name="nothing">"no matches found"</string>
-    <string name="alert_message">"Ups... internet connection lost"</string>
+    <string name="alert_message">"Ups&#8230; internet connection lost"</string>
+    <string name="todo">TODO</string>
 
 </resources>
