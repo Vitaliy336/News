@@ -1,7 +1,8 @@
 package com.example.vitaliy.news;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -19,16 +20,10 @@ import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
+import com.example.vitaliy.news.ui.service.MyAlarmReceiver;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -48,6 +43,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         checkForDelete();
+        startAlarm();
+    }
+
+    private void startAlarm() {
+        Log.e("Main", "startAlarm");
+        Intent intent = new Intent(getApplicationContext(), MyAlarmReceiver.class);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, MyAlarmReceiver.CODE,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        long firstMills = System.currentTimeMillis();
+        AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, firstMills, 30000, pendingIntent);
     }
 
     private void checkForDelete() {
