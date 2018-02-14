@@ -1,5 +1,6 @@
 package com.example.vitaliy.news;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -20,7 +22,7 @@ import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
-import com.example.vitaliy.news.ui.service.MyAlarmReceiver;
+import com.example.vitaliy.news.ui.service.MyService;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
@@ -47,13 +49,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startAlarm() {
-        Log.e("Main", "startAlarm");
-        Intent intent = new Intent(getApplicationContext(), MyAlarmReceiver.class);
-        final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, MyAlarmReceiver.CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        long firstMills = System.currentTimeMillis();
-        AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, firstMills, 30000, pendingIntent);
+        Log.e("MAin", "StartAlarm");
+        Intent intent = new Intent(getApplicationContext(), MyService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 322, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Activity.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 3000, pendingIntent);
     }
 
     private void checkForDelete() {
