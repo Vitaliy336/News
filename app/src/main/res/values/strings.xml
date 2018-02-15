@@ -7,5 +7,6 @@
     <string name="nothing">"no matches found"</string>
     <string name="alert_message">"Ups&#8230; internet connection lost"</string>
     <string name="todo">TODO</string>
+    <string name="update">New news are available to watch</string>
 
 </resources>

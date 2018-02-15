@@ -4,12 +4,14 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.vitaliy.news.App;
+import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.data.model.news.Article;
@@ -36,8 +38,8 @@ public class NewsService extends Service {
         return Service.START_STICKY;
     }
 
-    public void check() {
-        Log.e("check", "data updated");
+    private void check() {
+        Log.e("Service", "check");
         localNewsDataSource = new LocalNewsDataSource();
         newsDataRepository = App.getInstance().getDataRepositoryInstance();
         db = App.getInstance().getDatabaseInstance();
@@ -64,8 +66,10 @@ public class NewsService extends Service {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(android.R.drawable.ic_dialog_email)
-                        .setContentTitle("Title")
-                        .setContentText("Notification text");
+                        .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                        .setLights(Color.RED, 3000, 3000)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.update));
 
         Notification notification = builder.build();
 
