@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
+    private static final long delay = 5000;
     ConnectivityManager manager;
 
     @Override
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar t = Calendar.getInstance();
         t.setTimeInMillis(System.currentTimeMillis());
 
-        am.setRepeating(AlarmManager.RTC_WAKEUP, t.getTimeInMillis(), 5000, pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, t.getTimeInMillis(), delay, pendingIntent);
     }
 
     private void checkForDelete() {
