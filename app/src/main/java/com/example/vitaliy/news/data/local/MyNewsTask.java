@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MyNewsTask {
@@ -31,6 +32,11 @@ public class MyNewsTask {
     public void loadNews(NewsDataSource.getListCallback callback, String category, String source) {
         LoadNewsTask loadNewsTask = new LoadNewsTask(callback, category, source);
         loadNewsTask.execute();
+    }
+
+    public void getItemsCount(AsyncCompleate asyncCompleate) {
+        ItemsCount itemsCount = new ItemsCount(asyncCompleate);
+        itemsCount.execute();
     }
 
     public void deleteOld() {
@@ -157,4 +163,26 @@ public class MyNewsTask {
         }
     }
 
+    class ItemsCount extends AsyncTask<Void, Void, Integer>{
+        AsyncCompleate asyncCompleate;
+
+        public ItemsCount(AsyncCompleate asyncCompleate) {
+            this.asyncCompleate = asyncCompleate;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            db = App.getInstance().getDatabaseInstance();
+           return db.getDataDao().count();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            asyncCompleate.getResult(integer);
+        }
+    }
+
+    public interface AsyncCompleate{
+        void getResult(Object o);
+    }
 }

@@ -19,7 +19,7 @@ public interface NewsDao {
     void insertAll(List<Article> articles);
 
     @Query("DELETE FROM NEWS")
-    public void nukeTable();
+    void nukeTable();
 
     @Query("Select * FROM NEWS WHERE _category LIKE :category")
     List<Article> getNewsWithCategory(String category);
@@ -32,6 +32,9 @@ public interface NewsDao {
 
     @Query("SELECT * FROM NEWS WHERE _title LIKE :title")
     List<Article> searchNews(String title);
+
+    @Query("SELECT COUNT(*) FROM NEWS")
+    int count();
 
     @Delete
     void deleteArticle(Article article);

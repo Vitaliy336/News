@@ -42,4 +42,10 @@ public class LocalNewsDataSource implements NewsDataSource {
         MyNewsTask myNewsTask = new MyNewsTask();
         myNewsTask.deleteOld();
     }
+
+    public void getItemsCount(MyNewsTask.AsyncCompleate asyncCompleate){
+        MyNewsTask myNewsTask = new MyNewsTask();
+        myNewsTask.getItemsCount(asyncCompleate);
+    }
+
 }

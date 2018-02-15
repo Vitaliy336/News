@@ -26,6 +26,7 @@ public class App extends Application {
         dataRepository = new NewsDataRepository();
         db = Room.databaseBuilder(getApplicationContext(), NewsDb.class, "data-database")
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
                 .build();
     }
 
