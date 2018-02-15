@@ -1,6 +1,5 @@
 package com.example.vitaliy.news;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -22,8 +20,7 @@ import com.example.vitaliy.news.data.local.LocalNewsDataSource;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
-import com.example.vitaliy.news.ui.service.MyReceiver;
-import com.example.vitaliy.news.ui.service.MyService;
+import com.example.vitaliy.news.data.local.service.MyReceiver;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
 import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
-    private static final long delay = 5000;
+    private static final long delay = 1000 * 60 * 30;
     ConnectivityManager manager;
 
     @Override
@@ -139,14 +136,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(URL_TAG, url);
             startActivity(intent);
         } else {
-            EndlessRecyclerView endlessRecyclerView = new EndlessRecyclerView() {
-                @Override
-                public void onLoadMore(int page, int totalitemCount, RecyclerView view) {
-                    Toast.makeText(getApplicationContext(), "Congratulations, all readed", Toast.LENGTH_SHORT).show();
-                }
-            };
-            endlessRecyclerView.turnOff();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
             builder.setMessage(R.string.alert_message)
                     .setCancelable(false)

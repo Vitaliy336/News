@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.fullnews.FullNewsActivity"></activity>
-        <receiver android:name=".ui.service.MyReceiver"
+        <receiver android:name=".data.local.service.MyReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -34,7 +34,7 @@
             </intent-filter>
         </receiver>
         <service
-            android:name=".ui.service.MyService">
+            android:name=".data.local.service.NewsService">
         </service>
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui.service;
+package com.example.vitaliy.news.data.local.service;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -10,8 +10,7 @@ import android.os.SystemClock;
 
 public class MyReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "MYRECEIVER";
-    public static final long delay = 5000;
+    public static final long delay = 1000 * 60 * 30;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -21,8 +20,7 @@ public class MyReceiver extends BroadcastReceiver {
     static void scheduleAlarms(Context ctxt) {
         AlarmManager mgr=
                 (AlarmManager)ctxt.getSystemService(Context.ALARM_SERVICE);
-        Intent i=new Intent(ctxt, MyService.class);
-        i.putExtra("title", "info");
+        Intent i=new Intent(ctxt, NewsService.class);
         PendingIntent pi=PendingIntent.getService(ctxt, 0, i, 0);
 
         mgr.setRepeating(AlarmManager.ELAPSED_REALTIME,

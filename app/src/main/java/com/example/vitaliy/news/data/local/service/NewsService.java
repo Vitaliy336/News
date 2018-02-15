@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui.service;
+package com.example.vitaliy.news.data.local.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,7 +8,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.NewsDataRepository;
@@ -19,7 +18,7 @@ import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.List;
 
-public class MyService extends Service {
+public class NewsService extends Service {
     private NewsDataRepository newsDataRepository;
     private LocalNewsDataSource localNewsDataSource;
     private NewsDb db;
