@@ -1,26 +1,31 @@
 package com.example.vitaliy.news.ui.service;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 
-/**
- * Created by v_shevchyk on 14.02.18.
- */
 
 public class MyReceiver extends BroadcastReceiver {
 
+    private static final String TAG = "MYRECEIVER";
+
     @Override
     public void onReceive(Context context, Intent intent) {
+        scheduleAlarms(context);
+    }
 
-        Context oAppContext = context.getApplicationContext();
+    static void scheduleAlarms(Context ctxt) {
+        AlarmManager mgr=
+                (AlarmManager)ctxt.getSystemService(Context.ALARM_SERVICE);
+        Intent i=new Intent(ctxt, MyService.class);
+        PendingIntent pi=PendingIntent.getService(ctxt, 0, i, 0);
 
-        if (oAppContext == null) {
-            oAppContext = context;
-        }
-
-        Intent serviceIntent = new Intent(oAppContext, MyService.class);
-        oAppContext.startService(serviceIntent);
+        mgr.setRepeating(AlarmManager.ELAPSED_REALTIME,
+                SystemClock.elapsedRealtime(), 5000, pi);
     }
 }
 

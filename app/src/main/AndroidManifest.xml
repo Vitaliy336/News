@@ -28,17 +28,14 @@
         <activity android:name=".ui.fullnews.FullNewsActivity"></activity>
         <receiver android:name=".ui.service.MyReceiver"
             android:enabled="true"
-            android:exported="false"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </receiver>
         <service
-            android:name=".ui.service.MyService"></service>
+            android:name=".ui.service.MyService">
+        </service>
     </application>
 
 </manifest>
