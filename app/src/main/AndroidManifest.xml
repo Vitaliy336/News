@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.fullnews.FullNewsActivity"></activity>
+        <activity android:name=".ui.preference.MyPreference"></activity>
         <receiver android:name=".data.local.service.MyReceiver"
             android:enabled="true"
             android:exported="true">

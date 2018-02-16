@@ -9,25 +9,24 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.vitaliy.news.data.local.LocalNewsDataSource;
-import com.example.vitaliy.news.data.room.NewsDb;
+import com.example.vitaliy.news.data.local.service.MyReceiver;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
+import com.example.vitaliy.news.ui.preference.MyPreference;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
-import com.example.vitaliy.news.data.local.service.MyReceiver;
 import com.example.vitaliy.news.ui.sources.SourcesFragment;
 import com.example.vitaliy.news.ui.topnews.TopNewsFragment;
-import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 
 import java.util.Calendar;
 
@@ -37,35 +36,48 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private LocalNewsDataSource localNewsDataSource;
     private String sourceId = "";
-    private Button nuke;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
-    private static final long delay = 1000*60;// * 60 * 30;
+    private static final long delay = 1000 * 60;// * 60 * 30;
     ConnectivityManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.cancel(1);
         initView();
-        initlistener();
         checkForDelete();
         startAlarm();
     }
 
-    private void initlistener() {
-        nuke.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NewsDb newsDb = App.getInstance().getDatabaseInstance();
-                newsDb.getDataDao().nukeTable();
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                settings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void settings() {
+        Intent intent = new Intent(this, MyPreference.class);
+        startActivity(intent);
+
+    }
+
 
     private void startAlarm() {
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -90,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        nuke = findViewById(R.id.nukeTable);
-
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 

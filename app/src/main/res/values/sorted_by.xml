@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sorted">
+        <item>Relevancy</item>
+        <item>Popularity</item>
+        <item>PublishedAt</item>
+    </string-array>
+
+
+
+</resources>
