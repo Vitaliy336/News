@@ -29,7 +29,7 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveNewsToCache(setFilters((List<Article>) article, category, source));
+                localNewsDataSource.saveNewsToCache((List<Article>) article, category, source);
             }
 
             @Override
@@ -46,7 +46,7 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onListReceived(List<?> article) {
                 callback.onListReceived(article);
-                localNewsDataSource.saveNewsToCache((List<Article>) article);
+                localNewsDataSource.saveNewsToCache((List<Article>) article, null, null);
             }
 
             @Override
@@ -70,27 +70,5 @@ public class NewsDataRepository implements NewsDataSource {
                 localNewsDataSource.getSources(callback, category);
             }
         }, category);
-    }
-
-    public List<Article> setFilters(List<Article> articles, String category, String source) {
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        if (!TextUtils.isEmpty(category)) {
-            for (Article article : articles) {
-                article.setCategory(category);
-                article.setAddTime(dateFormat.format(date));
-            }
-        }
-        if(!TextUtils.isEmpty(source)) {
-            for (Article article : articles) {
-                article.setSourceId(source);
-                article.setAddTime(dateFormat.format(date));
-            }
-        } else {
-          for (Article article : articles){
-              article.setAddTime(dateFormat.format(date));
-          }
-        }
-        return articles;
     }
 }

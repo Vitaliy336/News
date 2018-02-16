@@ -14,9 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.vitaliy.news.data.local.LocalNewsDataSource;
+import com.example.vitaliy.news.data.room.NewsDb;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsFragment;
@@ -33,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private LocalNewsDataSource localNewsDataSource;
     private String sourceId = "";
+    private Button nuke;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
-    private static final long delay = 1000 * 60 * 30;
+    private static final long delay = 1000*60;// * 60 * 30;
     ConnectivityManager manager;
 
     @Override
@@ -45,8 +49,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initlistener();
         checkForDelete();
         startAlarm();
+    }
+
+    private void initlistener() {
+        nuke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NewsDb newsDb = App.getInstance().getDatabaseInstance();
+                newsDb.getDataDao().nukeTable();
+            }
+        });
     }
 
     private void startAlarm() {
@@ -72,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        nuke = findViewById(R.id.nukeTable);
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -84,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TopNewsFragment(), "Top News");
-        adapter.addFragment(new SearchNewsFragment(), "All News");
-        adapter.addFragment(new SourcesFragment(), "Sources");
+        adapter.addFragment(new TopNewsFragment(), getString(R.string.top_news));
+        adapter.addFragment(new SearchNewsFragment(), getString(R.string.all_news));
+        adapter.addFragment(new SourcesFragment(), getString(R.string.sources));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

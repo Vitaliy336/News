@@ -76,7 +76,7 @@ public class MyNewsTask {
             Date postDate;
             long dif;
             db = App.getInstance().getDatabaseInstance();
-            //db.getDataDao().nukeTable()
+           // db.getDataDao().nukeTable();
             for (Article article : db.getDataDao().getAllArticles()) {
                 try {
                     if (TextUtils.isEmpty(article.getAddTime())) {

@@ -10,7 +10,7 @@ import android.os.SystemClock;
 
 public class MyReceiver extends BroadcastReceiver {
 
-    public static final long delay = 1000 * 60 * 30;
+    public static final long delay = 1000*60; //* 60 * 30;
 
     @Override
     public void onReceive(Context context, Intent intent) {

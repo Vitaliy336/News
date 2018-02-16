@@ -48,8 +48,13 @@ public class NewsService extends Service {
         newsDataRepository.getHotNews(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
-                localNewsDataSource.saveNewsToCache((List<Article>) article);
+                Log.e("Count", String.valueOf(count));
+//                for(Object art : article){
+//                    Log.e("SS", art.toString());
+//                }
+                localNewsDataSource.saveNewsToCache((List<Article>) article, null, null);
                 if(count < db.getDataDao().count()){
+                    Log.e("db.count", String.valueOf(db.getDataDao().count()));
                     createNotification();
                 }
             }
@@ -67,7 +72,7 @@ public class NewsService extends Service {
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(android.R.drawable.ic_dialog_email)
                         .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
-                        .setLights(Color.RED, 3000, 3000)
+                        .setLights(Color.GREEN, 3000, 3000)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(getString(R.string.update));
 
