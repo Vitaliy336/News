@@ -6,12 +6,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,7 +32,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-
+    private SharedPreferences sharedPreferences;
     private Toolbar toolbar;
     private LocalNewsDataSource localNewsDataSource;
     private String sourceId = "";
@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
     private static final long delay = 1000 * 60;// * 60 * 30;
-    ConnectivityManager manager;
+    private ConnectivityManager manager;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +50,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.cancel(1);
-        initView();
-        checkForDelete();
         startAlarm();
+
     }
 
     @Override
@@ -66,16 +66,38 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings:
                 settings();
                 return true;
+            case R.id.clear:
+                nukeNews();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
 
+    private void nukeNews() {
+        builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setMessage(R.string.alert_message_clear)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        localNewsDataSource.nukeNews();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     private void settings() {
         Intent intent = new Intent(this, MyPreference.class);
         startActivity(intent);
-
     }
 
 
@@ -99,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initView() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -108,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -165,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(URL_TAG, url);
             startActivity(intent);
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+            builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
             builder.setMessage(R.string.alert_message)
                     .setCancelable(false)
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -177,5 +199,18 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+        checkForDelete();
+        preferences();
+    }
+
+    private void preferences() {
+        boolean tougle = sharedPreferences.getBoolean("notifications", false);
+        Log.e("PREFERENCE", String.valueOf(tougle));
     }
 }

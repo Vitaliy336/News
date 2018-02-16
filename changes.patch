@@ -1,0 +1,75 @@
+Index: app/src/main/java/com/example/vitaliy/news/data/local/service/NewsService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/vitaliy/news/data/local/service/NewsService.java	(revision 73ff5de7f6288ce52ba4f1418dd275f15859d95a)
++++ app/src/main/java/com/example/vitaliy/news/data/local/service/NewsService.java	(revision )
+@@ -4,12 +4,14 @@
+ import android.app.NotificationManager;
+ import android.app.Service;
+ import android.content.Intent;
++import android.graphics.Color;
+ import android.os.IBinder;
+ import android.support.annotation.Nullable;
+ import android.support.v4.app.NotificationCompat;
+ import android.util.Log;
+ 
+ import com.example.vitaliy.news.App;
++import com.example.vitaliy.news.R;
+ import com.example.vitaliy.news.data.NewsDataRepository;
+ import com.example.vitaliy.news.data.local.LocalNewsDataSource;
+ import com.example.vitaliy.news.data.model.news.Article;
+@@ -36,8 +38,8 @@
+         return Service.START_STICKY;
+     }
+ 
+-    public void check() {
+-        Log.e("check", "data updated");
++    private void check() {
++        Log.e("Service", "check");
+         localNewsDataSource = new LocalNewsDataSource();
+         newsDataRepository = App.getInstance().getDataRepositoryInstance();
+         db = App.getInstance().getDatabaseInstance();
+@@ -64,8 +66,10 @@
+         NotificationCompat.Builder builder =
+                 new NotificationCompat.Builder(this)
+                         .setSmallIcon(android.R.drawable.ic_dialog_email)
+-                        .setContentTitle("Title")
+-                        .setContentText("Notification text");
++                        .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
++                        .setLights(Color.RED, 3000, 3000)
++                        .setContentTitle(getString(R.string.app_name))
++                        .setContentText(getString(R.string.update));
+ 
+         Notification notification = builder.build();
+ 
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 73ff5de7f6288ce52ba4f1418dd275f15859d95a)
++++ app/src/main/res/values/strings.xml	(revision )
+@@ -7,5 +7,6 @@
+     <string name="nothing">"no matches found"</string>
+     <string name="alert_message">"Ups&#8230; internet connection lost"</string>
+     <string name="todo">TODO</string>
++    <string name="update">New news are available to watch</string>
+ 
+ </resources>
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 73ff5de7f6288ce52ba4f1418dd275f15859d95a)
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -7,6 +7,7 @@
+     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+     <uses-permission android:name="android.permission.NET" />
+     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
++    <uses-permission android:name="android.permission.VIBRATE" />
+ 
+     <application
+ 

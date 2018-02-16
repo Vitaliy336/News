@@ -12,6 +12,8 @@
     <string name="all_news">Search News</string>
     <string name="sources">Sources</string>
     <string name="ApiKey"></string>
+    <string name="alert_message_clear">You really want to clear all news?</string>
+    <string name="cancel">cancel</string>
 
 
 </resources>

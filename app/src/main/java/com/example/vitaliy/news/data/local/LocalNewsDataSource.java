@@ -55,6 +55,11 @@ public class LocalNewsDataSource implements NewsDataSource {
         myNewsTask.getItemsCount(asyncCompleate);
     }
 
+    public void nukeNews(){
+        MyNewsTask myNewsTask = new MyNewsTask();
+        myNewsTask.nukeNews();
+    }
+
     public List<Article> setFilters(List<Article> articles, String category, String source) {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");

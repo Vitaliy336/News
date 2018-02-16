@@ -4,18 +4,18 @@
     <PreferenceCategory android:title="Notifications">
 
         <SwitchPreference
-            android:defaultValue="ture"
-            android:key="switch_preference_1"
+            android:defaultValue="true"
+            android:key="notifications"
             android:summary="on/off"
             android:title="Notifications" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Hot News">
 
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="true"
             android:entries="@array/countries"
             android:entryValues="@array/countries"
-            android:key="list_preference_1"
+            android:key="country_list"
             android:title="Countries" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Search news">
@@ -24,7 +24,7 @@
             android:defaultValue="1"
             android:entries="@array/sorted"
             android:entryValues="@array/sorted"
-            android:key="list_preference_1"
+            android:key="order_list"
             android:title="Order" />
     </PreferenceCategory>
 

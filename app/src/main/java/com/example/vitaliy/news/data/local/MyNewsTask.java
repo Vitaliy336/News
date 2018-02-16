@@ -29,6 +29,11 @@ public class MyNewsTask {
     private Date currentDate = new Date();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
+    public void nukeNews(){
+        NukeNews nukeNews = new NukeNews();
+        nukeNews.execute();
+    }
+
     public void loadNews(NewsDataSource.getListCallback callback, String category, String source) {
         LoadNewsTask loadNewsTask = new LoadNewsTask(callback, category, source);
         loadNewsTask.execute();
@@ -184,5 +189,15 @@ public class MyNewsTask {
 
     public interface AsyncCompleate{
         void getResult(Object o);
+    }
+
+    class NukeNews extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            db = App.getInstance().getDatabaseInstance();
+            db.getDataDao().nukeTable();
+            return null;
+        }
     }
 }
