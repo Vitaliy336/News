@@ -44,15 +44,14 @@ public class NewsService extends Service {
         newsDataRepository = App.getInstance().getDataRepositoryInstance();
         db = App.getInstance().getDatabaseInstance();
         final int count = db.getDataDao().count();
+        Log.e("db.count", String.valueOf(count));
 
         newsDataRepository.getHotNews(new NewsDataSource.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
-                Log.e("Count", String.valueOf(count));
-//                for(Object art : article){
-//                    Log.e("SS", art.toString());
-//                }
+
                 localNewsDataSource.saveNewsToCache((List<Article>) article, null, null);
+                Log.e("db", String.valueOf(db.getDataDao().count()));
                 if(count < db.getDataDao().count()){
                     Log.e("db.count", String.valueOf(db.getDataDao().count()));
                     createNotification();

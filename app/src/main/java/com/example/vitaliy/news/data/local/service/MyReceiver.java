@@ -17,11 +17,11 @@ public class MyReceiver extends BroadcastReceiver {
         scheduleAlarms(context);
     }
 
-    static void scheduleAlarms(Context ctxt) {
+    static void scheduleAlarms(Context context) {
         AlarmManager mgr=
-                (AlarmManager)ctxt.getSystemService(Context.ALARM_SERVICE);
-        Intent i=new Intent(ctxt, NewsService.class);
-        PendingIntent pi=PendingIntent.getService(ctxt, 0, i, 0);
+                (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent i=new Intent(context, NewsService.class);
+        PendingIntent pi=PendingIntent.getService(context, 0, i, 0);
 
         mgr.setRepeating(AlarmManager.ELAPSED_REALTIME,
                 SystemClock.elapsedRealtime(), delay, pi);
