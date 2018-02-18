@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
     private static final long delay = 1000 * 60;// * 60 * 30;
     private ConnectivityManager manager;
     private AlertDialog.Builder builder;
+    private AlarmManager am;
+    private static final int code = 322;
+    private boolean notifications;
+    private String country;
+    private String order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.cancel(1);
-        startAlarm();
+
 
     }
 
@@ -102,10 +107,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startAlarm() {
-        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
         Intent i = new Intent(getBaseContext(), MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                MainActivity.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar t = Calendar.getInstance();
         t.setTimeInMillis(System.currentTimeMillis());
@@ -124,9 +128,10 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        am = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -159,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean checkNetwork(){
-        if(manager.getActiveNetworkInfo()!=null){
+    public boolean checkNetwork() {
+        if (manager.getActiveNetworkInfo() != null) {
             return true;
         } else {
             return false;
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showFullInfo(String url) {
-        if(checkNetwork()) {
+        if (checkNetwork()) {
             Intent intent = new Intent(this, FullNewsActivity.class);
             intent.putExtra(URL_TAG, url);
             startActivity(intent);
@@ -207,10 +212,15 @@ public class MainActivity extends AppCompatActivity {
         initView();
         checkForDelete();
         preferences();
+        startAlarm();
     }
 
     private void preferences() {
-        boolean tougle = sharedPreferences.getBoolean("notifications", false);
-        Log.e("PREFERENCE", String.valueOf(tougle));
+        notifications = sharedPreferences.getBoolean("notifications", false);
+        Log.e("PREFERENCE", String.valueOf(notifications));
+        country = sharedPreferences.getString("country_lis", "us");
+        Log.e("PREFERENCE", country);
+        order = sharedPreferences.getString("order_list", "PublishedAt");
+        Log.e("PREFERENCE", order);
     }
 }

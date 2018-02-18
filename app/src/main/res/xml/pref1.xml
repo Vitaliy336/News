@@ -12,7 +12,7 @@
     <PreferenceCategory android:title="Hot News">
 
         <ListPreference
-            android:defaultValue="true"
+            android:defaultValue="us"
             android:entries="@array/countries"
             android:entryValues="@array/countries"
             android:key="country_list"
@@ -21,7 +21,7 @@
     <PreferenceCategory android:title="Search news">
 
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="PublishedAt"
             android:entries="@array/sorted"
             android:entryValues="@array/sorted"
             android:key="order_list"
