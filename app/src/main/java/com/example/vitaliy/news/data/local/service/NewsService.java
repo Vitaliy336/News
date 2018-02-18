@@ -37,7 +37,8 @@ public class NewsService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        check();
+        createNotification();
+       // check();
         return Service.START_STICKY;
     }
 
