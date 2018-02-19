@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        preferences();
         manager.cancel(1);
 
 
@@ -109,11 +110,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startAlarm() {
-        Intent i = new Intent(this, NewsService.class);
-        PendingIntent pi = PendingIntent.getService(this, code, i, 0);
+//        Intent i = new Intent(this, MyReceiver.class);
+//        PendingIntent pi = PendingIntent.getService(this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        am.setRepeating(AlarmManager.ELAPSED_REALTIME,
+//                SystemClock.elapsedRealtime(), delay, pi);
+        Intent i = new Intent(getBaseContext(), MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        am.setRepeating(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime(), delay, pi);
+        Calendar t = Calendar.getInstance();
+        t.setTimeInMillis(System.currentTimeMillis());
+
+        am.setRepeating(AlarmManager.RTC_WAKEUP, t.getTimeInMillis(), delay, pendingIntent);
     }
 
     private void checkForDelete() {
@@ -210,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         initView();
         checkForDelete();
-        preferences();
         if (notifications) {
             startAlarm();
         } else {
@@ -219,10 +227,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void stopAlarm() {
-        Intent i = new Intent(this, NewsService.class);
-        PendingIntent pi = PendingIntent.getService(this, code, i, 0);
+//        Intent i = new Intent(this, MyReceiver.class);
+//        PendingIntent pi = PendingIntent.getService(this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        am.cancel(pi);
 
-        am.cancel(pi);
+        Intent i = new Intent(getBaseContext(), MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar t = Calendar.getInstance();
+        t.setTimeInMillis(System.currentTimeMillis());
+
+        am.cancel(pendingIntent);
     }
 
     private void preferences() {
