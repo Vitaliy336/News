@@ -13,7 +13,8 @@ import android.util.Log;
 
 public class MyReceiver extends BroadcastReceiver {
 
-    public static final long delay = 3000; //* 60 * 30;
+    private static final int code = 322;
+    private static final long delay = 3000; //* 60 * 30;
     private SharedPreferences sharedPreferences;
 
 
@@ -32,7 +33,7 @@ public class MyReceiver extends BroadcastReceiver {
         AlarmManager mgr =
                 (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NewsService.class);
-        PendingIntent pi = PendingIntent.getService(context, 322, i, 0);
+        PendingIntent pi = PendingIntent.getService(context, code, i, 0);
 
         mgr.cancel(pi);
     }
@@ -42,7 +43,7 @@ public class MyReceiver extends BroadcastReceiver {
         AlarmManager mgr =
                 (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NewsService.class);
-        PendingIntent pi = PendingIntent.getService(context, 322, i, 0);
+        PendingIntent pi = PendingIntent.getService(context, code, i, 0);
 
         mgr.setRepeating(AlarmManager.ELAPSED_REALTIME,
                 SystemClock.elapsedRealtime(), delay, pi);

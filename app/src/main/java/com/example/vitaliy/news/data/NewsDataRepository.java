@@ -19,7 +19,8 @@ public class NewsDataRepository implements NewsDataSource {
     }
 
     @Override
-    public void getHotNews(final getListCallback callback, final String category, final String source, int page) {
+    public void getHotNews(final getListCallback callback, final String category, final String source, int page,
+                           final String country) {
         remoteNewsDataSource.getHotNews(new getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
@@ -30,13 +31,13 @@ public class NewsDataRepository implements NewsDataSource {
             @Override
             public void onFailure() {
                 int thispage = 1;
-                localNewsDataSource.getHotNews(callback, category, source, thispage);
+                localNewsDataSource.getHotNews(callback, category, source, thispage, country);
             }
-        }, category, source, page);
+        }, category, source, page, country);
     }
 
     @Override
-    public void getEverything(final getListCallback callback, final String query, final int page) {
+    public void getEverything(final getListCallback callback, final String query, final int page, final String order) {
         remoteNewsDataSource.getEverything(new getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
@@ -46,9 +47,9 @@ public class NewsDataRepository implements NewsDataSource {
 
             @Override
             public void onFailure() {
-                localNewsDataSource.getEverything(callback, query, page);
+                localNewsDataSource.getEverything(callback, query, page, order);
             }
-        }, query, page);
+        }, query, page, order);
     }
 
     @Override

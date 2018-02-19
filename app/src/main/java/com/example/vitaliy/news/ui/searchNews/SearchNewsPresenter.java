@@ -14,6 +14,7 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
     private String query = null;
     private SearchNewsContract.IAllNewsView view;
     private NewsDataRepository repository;
+    private String order = "";
     private int page = 1;
     private final int startingPage = 1;
 
@@ -58,7 +59,7 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
             public void onFailure() {
                 onFailure();
             }
-        }, query, page);
+        }, query, page, order);
     }
 
     @Override
@@ -74,6 +75,11 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
     @Override
     public void setPageNumber(int page) {
         this.page = page;
+    }
+
+    @Override
+    public void setOrder(String order) {
+        this.order = order;
     }
 
 }

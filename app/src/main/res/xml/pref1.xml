@@ -16,6 +16,7 @@
             android:entries="@array/countries"
             android:entryValues="@array/countries"
             android:key="country_list"
+            android:summary="@string/county_summary"
             android:title="Countries" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Search news">
@@ -25,6 +26,7 @@
             android:entries="@array/sorted"
             android:entryValues="@array/sorted"
             android:key="order_list"
+            android:summary="@string/sort_order_summary"
             android:title="Order" />
     </PreferenceCategory>
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String category = "";
     private String source = "";
+    private String country = "";
     private int page = 1;
     private final int startingPage = 1;
     private NewsDataRepository dataRepository;
@@ -53,7 +54,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
             public void onFailure() {
 
             }
-        }, category, source, page);
+        }, category, source, page, country);
     }
 
     @Override
@@ -84,5 +85,10 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     @Override
     public void setPageNumber(int page) {
         this.page = page;
+    }
+
+    @Override
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

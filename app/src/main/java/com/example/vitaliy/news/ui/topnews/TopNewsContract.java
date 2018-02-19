@@ -40,5 +40,7 @@ public interface TopNewsContract {
 
         void setPageNumber(int page);
 
+        void setCountry(String country);
+
     }
 }

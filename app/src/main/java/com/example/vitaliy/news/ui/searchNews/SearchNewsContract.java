@@ -31,5 +31,7 @@ public interface SearchNewsContract {
         void getSearchQuery(String query);
 
         void setPageNumber(int page);
+
+        void setOrder(String order);
     }
 }

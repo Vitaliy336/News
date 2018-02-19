@@ -48,15 +48,14 @@ public class MainActivity extends AppCompatActivity {
     private AlarmManager am;
     private static final int code = 322;
     private boolean notifications;
-    private String country;
-    private String order;
+    private String country="";
+    private String order="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        preferences();
         manager.cancel(1);
 
 
@@ -110,11 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startAlarm() {
-//        Intent i = new Intent(this, MyReceiver.class);
-//        PendingIntent pi = PendingIntent.getService(this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        am.setRepeating(AlarmManager.ELAPSED_REALTIME,
-//                SystemClock.elapsedRealtime(), delay, pi);
         Intent i = new Intent(getBaseContext(), MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -219,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         initView();
         checkForDelete();
+        preferences();
         if (notifications) {
             startAlarm();
         } else {
@@ -227,11 +222,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void stopAlarm() {
-//        Intent i = new Intent(this, MyReceiver.class);
-//        PendingIntent pi = PendingIntent.getService(this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        am.cancel(pi);
-
         Intent i = new Intent(getBaseContext(), MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -245,9 +235,17 @@ public class MainActivity extends AppCompatActivity {
     private void preferences() {
         notifications = sharedPreferences.getBoolean("notifications", true);
         Log.e("PREFERENCE", String.valueOf(notifications));
-        country = sharedPreferences.getString("country_lis", "us");
+        country = sharedPreferences.getString("country_list", "us");
         Log.e("PREFERENCE", country);
         order = sharedPreferences.getString("order_list", "PublishedAt");
         Log.e("PREFERENCE", order);
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getOrder() {
+        return order;
     }
 }

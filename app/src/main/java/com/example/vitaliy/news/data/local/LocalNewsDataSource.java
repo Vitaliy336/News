@@ -17,13 +17,13 @@ import java.util.List;
 public class LocalNewsDataSource implements NewsDataSource {
 
     @Override
-    public void getHotNews(getListCallback callback, String category, String source, int page) {
+    public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
         MyNewsTask myNewsTask = new MyNewsTask();
         myNewsTask.loadNews(callback, category, source);
     }
 
     @Override
-    public void getEverything(getListCallback callback, String query, int page) {
+    public void getEverything(getListCallback callback, String query, int page, String order) {
         MyNewsTask myNewsTask = new MyNewsTask();
         myNewsTask.searchNews(callback, query);
     }

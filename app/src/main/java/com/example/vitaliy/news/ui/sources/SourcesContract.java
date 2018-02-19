@@ -18,5 +18,6 @@ public interface SourcesContract {
         void prepareSources();
 
         void getSourceCategory(String category);
+
     }
 }

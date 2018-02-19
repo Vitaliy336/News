@@ -25,12 +25,11 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void getHotNews(final getListCallback callback, String category, String source, int page) {
+    public void getHotNews(final getListCallback callback, String category, String source, int page, String country) {
         Map<String, String> map = new HashMap<>();
-        map.put("country", "us");
+        map.put("country", country);
         if (!TextUtils.isEmpty(category)) {
             map.put("category", category);
-            map.remove("country");
         }
         if (!TextUtils.isEmpty(source)) {
             map.put("sources", source);
@@ -56,12 +55,13 @@ public class RemoteNewsDataSource implements NewsDataSource {
     }
 
     @Override
-    public void getEverything(final getListCallback callback, String query, int page) {
+    public void getEverything(final getListCallback callback, String query, int page, String order) {
         Map<String, String> map = new HashMap<>();
         if (!TextUtils.isEmpty(query)) {
             map.put("q", query);
         }
         map.put("apiKey", API_KEY);
+        map.put("sortBy", order);
         map.put("page", String.valueOf(page));
         if (callback != null) {
             apiInterface.getEverything(map).enqueue(new Callback<NewsResponse>() {

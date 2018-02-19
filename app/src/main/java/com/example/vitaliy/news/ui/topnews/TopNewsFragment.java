@@ -46,6 +46,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         initView();
         initListener();
         initPresenter();
+        getCountry();
         getSourceID();
         updateData();
     }
@@ -185,4 +186,8 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         presenter.setSourceID(sourceId);
     }
 
+    void getCountry(){
+        final String country = ((MainActivity)getActivity()).getCountry();
+        presenter.setCountry(country);
+    }
 }

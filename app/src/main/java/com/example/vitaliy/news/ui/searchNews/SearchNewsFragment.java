@@ -52,6 +52,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         initView();
         intiListener();
         initPresenter();
+        getOrder();
         updateData();
     }
 
@@ -173,5 +174,8 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         mgr.hideSoftInputFromWindow(windowToken, 0);
     }
 
-
+    void getOrder(){
+        final String order = ((MainActivity)getActivity()).getOrder();
+        presenter.setOrder(order);
+    }
 }

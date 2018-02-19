@@ -37,8 +37,7 @@ public class NewsService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        createNotification();
-       // check();
+        check();
         return Service.START_STICKY;
     }
 
@@ -65,7 +64,7 @@ public class NewsService extends Service {
             public void onFailure() {
 
             }
-        }, null, null, 1);
+        }, null, null, 1, null);
     }
 
 
