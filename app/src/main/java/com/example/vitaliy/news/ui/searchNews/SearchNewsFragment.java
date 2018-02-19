@@ -76,7 +76,8 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         searchNews.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (!TextUtils.isEmpty(searchNews.getText().toString())) {
+                if (!TextUtils.isEmpty(searchNews.getText().toString()) &&
+                        !TextUtils.equals(searchNews.getText(), " ") ) {
                     if (i == EditorInfo.IME_ACTION_SEARCH) {
                         presenter.getSearchQuery(searchNews.getText().toString());
                         presenter.prepareNews();
