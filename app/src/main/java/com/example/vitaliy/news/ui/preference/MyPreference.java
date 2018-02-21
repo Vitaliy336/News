@@ -26,7 +26,6 @@ public class MyPreference extends Activity {
 
 
     public static class MyPreferenceFragment extends PreferenceFragment{
-        private SharedPreferences sharedPreferences;
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

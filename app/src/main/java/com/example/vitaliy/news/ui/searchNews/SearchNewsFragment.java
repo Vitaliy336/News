@@ -170,12 +170,12 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         newsAdapter.addArticles(articles);
     }
 
-    public static void closeKeyboard(Context c, IBinder windowToken) {
+    private static void closeKeyboard(Context c, IBinder windowToken) {
         InputMethodManager mgr = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(windowToken, 0);
     }
 
-    void getOrder(){
+    private void getOrder(){
         final String order = ((MainActivity)getActivity()).getOrder();
         presenter.setOrder(order);
     }

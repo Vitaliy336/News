@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.local.service;
+package com.example.vitaliy.news.background;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,10 +11,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 
-public class MyReceiver extends BroadcastReceiver {
+public class NewsReceiver extends BroadcastReceiver {
 
     private static final int code = 322;
-    private static final long delay = 3000; //* 60 * 30;
+    private static final long delay = 3000; //* 60 * 60;
     private SharedPreferences sharedPreferences;
 
 

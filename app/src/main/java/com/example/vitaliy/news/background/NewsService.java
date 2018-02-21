@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.data.local.service;
+package com.example.vitaliy.news.background;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -37,6 +37,7 @@ public class NewsService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        createNotification();
         check();
         return Service.START_STICKY;
     }
@@ -79,7 +80,7 @@ public class NewsService extends Service {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(android.R.drawable.ic_dialog_email)
-                        .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                        .setVibrate(new long[] { 1000, 1000})
                         .setLights(Color.GREEN, 3000, 3000)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(getString(R.string.update))

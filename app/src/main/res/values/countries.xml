@@ -12,6 +12,42 @@
         <item>ch</item>
         <item>cn</item>
         <item>co</item>
+        <item>cu</item>
+        <item>cz</item>
+        <item>de</item>
+        <item>eg</item>
+        <item>fr</item>
+        <item>gb</item>
+        <item>gr</item>
+        <item>hk</item>
+        <item>hu</item>
+        <item>id</item>
+        <item>ie</item>
+        <item>il</item>
+        <item>in</item>
+        <item>it</item>
+        <item>jp</item>
+        <item>kr</item>
+        <item>lt</item>
+        <item>lv</item>
+        <item>ma</item>
+        <item>mx</item>
+        <item>my</item>
+        <item>ng</item>
+        <item>nl</item>
+        <item>no</item>
+        <item>nz</item>
+        <item>ph</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>rs</item>
+        <item>ru</item>
+        <item>sa</item>
+        <item>se</item>
+        <item>sg</item>
+        <item>si</item>
+        <item>sk</item>
         <item>th</item>
         <item>tr</item>
         <item>tw</item>
@@ -19,39 +55,5 @@
         <item>us</item>
         <item>ve</item>
         <item>za</item>
-        <item>sk</item>
-        <item>si</item>
-        <item>sg</item>
-        <item>se</item>
-        <item>sa</item>
-        <item>rs</item>
-        <item>ro</item>
-        <item>pt</item>
-        <item>ph</item>
-        <item>nz</item>
-        <item>no</item>
-        <item>ng</item>
-        <item>nl</item>
-        <item>my</item>
-        <item>mx</item>
-        <item>ma</item>
-        <item>lv</item>
-        <item>lt</item>
-        <item>kr</item>
-        <item>jp</item>
-        <item>it</item>
-        <item>in</item>
-        <item>li</item>
-        <item>ie</item>
-        <item>id</item>
-        <item>hu</item>
-        <item>hk</item>
-        <item>gr</item>
-        <item>gb</item>
-        <item>fr</item>
-        <item>eg</item>
-        <item>de</item>
-        <item>cz</item>
-        <item>cu</item>
     </string-array>
 </resources>

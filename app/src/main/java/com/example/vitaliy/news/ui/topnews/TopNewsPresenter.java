@@ -2,6 +2,7 @@
 package com.example.vitaliy.news.ui.topnews;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
@@ -91,4 +92,6 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     public void setCountry(String country) {
         this.country = country;
     }
+
+
 }

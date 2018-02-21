@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,9 +19,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.vitaliy.news.background.NewsReceiver;
 import com.example.vitaliy.news.data.local.LocalNewsDataSource;
-import com.example.vitaliy.news.data.local.service.MyReceiver;
-import com.example.vitaliy.news.data.local.service.NewsService;
 import com.example.vitaliy.news.ui.ViewPagerAdapter;
 import com.example.vitaliy.news.ui.fullnews.FullNewsActivity;
 import com.example.vitaliy.news.ui.preference.MyPreference;
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
-    private static final long delay = 1000;// * 60 * 30;
+    private static final long delay = 1000;// * 60 * 60;
     private ConnectivityManager manager;
     private AlertDialog.Builder builder;
     private AlarmManager am;
@@ -58,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.cancel(1);
 
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startAlarm() {
-        Intent i = new Intent(getBaseContext(), MyReceiver.class);
+        Intent i = new Intent(getBaseContext(), NewsReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -184,10 +182,6 @@ public class MainActivity extends AppCompatActivity {
         showTopNews();
     }
 
-    public String getSourceId() {
-        return sourceId;
-    }
-
     public void showFullInfo(String url) {
         if (checkNetwork()) {
             Intent intent = new Intent(this, FullNewsActivity.class);
@@ -221,8 +215,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void stopAlarm() {
-        Intent i = new Intent(getBaseContext(), MyReceiver.class);
+    private void stopAlarm() {
+        Intent i = new Intent(getBaseContext(), NewsReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 MainActivity.this, code, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -234,11 +228,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void preferences() {
         notifications = sharedPreferences.getBoolean("notifications", true);
-        Log.e("PREFERENCE", String.valueOf(notifications));
         country = sharedPreferences.getString("country_list", "us");
-        Log.e("PREFERENCE", country);
         order = sharedPreferences.getString("order_list", "PublishedAt");
-        Log.e("PREFERENCE", order);
     }
 
     public String getCountry() {
@@ -247,5 +238,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String getOrder() {
         return order;
+    }
+
+    public String getSourceId() {
+        return sourceId;
     }
 }
