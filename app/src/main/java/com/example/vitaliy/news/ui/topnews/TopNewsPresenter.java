@@ -8,6 +8,7 @@ import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -75,7 +76,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         if (!TextUtils.isEmpty(this.source)) {
             view.hideCategories();
             view.showSourceFilter();
-            view.viewSetText(source);
+            view.viewSetText(category);
         } else {
             view.hideSourceFilter();
             view.showCategories();
