@@ -1,6 +1,7 @@
 package com.example.vitaliy.news;
 
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsContract;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsPresenter;
 
@@ -11,7 +12,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -21,8 +21,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.isNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
 
 /**
  * Created by v_shevchyk on 22.02.18.
@@ -30,59 +31,97 @@ import static org.mockito.Matchers.isNull;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchNewsPresenterUnitTest {
     private List<Article> articles;
-    private List<Object> objects;
     private String fakeUrl = "http//....";
+
+
+    public NewsDataSource goodDataSource = new NewsDataSource() {
+        @Override
+        public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
+            callback.onListReceived(articles);
+        }
+
+        @Override
+        public void getEverything(getListCallback callback, String query, int page, String order) {
+            callback.onListReceived(articles);
+        }
+
+        @Override
+        public void getSources(getListCallback callback, String category) {
+            callback.onListReceived(articles);
+        }
+    };
+
+    public NewsDataSource badDataSource = new NewsDataSource() {
+        @Override
+        public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
+            callback.onFailure();
+        }
+
+        @Override
+        public void getEverything(getListCallback callback, String query, int page, String order) {
+            callback.onFailure();
+        }
+
+        @Override
+        public void getSources(getListCallback callback, String category) {
+            callback.onFailure();
+        }
+    };
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-    @Mock
     SearchNewsContract.IAllNewsPresenter presenter;
 
     @Mock
     SearchNewsContract.IAllNewsView view;
 
-
+    @Captor
+    ArgumentCaptor<String> argum;
 
     @Before
     public void setUp() {
         articles = new ArrayList<>();
-        objects = new ArrayList<>();
+        articles.add(new Article());
         presenter = new SearchNewsPresenter();
+        presenter.attachView(view);
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void SearchNewsDisplayTest(){
+    public void SearchNewsDisplayTest() {
         view.displayNews(articles);
         Mockito.verify(view, new AtLeast(1)).displayNews(articles);
     }
 
     @Test
-    public void testFullNewsUrl(){
+    public void testFullNewsUrl() {
         presenter.goTofullNews(fakeUrl);
-        ArgumentCaptor<String> argum = ArgumentCaptor.forClass(String.class);
         Mockito.verify(presenter).goTofullNews(argum.capture());
         assertEquals(fakeUrl, argum.getValue());
     }
 
     @Test
-    public void testSeachNewsQuery(){
+    public void testSeachNewsQuery() {
         presenter.getSearchQuery("query");
-        ArgumentCaptor<String> argum = ArgumentCaptor.forClass(String.class);
         Mockito.verify(presenter).getSearchQuery(argum.capture());
         assertEquals("query", argum.getValue());
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testSearchQueryNull(){
+    @Test(expected = NullPointerException.class)
+    public void testSearchQueryNull() {
         Object o = null;
         System.out.println(o.toString());
         presenter.getSearchQuery(o.toString());
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        Mockito.verify(presenter).getSearchQuery(captor.capture());
-        assertNotNull(null, captor.getValue());
+        Mockito.verify(presenter).getSearchQuery(argum.capture());
+        assertNotNull(null, argum.getValue());
     }
 
+    @Test
+    public void sss(){
+        presenter.setDataSource(goodDataSource);
+        presenter.prepareNews();
+        Mockito.verify(view).displayNews((List<Article>) any());
+    }
 
 }

@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
@@ -63,6 +64,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
 
     private void initPresenter() {
         presenter = new SearchNewsPresenter();
+        presenter.setDataSource(App.getInstance().getDataRepositoryInstance());
         presenter.attachView(this);
     }
 

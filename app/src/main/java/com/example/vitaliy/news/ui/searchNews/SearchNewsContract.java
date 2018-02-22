@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.ui.searchNews;
 
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.ui.base.BasePresenter;
 import com.example.vitaliy.news.ui.base.BaseView;
 
@@ -21,6 +22,8 @@ public interface SearchNewsContract {
     }
 
     interface IAllNewsPresenter extends BasePresenter<IAllNewsView> {
+
+        void setDataSource(NewsDataSource dataSource);
 
         void start();
 
