@@ -87,8 +87,6 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
                         if(newsAdapter.getItemCount() == 0);{
                             info.setText(R.string.nothing);
                         }
-
-                        Log.e("after query submit", String.valueOf(newsAdapter.getItemCount()));
                         searchNews.clearFocus();
                         newsAdapter.clear();
                         closeKeyboard(getActivity(), searchNews.getWindowToken());
@@ -104,7 +102,6 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         endlessRecycler = new EndlessRecyclerView(layoutManagerForNews) {
             @Override
             public void onLoadMore(int page, int totalitemCount, RecyclerView view) {
-                Log.e("PAGESSSS", String.valueOf(page));
                 if(((MainActivity) getActivity()).checkNetwork()) {
                     presenter.setPageNumber(page);
                     presenter.prepareNews();
@@ -145,7 +142,6 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
 
     @Override
     public void displayNews(List<Article> news) {
-        Log.e("Allnews", "show");
         newsAdapter.setData(news, getActivity());
         newsAdapter.notifyDataSetChanged();
 

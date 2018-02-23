@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
@@ -66,6 +67,7 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
 
     private void initPresenter() {
         presenter = new TopNewsPresenter();
+        presenter.setDataSource(App.getInstance().getDataRepositoryInstance());
         presenter.attachView(this);
     }
 

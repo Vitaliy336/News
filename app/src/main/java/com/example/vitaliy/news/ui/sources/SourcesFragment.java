@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.source.Source;
@@ -64,6 +65,7 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
 
     private void initPresenter() {
         presenter = new SourcesPresenter();
+        presenter.setDataSource(App.getInstance().getDataRepositoryInstance());
         presenter.attachView(this);
 
     }
@@ -112,6 +114,11 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     public void showSources(List<Source> list) {
         sourcesAdapter.setInfo(list, getActivity());
         Log.e("SSS", list.size() + "");
+    }
+
+    @Override
+    public void doNothing() {
+
     }
 
 }

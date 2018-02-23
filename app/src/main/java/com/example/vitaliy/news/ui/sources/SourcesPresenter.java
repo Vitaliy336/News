@@ -3,6 +3,7 @@ package com.example.vitaliy.news.ui.sources;
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.data.NewsDataRepository;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class SourcesPresenter implements ISourcesPresenter {
 
     private String category = "";
-    private NewsDataRepository repository;
+    private NewsDataSource dataSource;
     private SourcesContract.ISourcesView view;
 
     public SourcesPresenter() {
@@ -34,9 +35,14 @@ public class SourcesPresenter implements ISourcesPresenter {
     }
 
     @Override
+    public void setDataSource(NewsDataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+
+    @Override
     public void prepareSources() {
-        repository = App.getInstance().getDataRepositoryInstance();
-        repository.getSources(new NewsDataRepository.getListCallback() {
+        dataSource.getSources(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
                 view.showSources((List<Source>) article);

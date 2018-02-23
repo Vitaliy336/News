@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String country = "";
     private int page = 1;
     private final int startingPage = 1;
-    private NewsDataRepository dataRepository;
+    private NewsDataSource dataSource;
     private TopNewsContract.ITopNewsView view;
 
     public TopNewsPresenter() {
@@ -41,8 +42,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
     @Override
     public void prepareNews() {
-        dataRepository = App.getInstance().getDataRepositoryInstance();
-        dataRepository.getHotNews(new NewsDataRepository.getListCallback() {
+        dataSource.getHotNews(new NewsDataRepository.getListCallback() {
             @Override
             public void onListReceived(List<?> article) {
                 if (page > startingPage){
@@ -92,6 +92,11 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     @Override
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public void setDataSource(NewsDataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
 

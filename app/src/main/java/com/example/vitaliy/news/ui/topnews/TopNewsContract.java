@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.ui.topnews;
 
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.ui.base.BasePresenter;
 import com.example.vitaliy.news.ui.base.BaseView;
 
@@ -41,6 +42,8 @@ public interface TopNewsContract {
         void setPageNumber(int page);
 
         void setCountry(String country);
+
+        void setDataSource(NewsDataSource dataSource);
 
     }
 }
