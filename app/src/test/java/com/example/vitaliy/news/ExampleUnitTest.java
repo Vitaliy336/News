@@ -1,7 +1,13 @@
 package com.example.vitaliy.news;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.*;
 
 /**
@@ -14,4 +20,17 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void add_notCorrect(){
+        assertNotEquals(7, 3+1);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void nullCheck(){
+        String s = null;
+        assertTrue(s.isEmpty());
+    }
+
+
 }

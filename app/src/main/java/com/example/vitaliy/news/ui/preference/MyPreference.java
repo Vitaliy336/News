@@ -11,10 +11,6 @@ import android.view.ContextThemeWrapper;
 
 import com.example.vitaliy.news.R;
 
-/**
- * Created by v_shevchyk on 16.02.18.
- */
-
 public class MyPreference extends Activity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

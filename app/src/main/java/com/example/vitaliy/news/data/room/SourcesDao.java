@@ -11,15 +11,16 @@ import java.util.List;
 
 @Dao
 public interface SourcesDao {
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAll(List<Source> sources);
+    void insertAll(List<Source> sources); //checked
 
     @Query("DELETE FROM SOURCES")
-    void nukeTable();
+    void nukeTable(); //checked
 
     @Query("Select * FROM SOURCES WHERE _category LIKE :category")
     List<Source> getSourtedSources(String category);
 
     @Query("SELECT * FROM SOURCES")
-    List<Source> getAllSources();
+    List<Source> getAllSources(); //checked
 }
