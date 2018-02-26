@@ -42,7 +42,6 @@ public class SourceDaoTest {
         secondSource.setCategory("Fake category1");
         sourceList.add(source);
         sourceList.add(secondSource);
-
     }
 
     @After

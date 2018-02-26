@@ -52,7 +52,6 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
 
             @Override
             public void onFailure() {
-                onFailure();
             }
         }, query, page, order);
     }

@@ -41,6 +41,7 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     private TextView info;
     private EndlessRecyclerView endlessRecycler;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

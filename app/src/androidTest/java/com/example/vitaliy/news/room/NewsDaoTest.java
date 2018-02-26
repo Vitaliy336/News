@@ -56,7 +56,7 @@ public class NewsDaoTest {
     }
 
     @Test
-    public void IsertandSelectArticcleDataTest() {
+    public void InsertAndSelectArticleDataTest() {
         mDao.insertAll(articleList);
         assertEquals(2, mDao.getAllArticles().size());
     }
@@ -118,7 +118,6 @@ public class NewsDaoTest {
         assertTrue(mDao.getAllArticles().isEmpty());
     }
 
-
     @Test
     public void checkDeleteOneArticles() {
         mDao.insertAll(articleList);
@@ -131,6 +130,4 @@ public class NewsDaoTest {
         mDao.insertAll(articleList);
         assertEquals(2, mDao.count());
     }
-
-
 }

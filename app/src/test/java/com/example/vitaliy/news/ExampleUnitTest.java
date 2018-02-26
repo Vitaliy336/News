@@ -1,5 +1,8 @@
 package com.example.vitaliy.news;
 
+import com.example.vitaliy.news.modules.GoodDataSource;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
@@ -31,6 +34,7 @@ public class ExampleUnitTest {
         String s = null;
         assertTrue(s.isEmpty());
     }
+
 
 
 }
