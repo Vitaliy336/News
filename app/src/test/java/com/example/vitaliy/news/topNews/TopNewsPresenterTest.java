@@ -34,7 +34,7 @@ import static org.mockito.Matchers.any;
  * Created by v_shevchyk on 22.02.18.
  */
 @RunWith(JUnit4.class)
-public class TopNEwsPresenterTest {
+public class TopNewsPresenterTest {
     private List<Article> articles;
     private List<Source> sources;
     private String fakeUrl = "http//....";
