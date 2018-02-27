@@ -53,6 +53,7 @@ public class SourcePresenterTest {
         presenter.setDataSource(badDataSource.badDatasource);
         presenter.prepareSources();
         Mockito.verify(view, Mockito.never()).showSources((List<Source>) any());
+        Mockito.verify(view).showErrorMessage((String)any());
     }
 
     @Test

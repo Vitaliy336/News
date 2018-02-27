@@ -14,6 +14,8 @@ public interface TopNewsContract {
 
         void displayNews(List<Article> article);
 
+        void displayError(String errorMessage);
+
         void hideCategories();
 
         void showCategories();

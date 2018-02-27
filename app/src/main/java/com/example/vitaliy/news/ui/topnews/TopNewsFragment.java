@@ -149,6 +149,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
     }
 
     @Override
+    public void displayError(String errorMessage) {
+        //todo
+    }
+
+    @Override
     public void hideCategories() {
         categories.setVisibility(View.INVISIBLE);
     }

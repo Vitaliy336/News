@@ -52,6 +52,7 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
 
             @Override
             public void onFailure() {
+                view.showErrorMessage("Fail to load data");
             }
         }, query, page, order);
     }

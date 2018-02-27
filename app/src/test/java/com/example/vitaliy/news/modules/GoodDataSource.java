@@ -1,6 +1,7 @@
 package com.example.vitaliy.news.modules;
 
 import com.example.vitaliy.news.data.model.news.Article;
+import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.ArrayList;
@@ -8,9 +9,11 @@ import java.util.List;
 
 public class GoodDataSource {
     private List<Article> articles = new ArrayList<>();
+    private List<Source> sources = new ArrayList<>();
 
     public GoodDataSource() {
         articles.add(new Article());
+        sources.add(new Source());
     }
 
     public NewsDataSource dataSource = new NewsDataSource() {
@@ -26,7 +29,7 @@ public class GoodDataSource {
 
         @Override
         public void getSources(getListCallback callback, String category) {
-            callback.onListReceived(articles);
+            callback.onListReceived(sources);
         }
     };
 }

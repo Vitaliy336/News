@@ -11,6 +11,8 @@ public interface SourcesContract {
     interface ISourcesView extends BaseView {
         void showSources(List<Source> list);
 
+        void showErrorMessage(String message);
+
         void doNothing();
 
     }

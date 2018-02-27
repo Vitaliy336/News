@@ -54,7 +54,7 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
 
             @Override
             public void onFailure() {
-
+                view.displayError("Fail to load data");
             }
         }, category, source, page, country);
     }

@@ -14,6 +14,8 @@ public interface SearchNewsContract {
 
         void showFullNews(String url);
 
+        void showErrorMessage(String message);
+
         void hideMessage();
 
         void showMessage();

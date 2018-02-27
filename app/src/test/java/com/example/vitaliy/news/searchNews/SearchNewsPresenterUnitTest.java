@@ -67,6 +67,7 @@ public class SearchNewsPresenterUnitTest {
         presenter.setDataSource(badDataSource.badDatasource);
         presenter.prepareNews();
         Mockito.verify(view, Mockito.never()).displayNews((List<Article>)any());
+        Mockito.verify(view).showErrorMessage((String)any());
     }
 
     @Test

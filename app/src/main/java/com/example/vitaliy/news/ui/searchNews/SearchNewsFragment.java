@@ -155,6 +155,11 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
     }
 
     @Override
+    public void showErrorMessage(String message) {
+        // TODO: 27.02.18 display error message
+    }
+
+    @Override
     public void hideMessage() {
         info.setVisibility(View.INVISIBLE);
     }

@@ -117,6 +117,11 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
     }
 
     @Override
+    public void showErrorMessage(String message) {
+        // TODO: 27.02.18 display error message
+    }
+
+    @Override
     public void doNothing() {
 
     }
