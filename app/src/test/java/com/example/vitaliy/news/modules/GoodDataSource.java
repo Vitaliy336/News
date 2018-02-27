@@ -6,10 +6,6 @@ import com.example.vitaliy.news.data.source.NewsDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by v_shevchyk on 26.02.18.
- */
-
 public class GoodDataSource {
     private List<Article> articles = new ArrayList<>();
 

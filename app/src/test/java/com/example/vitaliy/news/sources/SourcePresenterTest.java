@@ -3,6 +3,9 @@ package com.example.vitaliy.news.sources;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.modules.BadDataSource;
+import com.example.vitaliy.news.modules.GoodDataSource;
+import com.example.vitaliy.news.ui.searchNews.SearchNewsPresenter;
 import com.example.vitaliy.news.ui.sources.SourcesContract;
 import com.example.vitaliy.news.ui.sources.SourcesPresenter;
 
@@ -26,43 +29,8 @@ import static org.mockito.Matchers.any;
 
 @RunWith(JUnit4.class)
 public class SourcePresenterTest {
-    List<Source> sources;
-    List<Article> articles;
-
-    public NewsDataSource goodDataSource = new NewsDataSource() {
-        @Override
-        public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
-
-        }
-
-        @Override
-        public void getEverything(getListCallback callback, String query, int page, String order) {
-
-        }
-
-        @Override
-        public void getSources(getListCallback callback, String category) {
-            callback.onListReceived(sources);
-        }
-    };
-
-    public NewsDataSource badDataSource = new NewsDataSource() {
-        @Override
-        public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
-        }
-
-        @Override
-        public void getEverything(getListCallback callback, String query, int page, String order) {
-
-        }
-
-        @Override
-        public void getSources(getListCallback callback, String category) {
-            callback.onFailure();
-        }
-    };
-
-
+    private GoodDataSource goodDataSource;
+    private BadDataSource badDataSource;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -75,21 +43,21 @@ public class SourcePresenterTest {
 
     @Before
     public void setUp() {
-        articles = new ArrayList<>();
-        articles.add(new Article());
+        goodDataSource = new GoodDataSource();
+        badDataSource = new BadDataSource();
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void SourceBadRequest() {
-        presenter.setDataSource(badDataSource);
+        presenter.setDataSource(badDataSource.badDatasource);
         presenter.prepareSources();
         Mockito.verify(view, Mockito.never()).showSources((List<Source>) any());
     }
 
     @Test
     public void SourceGoodDataSource() {
-        presenter.setDataSource(goodDataSource);
+        presenter.setDataSource(goodDataSource.dataSource);
         presenter.prepareSources();
         Mockito.verify(view).showSources((List<Source>) any());
     }

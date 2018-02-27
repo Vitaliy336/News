@@ -3,6 +3,8 @@ package com.example.vitaliy.news.topNews;
 import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.model.source.Source;
 import com.example.vitaliy.news.data.source.NewsDataSource;
+import com.example.vitaliy.news.modules.BadDataSource;
+import com.example.vitaliy.news.modules.GoodDataSource;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsContract;
 import com.example.vitaliy.news.ui.searchNews.SearchNewsPresenter;
 import com.example.vitaliy.news.ui.topnews.TopNewsContract;
@@ -35,46 +37,8 @@ import static org.mockito.Matchers.any;
  */
 @RunWith(JUnit4.class)
 public class TopNewsPresenterTest {
-    private List<Article> articles;
-    private List<Source> sources;
-    private String fakeUrl = "http//....";
-
-
-
-    public NewsDataSource goodDataSource = new NewsDataSource() {
-        @Override
-        public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
-            callback.onListReceived(articles);
-        }
-
-        @Override
-        public void getEverything(getListCallback callback, String query, int page, String order) {
-
-        }
-
-        @Override
-        public void getSources(getListCallback callback, String category) {
-        }
-    };
-
-    public NewsDataSource badDataSource = new NewsDataSource() {
-        @Override
-        public void getHotNews(getListCallback callback, String category, String source, int page, String country) {
-            callback.onFailure();
-        }
-
-        @Override
-        public void getEverything(getListCallback callback, String query, int page, String order) {
-
-        }
-
-        @Override
-        public void getSources(getListCallback callback, String category) {
-        }
-    };
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
+    private GoodDataSource goodDataSource;
+    private BadDataSource badDataSource;
 
     @InjectMocks
     TopNewsPresenter presenter;
@@ -85,21 +49,21 @@ public class TopNewsPresenterTest {
 
     @Before
     public void setUp() {
-        articles = new ArrayList<>();
-        articles.add(new Article());
+        goodDataSource = new GoodDataSource();
+        badDataSource = new BadDataSource();
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void goodRequestTest(){
-        presenter.setDataSource(goodDataSource);
+        presenter.setDataSource(goodDataSource.dataSource);
         presenter.prepareNews();
         Mockito.verify(view).displayNews((List<Article>) any());
     }
 
     @Test
     public void badRequestTest(){
-        presenter.setDataSource(badDataSource);
+        presenter.setDataSource(badDataSource.badDatasource);
         presenter.prepareNews();
         Mockito.verify(view, Mockito.never()).displayNews((List<Article>) any());
     }

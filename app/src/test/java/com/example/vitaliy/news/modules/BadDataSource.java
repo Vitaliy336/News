@@ -2,10 +2,6 @@ package com.example.vitaliy.news.modules;
 
 import com.example.vitaliy.news.data.source.NewsDataSource;
 
-/**
- * Created by v_shevchyk on 26.02.18.
- */
-
 public class BadDataSource {
 
     public NewsDataSource badDatasource = new NewsDataSource() {

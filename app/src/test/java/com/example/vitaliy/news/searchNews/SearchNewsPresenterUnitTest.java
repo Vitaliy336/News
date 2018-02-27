@@ -34,8 +34,6 @@ import static org.mockito.Matchers.any;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class SearchNewsPresenterUnitTest {
-    private List<Article> articles;
-    private String fakeUrl = "http//....";
     private GoodDataSource goodDataSource;
     private BadDataSource badDataSource;
 
@@ -51,8 +49,6 @@ public class SearchNewsPresenterUnitTest {
 
     @Before
     public void setUp() {
-        articles = new ArrayList<>();
-        articles.add(new Article());
         presenter.attachView(view);
         goodDataSource = new GoodDataSource();
         badDataSource = new BadDataSource();
