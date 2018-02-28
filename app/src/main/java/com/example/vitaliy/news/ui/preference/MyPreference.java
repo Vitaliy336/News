@@ -11,6 +11,11 @@ import android.view.ContextThemeWrapper;
 
 import com.example.vitaliy.news.R;
 
+/**Create settings screen
+ *
+ * @author Vitaliy
+ * @version 1.0
+ */
 public class MyPreference extends Activity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

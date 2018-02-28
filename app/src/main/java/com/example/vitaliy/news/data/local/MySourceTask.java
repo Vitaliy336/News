@@ -11,6 +11,11 @@ import com.example.vitaliy.news.data.source.NewsDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains AsyncTasks to CRUD data in source table
+ * @author Vitaliy
+ * @version 1.5
+ */
 public class MySourceTask {
     private NewsDb db;
 

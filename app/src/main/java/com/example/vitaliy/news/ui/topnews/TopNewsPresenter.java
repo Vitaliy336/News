@@ -2,17 +2,19 @@
 package com.example.vitaliy.news.ui.topnews;
 
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.example.vitaliy.news.App;
-import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.NewsDataRepository;
+import com.example.vitaliy.news.data.model.news.Article;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Presenter class for HotNews
+ *
+ * @author Vitaliy
+ * @version 1.0
+ */
 public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
     private String category = "";
     private String source = "";
@@ -64,11 +66,25 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         view.showFullNews(url);
     }
 
+    /**
+     * Set news category filter
+     *
+     * @param category String
+     */
     @Override
     public void setCategoryName(String category) {
         this.category = category;
     }
 
+
+    /**
+     * Check if source paramether is empty.
+     * If source not empty -> hide categories menu
+     * and show editText with source name
+     * Else show categories and hide source name
+     *
+     * @since 15/Jan/18
+     */
     @Override
     public void setSourceID(String source) {
         view.hideSourceFilter();
@@ -84,16 +100,29 @@ public class TopNewsPresenter implements TopNewsContract.ITopNewsPresenter {
         }
     }
 
+
+    /**
+     * Set news category filter
+     * @param page Integer
+     */
     @Override
     public void setPageNumber(int page) {
         this.page = page;
     }
 
+    /**
+     * Set news category filter
+     * @param country String
+     */
     @Override
     public void setCountry(String country) {
         this.country = country;
     }
 
+    /**
+     * Set NewsDataSource
+     * @param dataSource NewsDataSource
+     */
     @Override
     public void setDataSource(NewsDataSource dataSource) {
         this.dataSource = dataSource;

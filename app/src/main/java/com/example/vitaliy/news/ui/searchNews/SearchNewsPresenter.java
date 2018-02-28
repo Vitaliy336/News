@@ -7,6 +7,11 @@ import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.List;
 
+/** Presenter for search news
+ *
+ * @author Vitaliy
+ * @version 1.1
+ */
 public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter {
     private String query = null;
     private SearchNewsContract.IAllNewsView view;
@@ -57,26 +62,46 @@ public class SearchNewsPresenter implements SearchNewsContract.IAllNewsPresenter
         }, query, page, order);
     }
 
+    /**
+     * @see com.example.vitaliy.news.ui.topnews.TopNewsPresenter#goToFullNews(String)
+     * @param url String
+     */
     @Override
     public void goTofullNews(String url) {
         view.showFullNews(url);
     }
 
+    /**
+     * Set query for news search
+     * @param query
+     */
     @Override
     public void getSearchQuery(String query) {
         this.query = query;
     }
 
+    /**
+     * @see com.example.vitaliy.news.ui.topnews.TopNewsPresenter#setPageNumber(int)
+     * @param page Integer
+     */
     @Override
     public void setPageNumber(int page) {
         this.page = page;
     }
 
+    /**
+     * Set news search by order
+     * @param order String
+     */
     @Override
     public void setOrder(String order) {
         this.order = order;
     }
 
+    /**
+     * @see com.example.vitaliy.news.ui.topnews.TopNewsPresenter#setDataSource(NewsDataSource)
+     * @param dataSource NewsDataSource
+     */
     @Override
     public void setDataSource(NewsDataSource dataSource){
         this.dataSource = dataSource;

@@ -16,14 +16,18 @@ import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.source.Source;
-import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.SourcesAdapter;
 
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Display all available sources
+ *
+ * @author Vitaliy
+ * @version 1.1.3
+ */
 public class SourcesFragment extends Fragment implements SourcesContract.ISourcesView {
     private View rootView;
     private SourcesPresenter presenter;
@@ -109,11 +113,13 @@ public class SourcesFragment extends Fragment implements SourcesContract.ISource
         categoriesS.setAdapter(sCategoriesAdapter);
     }
 
-
+    /**
+     * Send sources to SourcesAdapter
+     * @param list
+     */
     @Override
     public void showSources(List<Source> list) {
         sourcesAdapter.setInfo(list, getActivity());
-        Log.e("SSS", list.size() + "");
     }
 
     @Override

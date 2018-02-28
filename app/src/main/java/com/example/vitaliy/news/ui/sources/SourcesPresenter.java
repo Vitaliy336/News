@@ -7,7 +7,12 @@ import com.example.vitaliy.news.ui.sources.SourcesContract.ISourcesPresenter;
 
 import java.util.List;
 
-
+/**
+ * Sources presenter class
+ *
+ * @author Vitaliy
+ * @version 1.1.3
+ */
 public class SourcesPresenter implements ISourcesPresenter {
 
     private String category = "";
@@ -15,7 +20,6 @@ public class SourcesPresenter implements ISourcesPresenter {
     private SourcesContract.ISourcesView view;
 
     public SourcesPresenter() {
-
     }
 
     @Override
@@ -33,6 +37,11 @@ public class SourcesPresenter implements ISourcesPresenter {
         prepareSources();
     }
 
+    /**
+     * Set NewsDataSource
+     *
+     * @param dataSource NewsDataSource
+     */
     @Override
     public void setDataSource(NewsDataSource dataSource) {
         this.dataSource = dataSource;
@@ -54,7 +63,10 @@ public class SourcesPresenter implements ISourcesPresenter {
         }, category);
     }
 
-
+    /**
+     * Set NewsDataSource
+     * @param category String
+     */
     @Override
     public void getSourceCategory(String category) {
         this.category = category;

@@ -13,7 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Handles data from database
+ */
 public class LocalNewsDataSource implements NewsDataSource {
 
     @Override

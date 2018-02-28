@@ -1,4 +1,4 @@
-package com.example.vitaliy.news.ui;
+package com.example.vitaliy.news;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

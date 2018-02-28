@@ -1,6 +1,10 @@
 package com.example.vitaliy.news.ui.fullnews;
 
-
+/**Full article info presenter
+ *
+ * @author Vitaliy
+ * @version 1.0
+ */
 public class FullNewsPresenter implements FullNewsContract.IFullNewsPresenter {
 
     private FullNewsContract.IFullNewsView view;

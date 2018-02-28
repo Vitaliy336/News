@@ -23,6 +23,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Contains AsyncTasks to CRUD data in News table
+ * @author Vitaliy
+ * @version 1.5
+ */
 public class MyNewsTask {
     private final int daysCount = 3;
     private NewsDb db;

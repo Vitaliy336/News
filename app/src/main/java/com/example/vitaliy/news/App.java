@@ -8,6 +8,12 @@ import com.example.vitaliy.news.data.room.NewsDb;
 import com.example.vitaliy.news.data.source.NewsDataSource;
 import com.example.vitaliy.news.data.source.RemoteNewsDataSource;
 
+/**Singleton class.
+ * Create Room and NewsDataRepository instances
+ *
+ * @author vitaliy
+ * @version 1.0
+ */
 
 public class App extends Application {
 

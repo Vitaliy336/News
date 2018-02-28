@@ -9,6 +9,11 @@ import com.example.vitaliy.news.data.model.source.Source;
 
 import java.util.List;
 
+/**Sql queries for sources table
+ *
+ * @author Vitaliy
+ * @version 1.2
+ */
 @Dao
 public interface SourcesDao {
 

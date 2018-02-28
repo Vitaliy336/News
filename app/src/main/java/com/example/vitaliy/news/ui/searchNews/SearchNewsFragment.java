@@ -9,7 +9,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +22,16 @@ import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.data.NewsDataRepository;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
 import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 
-import java.util.Arrays;
 import java.util.List;
 
+/**Display news by user query
+ *
+ * @author Vitaliy
+ * @version 1.1
+ */
 public class SearchNewsFragment extends Fragment implements SearchNewsContract.IAllNewsView {
 
     private View rootView;
@@ -58,6 +60,9 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         updateData();
     }
 
+    /**
+     * Update items in recycler view when filter or page changing
+     */
     private void updateData() {
         presenter.start();
         endlessRecycler.reset();
@@ -159,16 +164,27 @@ public class SearchNewsFragment extends Fragment implements SearchNewsContract.I
         // TODO: 27.02.18 display error message
     }
 
+    /**
+     * When searching failed set message invisible
+     */
     @Override
     public void hideMessage() {
         info.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * When searching failed set message visible
+     */
     @Override
     public void showMessage() {
         info.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Add more articles to adapter
+     *
+     * @param articles List
+     */
     @Override
     public void pagination(List<Article> articles) {
         newsAdapter.addArticles(articles);

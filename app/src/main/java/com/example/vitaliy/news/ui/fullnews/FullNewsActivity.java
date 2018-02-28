@@ -9,6 +9,11 @@ import android.widget.ProgressBar;
 
 import com.example.vitaliy.news.R;
 
+/**Show all aticle information
+ *
+ * @author Vitaliy
+ * @version 1.1
+ */
 public class FullNewsActivity extends AppCompatActivity implements FullNewsContract.IFullNewsView {
     private FullNewsContract.IFullNewsPresenter presenter;
     private ProgressBar progressBar;
@@ -44,6 +49,10 @@ public class FullNewsActivity extends AppCompatActivity implements FullNewsContr
         progressBar = findViewById(R.id.newsPB);
     }
 
+    /**
+     * Load article info to webView by url
+     * @param url String
+     */
     @Override
     public void showContent(String url) {
         webView.setWebViewClient(new WebViewClient());

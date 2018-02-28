@@ -19,14 +19,19 @@ import com.example.vitaliy.news.App;
 import com.example.vitaliy.news.MainActivity;
 import com.example.vitaliy.news.R;
 import com.example.vitaliy.news.data.model.news.Article;
-import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 import com.example.vitaliy.news.ui.adapters.CategoriesAdapter;
 import com.example.vitaliy.news.ui.adapters.NewsAdapter;
+import com.example.vitaliy.news.ui.view.EndlessRecyclerView;
 
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Display hot news
+ *
+ * @author Vitaliy
+ * @version 1.0
+ */
 public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNewsView {
     private TopNewsContract.ITopNewsPresenter presenter;
     private RelativeLayout relativeLayout;
@@ -52,7 +57,9 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         updateData();
     }
 
-
+    /**
+     * Update items in recycler view when filter or page changing
+     */
     private void updateData() {
         presenter.start();
         endlessRecycler.reset();
@@ -141,7 +148,11 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         newsRecyclerView.addOnScrollListener(endlessRecycler);
     }
 
-
+    /**
+     * send news to NewsAdapter
+     *
+     * @param news List<Article>
+     */
     @Override
     public void displayNews(List<Article> news) {
         newsAdapter.setData(news, getActivity());
@@ -153,21 +164,34 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         //todo
     }
 
+    /**
+     * make categories menu invisible
+     */
     @Override
     public void hideCategories() {
         categories.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * make categories menu visible
+     */
     @Override
     public void showCategories() {
         categories.setVisibility(View.VISIBLE);
     }
 
+
+    /**
+     * make source name field visible
+     */
     @Override
     public void showSourceFilter() {
         relativeLayout.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * make source name field invisible
+     */
     @Override
     public void hideSourceFilter() {
         relativeLayout.setVisibility(View.GONE);
@@ -178,21 +202,37 @@ public class TopNewsFragment extends Fragment implements TopNewsContract.ITopNew
         sourceEt.setText(text);
     }
 
+    /**
+     * Add more articles to adapter
+     * @param articles List
+     */
     @Override
     public void pagination(List<Article> articles) {
         newsAdapter.addArticles(articles);
     }
 
+    /**
+     * Send url to MainActivity.class for show full article;
+     * @param url
+     */
     @Override
     public void showFullNews(String url) {
         ((MainActivity) getActivity()).showFullInfo(url);
     }
 
+    /**
+     * Get source name filter from MainActivity.class
+     */
     void getSourceID() {
         final String sourceId = ((MainActivity) getActivity()).getSourceId();
         presenter.setSourceID(sourceId);
     }
 
+    /**
+     * Get country name filter form MainActivity.class
+     *
+     * @since 16/Feb/18
+     */
     void getCountry(){
         final String country = ((MainActivity)getActivity()).getCountry();
         presenter.setCountry(country);

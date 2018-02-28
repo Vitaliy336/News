@@ -3,7 +3,13 @@ package com.example.vitaliy.news.ui.view;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+/**
+ * Custom recycler view with pagination ability
+ */
 public abstract class EndlessRecyclerView extends RecyclerView.OnScrollListener {
+    /**
+     * pagination starts when reach COUNT_ELEMENT_IN_RECYCLER_VIEW - 2 element
+     */
     private int visibleThreshold = 2;
     private int currentPage = 1;
     private int previousTotalItemCount = 0;

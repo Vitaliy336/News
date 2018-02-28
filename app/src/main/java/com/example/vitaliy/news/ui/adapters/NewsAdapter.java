@@ -21,6 +21,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Adapter for News Recycler view
+ * @author Vitaliy
+ * @version 1.1.2
+ */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private final static int TOP_POST = 0;
     private final static int OTHER_POSTS = 1;
@@ -29,6 +34,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private List<Article> newsList = new ArrayList<>();
     private View view;
 
+    /**
+     * @see CategoriesAdapter.onCategoryItemClick
+     */
     public interface onNewsClickListener {
         void OnClick(Article article);
     }

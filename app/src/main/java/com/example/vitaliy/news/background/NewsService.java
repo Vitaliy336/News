@@ -23,6 +23,11 @@ import com.example.vitaliy.news.data.source.NewsDataSource;
 
 import java.util.List;
 
+/**
+ * Notification service
+ * @author Vitaliy
+ * @version 2.2.1
+ */
 public class NewsService extends Service {
     private NewsDataRepository newsDataRepository;
     private LocalNewsDataSource localNewsDataSource;
@@ -43,12 +48,10 @@ public class NewsService extends Service {
     }
 
     private void check() {
-        Log.e("Service", "check");
         localNewsDataSource = new LocalNewsDataSource();
         newsDataRepository = App.getInstance().getDataRepositoryInstance();
         db = App.getInstance().getDatabaseInstance();
         final int count = db.getDataDao().count();
-        Log.e("db.count", String.valueOf(count));
 
         newsDataRepository.getHotNews(new NewsDataSource.getListCallback() {
             @Override
@@ -93,7 +96,5 @@ public class NewsService extends Service {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(1, notification);
-       // notificationManager.cancel(1);
-        Log.e("Notification show", "data updated");
     }
 }

@@ -10,7 +10,11 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-
+/**
+ * BroadcastReceiver that wake up notification service after rebooting device
+ * @author Vitaliy
+ * @version 3.3
+ */
 public class NewsReceiver extends BroadcastReceiver {
 
     private static final int code = 322;
@@ -39,7 +43,6 @@ public class NewsReceiver extends BroadcastReceiver {
     }
 
     static void scheduleAlarms(Context context) {
-        Log.e("receiver", "ss");
         AlarmManager mgr =
                 (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NewsService.class);

@@ -15,11 +15,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+/**
+ * Get news from api
+ * @author Vitaliy
+ * @version 1.2.1
+ */
 public class RemoteNewsDataSource implements NewsDataSource {
     private final static String API_KEY = "8ba6904683434f37a16c07a1e0cde166";
     private final ApiInterface apiInterface;
 
+    /**
+     * create new apiInterface for Retrofit
+     */
     public RemoteNewsDataSource() {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
     }

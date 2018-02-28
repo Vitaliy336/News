@@ -12,7 +12,11 @@ import java.util.List;
 
 import retrofit2.http.DELETE;
 
-
+/**Sql queries for News table
+ *
+ * @author Vitaliy
+ * @version 1.2
+ */
 @Dao
 public interface NewsDao {
 

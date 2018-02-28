@@ -11,6 +11,10 @@ import com.example.vitaliy.news.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**Adapter for categories recycler view
+ *
+ * @author Vitaliy
+ */
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
     private int selectedPos = RecyclerView.NO_POSITION;
@@ -18,6 +22,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     List<String> data = new ArrayList<>();
     View view;
 
+    /**
+     *  Interface to catch item click ivent
+     */
     public interface onCategoryItemClick {
         void onCatClick(String str);
     }

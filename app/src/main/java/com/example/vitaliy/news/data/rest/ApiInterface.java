@@ -9,7 +9,9 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
-
+/**
+ * Api Interface for retrofit
+ */
 public interface ApiInterface {
 
     @GET("/v2/top-headlines")
