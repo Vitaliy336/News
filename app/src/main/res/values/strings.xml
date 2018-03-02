@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">News</string>
+    <string name="app_name">myNews</string>
     <string name="search">Search here</string>
     <string name="search_something">Search something</string>
     <string name="space">" "</string>
