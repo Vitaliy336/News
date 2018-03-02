@@ -18,7 +18,7 @@ import android.util.Log;
 public class NewsReceiver extends BroadcastReceiver {
 
     private static final int code = 322;
-    private static final long delay = 3000; //* 60 * 60;
+    private static final long delay = 3000 * 60 * 60;
     private SharedPreferences sharedPreferences;
 
 

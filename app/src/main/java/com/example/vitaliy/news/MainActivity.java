@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private final String URL_TAG = "Url";
-    private static final long delay = 1000;// * 60 * 60;
+    private static final long delay = 1000* 60 * 60;
     private ConnectivityManager manager;
     private AlertDialog.Builder builder;
     private AlarmManager am;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         builder.setMessage(R.string.alert_message_clear)
                 .setCancelable(false)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.clear, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         localNewsDataSource.nukeNews();

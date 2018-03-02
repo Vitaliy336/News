@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
  */
 public abstract class EndlessRecyclerView extends RecyclerView.OnScrollListener {
     /**
-     * pagination starts when reach COUNT_ELEMENT_IN_RECYCLER_VIEW - 2 element
+     * pagination starts when recycler view reach COUNT_ELEMENT_IN_RECYCLER_VIEW - 2 element
      */
     private int visibleThreshold = 2;
     private int currentPage = 1;
